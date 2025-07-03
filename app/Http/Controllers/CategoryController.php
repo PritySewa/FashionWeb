@@ -104,6 +104,27 @@ class CategoryController extends BaseController{
             ->orWhere('description', 'like', "%{$search}%")
             ->get();
 
-        return view('categories/partialindex', compact('categories'));
+        if ($request->ajax()) {
+            if ($categories->isEmpty()) {
+                return '<tr><td colspan="3" class="text-center text-muted">No categories found.</td></tr>';
+            }
+
+            $html = '';
+            foreach ($categories as $category) {
+                $html .= '
+                <tr>
+                    <td>' . $category->title . '</td>
+                    <td>' . $category->description . '</td>
+                    <td>
+                        <a href="' . route('categories.edit', $category->id) . '" class="btn btn-sm btn-outline-secondary">Edit</a>
+                        <a href="' . route('categories.show', $category->id) . '" class="btn btn-sm btn-outline-secondary">Show</a>
+                    </td>
+                </tr>';
+            }
+
+            return response($html);
+        }
+
+        return view('categories.index', ['categories' => $categories]);
     }
 }

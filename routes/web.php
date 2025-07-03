@@ -6,6 +6,7 @@ use App\Http\Controllers\BuyController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -92,9 +93,13 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'verified', 'checkadmin'])->group(function () {
     Route::resource('orders', \App\Http\Controllers\OrderController::class);
+
+
 });
 Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store')->middleware(['auth', 'verified']);
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');
+Route::get('/searching', [ProductController::class, 'searching'])->name('products.searching');
+
 //Route::get('/contact', [WelcomeController::class, 'contact'])->name('contact');
 Route::get('/buy-now/', [BuyController::class, 'buyNow'])->name('buy.now');
 
@@ -103,6 +108,7 @@ Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 Route::get('/categories/search', [CategoryController::class, 'search'])->name('categories.search');
+Route::get('/collection', [CollectionController::class, 'show'])->name('collection');
 
 // Auth routes (login, register, etc.)
 require __DIR__.'/auth.php';

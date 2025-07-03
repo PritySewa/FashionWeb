@@ -159,6 +159,16 @@ class ProductController extends BaseController
 
         return view('search', compact('products', 'query'));
     }
+    public function searching(Request $request)
+    {
+        $query = $request->input('query');
+
+        $products = Product::where('title', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->get();
+
+        return view('products.index', compact('products', 'query'));
+    }
 }
 
     // Add to Cart
