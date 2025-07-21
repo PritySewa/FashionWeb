@@ -133,4 +133,16 @@ class OrderController extends BaseController
     {
         //
     }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $orders = Order::with('orderitems.product')
+            ->where('id', 'like', "%{$query}%")
+            ->orWhere('address', 'like', "%{$query}%")
+            ->orWhere('phone_number', 'like', "%{$query}%")
+            ->orWhere('payment_method', 'like', "%{$query}%")
+            ->get();
+
+        return view('orders.searchresult', ['order' => $orders]);    }
 }

@@ -15,13 +15,13 @@ class BadgeSeeder extends Seeder
     {
         Badge::create([
             'title'=>'Best Seller',
-            'icon_image'=>'badge1.jpeg',
+            'icon_path'=>'https://cdn-icons-png.flaticon.com/128/7251/7251267.png',
             'description'=>'Most selling product'
         ]);
 
         Badge::create([
             'title'=>'Discount',
-            'icon_image'=>'badge2.jpeg',
+            'icon_path'=>'https://cdn-icons-png.flaticon.com/128/6136/6136996.png',
             'description'=>'50% discount'
 
 
@@ -29,7 +29,7 @@ class BadgeSeeder extends Seeder
 
         Badge::create([
             'title'=>'favorite',
-            'icon_image'=>'badge3.jpeg',
+            'icon_path'=>'https://cdn-icons-png.flaticon.com/128/5406/5406792.png',
             'description'=>'most loved by the customer'
 
         ]);

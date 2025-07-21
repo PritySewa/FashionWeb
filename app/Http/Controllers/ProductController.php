@@ -148,7 +148,6 @@ class ProductController extends BaseController
 
         return redirect()->route($this->route . 'index')->with('success', 'Product deleted successfully.');
     }
-    // app/Http/Controllers/ProductController.php
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -161,14 +160,35 @@ class ProductController extends BaseController
     }
     public function searching(Request $request)
     {
-        $query = $request->input('query');
+        $query = $request->get('query');
 
-        $products = Product::where('title', 'like', '%' . $query . '%')
-            ->orWhere('description', 'like', '%' . $query . '%')
+        $results = Product::where('title', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
+            ->orWhere('color', 'LIKE', "%{$query}%")
+            ->orWhere('size', 'LIKE', "%{$query}%")
             ->get();
 
-        return view('products.index', compact('products', 'query'));
+        return view('products.searchresult', ['entries' => $results])->render();
     }
 }
-
-    // Add to Cart
+//
+//    public function searchProducts(Request $request, $view = 'search') {
+//        $query = $request->input('query');
+//
+//        $results = Product::where('title', 'LIKE', "%{$query}%")
+//            ->orWhere('description', 'LIKE', "%{$query}%")
+//            ->orWhere('color', 'LIKE', "%{$query}%")
+//            ->orWhere('size', 'LIKE', "%{$query}%")
+//            ->get();
+//
+//        if ($view === 'search') {
+//            return view('search', compact('results', 'query'));
+//        } elseif ($view === 'ajax') {
+//            return view('products.searchresult', ['entries' => $results])->render();
+//        }
+//
+//        abort(404); // fallback if view param is invalid
+//    }
+//}
+//
+//    // Add to Cart

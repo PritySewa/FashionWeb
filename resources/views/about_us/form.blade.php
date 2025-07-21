@@ -1,4 +1,4 @@
--@php $about = $about ?? null; @endphp
+@php $about = $about ?? null; @endphp
 
     <!-- Name -->
 <div class="mb-4">

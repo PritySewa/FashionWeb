@@ -5,69 +5,123 @@ namespace App\Http\Controllers;
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
 
-class AboutUsController extends Controller
-
+class AboutUsController extends BaseController
 {
-    // Display all entries
+    public function __construct()
+    {
+        $this->title = "About Us";
+        $this->resources = "about_us.";
+        $this->route = "about_us";
+        parent::__construct();
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $aboutUs = AboutUs::all();
-        return view('about_us.index', compact('aboutUs'));
+        $info = $this->crudInfo();
+        $info['aboutUs'] = AboutUs::latest()->get();
+        return view($this->indexResource(), $info);
     }
 
-    // Show form to create a new entry
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('about_us.create');
+        $info = $this->crudInfo();
+        return view($this->createResource(), $info);
     }
 
-    // Store new entry
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'introduction' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'features' => 'required|string|max:255',
-            'images' => 'required|string', // or handle file upload if needed
+            'images' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
 
-        AboutUs::create($request->all());
+        $path = $request->file('images')->store('about-us', 'public');
+        $validated['images'] = $path;
 
-        return redirect()->route('about-us.index')->with('success', 'About Us entry created successfully.');
+        AboutUs::create($validated);
+
+
+        return redirect()->route($this->route . 'index')->with('success', 'About Us entry created successfully.');
     }
 
-    // Show form to edit an existing entry
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(AboutUs $aboutU)
     {
-        $about = AboutUs::findOrFail($id);
-        return view('about_us.edit', compact('about'));
+        return view($this->showResource(), compact('aboutU'));
     }
 
-    // Update the entry
-    public function update(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(AboutUs $aboutU)
     {
-        $request->validate([
+        return view($this->editResource(), compact('aboutU'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, AboutUs $aboutU)
+    {
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'introduction' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'features' => 'required|string|max:255',
-            'images' => 'required|string',
+            'images' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
 
-        $about = AboutUs::findOrFail($id);
-        $about->update($request->all());
+        if ($request->hasFile('images')) {
+            $path = $request->file('images')->store('about-us', 'public');
+            $validated['images'] = $path;
+        }
 
-        return redirect()->route('about-us.index')->with('success', 'About Us entry updated successfully.');
+        $aboutU->update($validated);
+
+        return redirect()->route($this->route . 'index')->with('success', 'About Us entry updated successfully.');
     }
 
-    // Delete an entry
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(AboutUs $aboutU)
     {
-        $about = AboutUs::findOrFail($id);
-        $about->delete();
+        $aboutU->delete();
 
-        return redirect()->route('about-us.index')->with('success', 'About Us entry deleted successfully.');
+        return redirect()->route($this->route . 'index')->with('success', 'About Us entry deleted successfully.');
     }
+
+    public function view()
+    {
+        $aboutu = AboutUs::latest()->first();
+        return view('AboutUs', compact('aboutu'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->query('query');
+
+        $results = AboutUs::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('introduction', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
+            ->orWhere('features', 'LIKE', "%{$query}%")
+            ->get();
+
+        return view('about_us.searchresult', ['entries' => $results])->render();
+    }
+
 }
-

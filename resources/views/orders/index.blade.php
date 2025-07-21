@@ -1,11 +1,19 @@
 @extends('templates.index')
 @section('index_content')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <div class="container">
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
+            <input
+                type="text"
+                id="search"
+                placeholder="Search entries..."
+                class="border p-2 mb-4 rounded w-full"
+            />
 
         <div class="table-responsive">
             <table class="table table-striped">
@@ -21,23 +29,48 @@
                     <th>Payment Mode</th>
                 </tr>
                 </thead>
-                <tbody>
-                @foreach($order as $orders)
-                    @foreach($orders->orderitems as $item)
-                        <tr>
-                            <td>{{ $orders->id }}</td>
-                            <td>{{ $item->product->title ?? 'N/A' }}</td>
-                            <td>{{ $item->product->price ?? 'N/A' }}</td>
-                            <td>{{ $item->quantity }}</td>
-                            <td>{{ $orders->address ?? 'N/A' }}</td>
-                            <td>{{ $orders->phone_number }}</td>
-                            <td>{{ $item->total_price}}</td>
-                            <td>{{ $orders->payment_method }}</td>
-                        </tr>
-                    @endforeach
-                @endforeach
-
+                <tbody id="searchResults">
+                @include('orders.searchresult', ['order' => $orders])
+                </tbody>
             </table>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            let timer;
+
+            $('#search').on('keyup', function () {
+                clearTimeout(timer);
+                let query = $(this).val();
+
+                timer = setTimeout(function () {
+                    if (query.length === 0) {
+                        $.ajax({
+                            url: '{{ route("orders.index") }}',
+                            type: 'GET',
+                            success: function (data) {
+                                const html = $(data).find('#searchResults').html();
+                                $('#searchResults').html(html);
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            url: '{{ route("orders.search") }}',
+                            type: 'GET',
+                            data: { query: query },
+                            success: function (data) {
+                                $('#searchResults').html(data);
+                            },
+                            error: function (xhr) {
+                                console.error("Search error:", xhr.responseText);
+                            }
+                        });
+                    }
+                }, 300);
+            });
+        });
+    </script>
 @endsection
+
+
+

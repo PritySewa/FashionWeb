@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('badges', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('icon_image')->nullable();
+            $table->string('icon_path')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });}

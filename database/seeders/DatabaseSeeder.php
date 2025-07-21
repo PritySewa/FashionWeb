@@ -17,6 +17,11 @@ class DatabaseSeeder extends Seeder
         $this->call(BadgeSeeder::class);
         $this->call(ProductSeeder::class);
 
+        $this->call(AboutUsSeeder::class);
+        $this->call(HomeDesignSeeder::class);
+
+
+
 
     }
 }

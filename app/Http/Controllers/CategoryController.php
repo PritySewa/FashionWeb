@@ -42,10 +42,14 @@ class CategoryController extends BaseController{
     {
         $validated = $request->validate([
             'title' => 'required|string',
-            'description' => 'required|string',
+            'images' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'status' => 'required|in:active,inactive',
         ]);
 
+        if ($request->hasFile('images')) {
+            $path = $request->file('images')->store('categories', 'public');
+            $validated['images'] = $path;
+        }
         Category::create($validated);
 
         return redirect()->route($this->route.'index')->with('success', 'Category created successfully.');
@@ -76,10 +80,14 @@ class CategoryController extends BaseController{
     {
         $validated = $request->validate([
             'title' => 'required|string',
-            'description' => 'required|string',
+            'images' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'status' => 'required|in:active,inactive',
         ]);
 
+        if ($request->hasFile('images')) {
+            $path = $request->file('images')->store('categories', 'public');
+            $validated['images'] = $path;
+        }
         $category = Category::findOrFail($id);
         $category->update($validated);
 
@@ -98,33 +106,11 @@ class CategoryController extends BaseController{
     }
     public function search(Request $request)
     {
-        $search = $request->search;
+        $query = $request->get('query');
 
-        $categories = Category::where('title', 'like', "%{$search}%")
-            ->orWhere('description', 'like', "%{$search}%")
-            ->get();
+        $results = Category::where('title', 'LIKE', "%{$query}%")->get();
 
-        if ($request->ajax()) {
-            if ($categories->isEmpty()) {
-                return '<tr><td colspan="3" class="text-center text-muted">No categories found.</td></tr>';
-            }
-
-            $html = '';
-            foreach ($categories as $category) {
-                $html .= '
-                <tr>
-                    <td>' . $category->title . '</td>
-                    <td>' . $category->description . '</td>
-                    <td>
-                        <a href="' . route('categories.edit', $category->id) . '" class="btn btn-sm btn-outline-secondary">Edit</a>
-                        <a href="' . route('categories.show', $category->id) . '" class="btn btn-sm btn-outline-secondary">Show</a>
-                    </td>
-                </tr>';
-            }
-
-            return response($html);
-        }
-
-        return view('categories.index', ['categories' => $categories]);
+        return view('categories.searchresult', ['entries' => $results])->render();
     }
+
 }

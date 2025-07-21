@@ -12,5 +12,17 @@ class CollectionController extends Controller
         $products = Product::all();
         return view('collection', compact('products'));
     }
+    public function filter(Request $request)
+    {
+        $category = $request->query('category');
+
+        if ($category === 'all') {
+            $products = Product::latest()->get();
+        } else {
+            $products = Product::where('category', $category)->latest()->get();
+        }
+
+        return view('product-grid', compact('products'));
+    }
 
 }

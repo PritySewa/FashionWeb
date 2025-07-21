@@ -12,28 +12,25 @@
             @endforeach
         </div>
 
-        <!-- Product Grid -->
         <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach($products as $product)
-                <div class="bg-white rounded-lg shadow hover:shadow-md transition p-4 space-y-2">
-                    <img src="{{ asset('storage/' . $product->thumb_images_url) }}" alt="{{ $product->title }}"
-                         class="w-full h-48 object-cover rounded-md">
+                <a href="{{ route('view', ['id' => $product->id]) }}" class="block">
+                    <div class="bg-white rounded-lg shadow hover:shadow-md transition p-4 space-y-2 hover:ring-2 hover:ring-[#BD806B]">
+                        <img src="{{ $product->thumb_images_url }}"
+                             alt="{{ $product->title }}"
+                             class="w-full h-48 object-cover rounded-md hover:opacity-90 transition">
 
-                    <h3 class="text-lg font-semibold text-gray-800">{{ $product->title }}</h3>
-                    <p class="text-sm text-gray-500">{{ Str::limit($product->description, 60) }}</p>
+                        <h3 class="text-lg font-semibold text-gray-800">{{ $product->title }}</h3>
+                        <p class="text-sm text-gray-500">{{ Str::limit($product->description, 60) }}</p>
 
-                    <div class="flex justify-between items-center">
-                        <span class="text-[#BD806B] font-bold text-lg">Rs. {{ $product->price }}</span>
-                        <span class="text-xs text-gray-600">Stock: {{ $product->stock }}</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[#BD806B] font-bold text-lg">Rs. {{ $product->price }}</span>
+                            <span class="text-xs text-gray-600">Stock: {{ $product->stock }}</span>
+                        </div>
+
+                        <div class="text-sm text-gray-600">Color: {{ $product->color }}</div>
                     </div>
-
-                    <div class="text-sm text-gray-600">Color: {{ $product->color }}</div>
-
-                    <button class="mt-2 w-full bg-[#BD806B] text-white py-1.5 rounded hover:bg-[#a96d5c] transition">
-                        Add to Cart
-                    </button>
-                </div>
+                </a>
             @endforeach
         </div>
-    </div>
 @endsection

@@ -25,8 +25,11 @@
 
             <div>
                 <p><strong>Thumbnail Image:</strong></p>
-                <img src="{{ asset('storage/' . $product->thumb_images_url) }}" width="100" alt="Image">
-            </div>
+                @if(Str::startsWith($product->thumb_images_url, ['http://', 'https://']))
+                    <img src="{{$product->thumb_images_url }}" alt="Category Image" style="width: 100px; height: auto;">
+                @else
+                    <img src="{{ asset('storage/' .$product->thumb_images_url) }}" alt="Category Image" style="width: 100px; height: auto;">
+                @endif            </div>
 
 
 

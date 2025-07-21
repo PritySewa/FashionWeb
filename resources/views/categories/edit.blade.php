@@ -11,9 +11,12 @@
                     <input type="text" name="title" class="form-control" value="{{ old('title', $category->title) }}" required>
                 </div>
 
+                {{-- Image Field --}}
                 <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea name="description" class="form-control" required>{{ old('description', $category->description) }}</textarea>
+                    <label class="form-label">Image*</label>
+                    <input type="file" name="images" class="form-control @error('images') is-invalid @enderror" accept="image/*" required>                    @error('images')
+                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">

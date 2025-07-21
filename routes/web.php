@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 // Public route (accessible to all users)
 Route::get('/', [WelcomeController::class, 'create'])->name('welcome');
-Route::get('/view/{id}', [WelcomeController::class, 'show'])->name('view');
+Route::get('/view{id}', [WelcomeController::class, 'show'])->name('view');
 
 
 // Dashboard - only for authenticated, verified, and admin users
@@ -62,27 +63,6 @@ Route::middleware(['auth', 'verified', 'checkadmin'])->group(function () {
 
 
 
-// Show all About Us entries
-    Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us.index');
-
-// Show form to create a new entry
-    Route::get('/about-us/create', [AboutUsController::class, 'create'])->name('about-us.create');
-
-// Store new entry
-    Route::post('/about-us/store', [AboutUsController::class, 'store'])->name('about-us.store');
-
-// Show form to edit an existing entry
-    Route::get('/about-us/edit/{id}', [AboutUsController::class, 'edit'])->name('about-us.edit');
-
-// Update an existing entry
-    Route::post('/about-us/update/{id}', [AboutUsController::class, 'update'])->name('about-us.update');
-
-// Delete an entry
-    Route::get('/about-us/delete/{id}', [AboutUsController::class, 'destroy'])->name('about-us.destroy');
-
-
-
-
 
 });
 
@@ -93,6 +73,9 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'verified', 'checkadmin'])->group(function () {
     Route::resource('orders', \App\Http\Controllers\OrderController::class);
+    Route::resource('about_us', \App\Http\Controllers\AboutUsController::class);
+    Route::resource('home_design', \App\Http\Controllers\HomeController::class);
+    Route::get('/view', [HomeController::class, 'welcome'])->name('view.home');
 
 
 });
@@ -101,14 +84,25 @@ Route::get('/search', [ProductController::class, 'search'])->name('products.sear
 Route::get('/searching', [ProductController::class, 'searching'])->name('products.searching');
 
 //Route::get('/contact', [WelcomeController::class, 'contact'])->name('contact');
-Route::get('/buy-now/', [BuyController::class, 'buyNow'])->name('buy.now');
 
-Route::get('carts', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
-Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::middleware(['auth'])->group(function () {
+    Route::get('carts', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
+    Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::get('/buy-now', [BuyController::class, 'buyNow'])->name('buy.now');
+    Route::get('/search-about-us', [AboutUsController::class, 'search'])->name('about_us.search');
+    Route::get('/search/categories', [CategoryController::class, 'search'])->name('categories.search');
+    Route::get('/search/products', [ProductController::class, 'searchindex'])->name('products.searchindex');
+    Route::get('/search/homedesign', [HomeController::class, 'search'])->name('home_design.search');
+    Route::get('/search/orders', [OrderController::class, 'search'])->name('orders.search');
 
-Route::get('/categories/search', [CategoryController::class, 'search'])->name('categories.search');
+
+});
 Route::get('/collection', [CollectionController::class, 'show'])->name('collection');
+
+Route::get('/aboutus', [AboutUsController::class, 'view'])->name('aboutus.view');
+Route::get('/filter-products', [CollectionController::class, 'filter']);
+
 
 // Auth routes (login, register, etc.)
 require __DIR__.'/auth.php';

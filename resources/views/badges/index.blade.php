@@ -19,13 +19,18 @@
             @foreach($badges as $index => $badge)
                 <tr>
                     <td>{{ $index + 1 }}</td>
-                    <td>
-                        @if($badge->icon_path)
-                            <img src="{{ asset('storage/' . $badge->icon_path) }}" alt="Icon" width="32" class="rounded">
+                    <td class="py-2 px-4 border-b">
+                        @if ($badge->icon_path)
+                            @if(Str::startsWith($badge->icon_path, ['http://', 'https://']))
+                                <img src="{{$badge->icon_path}}" style="width: 100px; height: auto;">
+                            @else
+                                <img src="{{ asset('storage/' .$badge->icon_path) }}" alt="Category Image" style="width: 100px; height: auto;">
+                            @endif
                         @else
-                            <span class="text-muted">N/A</span>
+                            <span class="text-gray-400 italic">No image</span>
                         @endif
                     </td>
+
 
                     <td>{{ $badge->title }}</td>
                     <td>

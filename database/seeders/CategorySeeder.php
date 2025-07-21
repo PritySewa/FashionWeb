@@ -15,22 +15,22 @@ class CategorySeeder extends Seeder
     {
         Category::Create([
             'title' => 'Pant',
-            'description' => 'Includes Different types of pant',
+            'images'=>'https://i.pinimg.com/736x/52/46/a0/5246a06344af7be76769b086fb22ec98.jpg',
             'status' => 'inactive',
         ]);
         Category::Create([
             'title' => 'T-Shirt',
-            'description' => 'Different types of tops',
-            'status' => 'active',
+         'images' => 'https://i.pinimg.com/736x/51/17/40/51174036e7475da3b98f21c5a3604d7e.jpg',
+        'status' => 'active',
         ]);
         Category::Create([
             'title' => 'Dress',
-            'description' => 'Includes Different types of dress ',
-            'status' => 'inactive',
+           'images'=>'https://i.pinimg.com/originals/72/7e/6a/727e6aaa19499582fe9240ab657ea523.png',
+           'status' => 'inactive',
         ]);
         Category::Create([
             'title' => 'Jackets',
-            'description' => 'Includes Different types of jackets',
+            'images'=>'https://i.pinimg.com/736x/f7/a1/c4/f7a1c480ffd71608cd59cd28205f42d9.jpg',
             'status' => 'inactive',
         ]);
     }

@@ -6,7 +6,11 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ $category->title }}</h5>
-                <p class="card-text">{{ $category->description }}</p>
+                @if(Str::startsWith($category->images, ['http://', 'https://']))
+                    <img src="{{ $category->images }}" alt="Category Image" style="width: 100px; height: auto;">
+                @else
+                    <img src="{{ asset('storage/' . $category->images) }}" alt="Category Image" style="width: 100px; height: auto;">
+                @endif
                 <span class="badge bg-{{ $category->status === 'active' ? 'success' : 'secondary' }}">
                 {{ ucfirst($category->status) }}
             </span>

@@ -30,7 +30,7 @@ class CartController extends Controller
         } else {
             Cart::create([
                 'user_id' => auth()->id(),
-                'product_id' => $product->id,
+                'product_id' => $product->id, // ✅ This was missing
                 'product_title' => $product->title,
                 'product_price' => $product->price,
                 'quantity' => $request->quantity,
@@ -38,13 +38,13 @@ class CartController extends Controller
                 'thumb_images_url' => $product->thumb_images_url,
             ]);
         }
-
         return redirect()->route('cart.index')->with('success', 'Product added to cart!');
     }
 
 
     public function index()
     {
+
         $cartItems = Cart::where('user_id', auth()->id())->get();
 
         return view('users.cart.index', compact('cartItems'));

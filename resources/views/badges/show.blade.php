@@ -1,15 +1,15 @@
 @extends('templates.show')
 @section('show_content')
     <div class="container mt-4">
+        <p>Title</p>
         <h1 class="text-2xl font-bold mb-4">{{ $badge->title }}</h1>
 
         <div class="mb-3">
-            @if($badge->icon_url)
-                <img src="{{ $badge->icon_url }}" alt="Badge Icon" width="64">
-            @elseif($badge->nameicon)
-                <i class="{{ $badge->nameicon }}" style="font-size: 64px;"></i>
-            @else
-                <p>No icon available.</p>
+            <p>Icon</p>
+                @if(Str::startsWith($badge->icon_path, ['http://', 'https://']))
+                    <img src="{{$badge->icon_path}}" style="width: 100px; height: auto;">
+                @else
+                    <img src="{{ asset('storage/' .$badge->icon_path) }}" alt="Category Image" style="width: 100px; height: auto;">
             @endif
         </div>
 

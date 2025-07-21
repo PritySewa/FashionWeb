@@ -27,14 +27,14 @@
         }
     </style>
 </head>
-<body class="antialiased bg-[#FAF3E0] text-gray-800">
+<body class="antialiased bg-[#fdf6f0]  text-gray-800">
 
 <!-- Header -->
-<header class="sticky top-0 z-50 bg-white shadow-md">
+<header class="sticky top-0 z-50 bg-[#fdf6f0]">
     <div class="container mx-auto px-6 lg:px-8">
         <div class="flex items-center justify-between py-4">
             <!-- Logo -->
-            <a href="/" class="text-2xl font-bold text-gray-800 hover:text-indigo-600 transition-colors">
+            <a href="/" class="text-4xl font-bold text-gray-800 hover:text-indigo-800 transition-colors">
                 Pretty Aura
             </a>
 
@@ -42,7 +42,7 @@
             <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
                 <a href="/" class="hover:text-indigo-600 transition">Home</a>
                 <a href="/collection" class="hover:text-indigo-600 transition">Collection</a>
-                <a href="/about" class="hover:text-indigo-600 transition">About Us</a>
+                <a href="/aboutus" class="hover:text-indigo-600 transition">About Us</a>
             </nav>
 
             <!-- Search Bar -->
@@ -52,6 +52,7 @@
                        class="form-input border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
             </form>
 
+            @auth
             <!-- Right Side Icons -->
             <div class="flex items-center space-x-4">
                 <!-- Cart Icon -->
@@ -63,7 +64,6 @@
                     </svg>
                 </a>
 
-                @auth
                     <!-- Profile Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open"

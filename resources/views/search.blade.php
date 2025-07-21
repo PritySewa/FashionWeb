@@ -1,21 +1,25 @@
 @extends('template') {{-- or your layout file --}}
 @section('content')
 
-        <div class="container mx-auto px-4 py-8">
-            <h2 class="text-2xl font-bold mb-4">Search results for "{{ $query }}"</h2>
+    <div class="max-w-7xl mx-auto px-4 py-10">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6"> <span class="text-blue-600">{{ $query }}</span></h2>
 
-            @if($products->count())
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    @foreach($products as $product)
-                        <div class="border p-4 rounded shadow hover:shadow-md transition">
-                            <h3 class="font-semibold text-lg">{{ $product->title }}</h3>
-                            <p class="text-sm text-gray-600">{{ $product->description }}</p>
-                            <span class="text-green-600 font-bold block mt-2">Rs. {{ $product->price }}</span>
+        @if($products->count())
+           <div class="aspect-[3/4] max-w-[200px] bg-white rounded shadow overflow-hidden">
+                @foreach($products as $product)
+                    <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300 overflow-hidden">
+                        <img src="{{($product->thumb_images_url) }}"
+                             alt="{{ $product->title }}"
+                             class="w-auto h-40 object-contain bg-gray-100 rounded-md" />
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mt-1 line-clamp-2">{{ $product->description }}</p>
+                            <div class="mt-3 text-green-600 font-bold text-sm">Rs. {{ $product->price }}</div>
                         </div>
-                    @endforeach
-                </div>
-            @else
-                <p class="text-gray-500">No products found.</p>
-            @endif
-        </div>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-gray-500 text-center mt-10">No products found for "<strong>{{ $query }}</strong>".</p>
+        @endif
+    </div>
 @endsection
