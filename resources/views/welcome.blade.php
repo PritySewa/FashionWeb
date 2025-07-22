@@ -1,29 +1,41 @@
 @extends('template')
 @section('content')
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display&display=swap" rel="stylesheet">
+        <style>
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+
+        </style>
+    </head>
     <!-- Hero Section -->
     <div class="flex flex-col md:flex-row w-full bg-white bg-opacity-20 backdrop-blur-md rounded-xl ">
         <!-- Left: Image -->
-        <div class="w-full md:w-1/2 lg:w-2/5">
+        <div class="w-full md:w-1/2 lg:w-2/5 pt-8 md:pt-3 overflow-hidden" style="max-height: 700px;">
             @if(Str::startsWith($home->image, ['http://', 'https://']))
-                <img src="{{ $home->image }}" class="w-full h-4/5 object-cover max-h-screen" style="min-height: 400px;">
+                <img src="{{ $home->image }}" class="w-full object-cover scale-105 shadow-2xl" style="object-position: top;" />
             @else
-                <img src="{{ asset('storage/' . $home->image) }}" class="w-full h-4/5 object-cover max-h-screen" style="min-height: 400px;">
+                <img src="{{ asset('storage/' . $home->image) }}" class="w-full object-cover shadow-lg" style="object-position: top;" />
             @endif
         </div>
 
+
         <!-- Right: Content -->
-        <div class="w-full md:w-1/2 lg:w-3/5 p-8 md:p-12 flex flex-col justify-center">
+        <div class="w-full md:w-1/2 lg:w-3/5 p-8 md:p-12 flex flex-col justify-center" style="background-color: #EFDECD;">
             <!-- Tagline -->
-            <div class="bg-[#cda991] bg-opacity-20 inline-block px-3 py-1 rounded mb-4">
-                <span class="text-l font-medium tracking-widest text-[#cda991] uppercase">ONLINE SHOPPING IN NEPAL</span>
+            <div class="bg-[#A9746E] bg-opacity-20 inline-block w-fit px-3 py-1  mb-4 rounded-lg ">
+                <span class="text-l font-medium tracking-widest text-[#8B4513] uppercase">ONLINE SHOPPING IN NEPAL</span>
             </div>
 
             <!-- Heading -->
-            <h1 class="text-4xl md:text-5xl font-serif font-bold mb-6 text-gray-900 italic">Shop Now!!</h1>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold mb-6 text-gray-900 italic text-shadow">
+                Shop Now!!
+            </h1>
 
             <!-- Description -->
             <div class="mb-8">
-                <div class="bg-[#cda991] bg-opacity-10 p-6 rounded-lg border-l-4 border-[#cda991]">
+                <div class="bg-[#A9746E] bg-opacity-10 border border-[#A9746E] shadow-lg rounded-lg p-6">
                     <p class="text-gray-700 text-1xl leading-relaxed">
                         {{ $home->description }}
                     </p>

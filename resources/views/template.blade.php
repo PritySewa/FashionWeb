@@ -7,7 +7,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Tailwind CSS -->
@@ -31,38 +31,43 @@
 
 <!-- Header -->
 <header class="sticky top-0 z-50 bg-[#fdf6f0]">
-    <div class="container mx-auto px-6 lg:px-8">
-        <div class="flex items-center justify-between py-4">
-            <!-- Logo -->
-            <a href="/" class="text-4xl font-bold text-gray-800 hover:text-indigo-800 transition-colors">
-                Pretty Aura
-            </a>
+    <div class="container mx-auto px-6 lg:px-8 border border-black">
+        <div class="flex items-center py-4">
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
-                <a href="/" class="hover:text-indigo-600 transition">Home</a>
-                <a href="/collection" class="hover:text-indigo-600 transition">Collection</a>
-                <a href="/aboutus" class="hover:text-indigo-600 transition">About Us</a>
-            </nav>
-
-            <!-- Search Bar -->
-            <form action="{{ route('products.search') }}" method="GET" class="hidden md:flex items-center">
-                <input type="text" name="query" id="search"
-                       placeholder="Search products..."
-                       class="form-input border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-            </form>
-
-            @auth
-            <!-- Right Side Icons -->
-            <div class="flex items-center space-x-4">
-                <!-- Cart Icon -->
-                <a href="{{ route('cart.index') }}" class="text-gray-500 hover:text-indigo-600 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                         viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 7M7 13l-1.293 1.293a1 1 0 001.414 1.414L9 14h6l1.293 1.293a1 1 0 001.414-1.414L17 13M9 21h6a2 2 0 100-4H9a2 2 0 100 4z"/>
-                    </svg>
+            <!-- Left: Logo -->
+            <div class="flex-shrink-0">
+                <a href="/" class="text-4xl font-serif font-bold text-gray-800 hover:text-amber-800 transition-colors ">
+                    Pretty Aura
                 </a>
+            </div>
+
+            <!-- Middle: Nav + Search -->
+            <div class="flex flex-grow justify-center items-center space-x-8 font-medium">
+                <nav class="hidden md:flex space-x-8 text-amber-800 font-medium">
+                    <a href="/" class="hover:text-amber-800 text-m text-semibold text-black transition">Home</a>
+                    <a href="/collection" class="hover:text-amber-800 text-black text-m transition">Collection</a>
+                    <a href="/aboutus" class="hover:text-amber-800  text-m text-black transition">About Us</a>
+                </nav>
+
+                <form action="{{ route('products.search') }}" method="GET" class="hidden md:flex items-center">
+                    <input type="text" name="query" id="search"
+                           placeholder="Search products..."
+                           class="form-input border border-black rounded-md px-3 py-1 text-m focus:outline-none focus:ring-2 focus:ring-amber-800" />
+                </form>
+            </div>
+
+            <!-- Right: Auth -->
+            <div class="flex-shrink-0 flex items-center space-x-4">
+                @auth
+                    <!-- Cart Icon -->
+                    <a href="{{ route('cart.index') }}" class="text-gray-500 hover:text-indigo-600 transition">
+                        <!-- SVG omitted for brevity -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 7M7 13l-1.293 1.293a1 1 0 001.414 1.414L9 14h6l1.293 1.293a1 1 0 001.414-1.414L17 13M9 21h6a2 2 0 100-4H9a2 2 0 100 4z"/>
+                        </svg>
+                    </a>
 
                     <!-- Profile Dropdown -->
                     <div class="relative" x-data="{ open: false }">
@@ -88,22 +93,23 @@
                         </div>
                     </div>
                 @else
-                    <!-- Login/Register -->
                     <a href="{{ route('login') }}"
-                       class="px-4 py-2 rounded-md text-sm font-medium hover:text-indigo-600 transition">
+                       class="px-4 py-2 rounded-md text-sm font-medium border border-black bg-white hover:text-amber-800 transition">
                         Login
                     </a>
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
-                           class="px-4 py-2 rounded-md text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                           class="px-4 py-2 rounded-md text-sm font-medium border border-black bg-white text-black hover:text-amber-800 transition">
                             Register
                         </a>
                     @endif
                 @endauth
             </div>
+
         </div>
     </div>
 </header>
+
 <main>
     @yield('content')
 </main>
