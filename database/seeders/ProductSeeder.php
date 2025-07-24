@@ -19,7 +19,8 @@ class ProductSeeder extends Seeder
             'category_id' => 1, // make sure this exists in your categories table
             'badge_id' => 1,// make sure this exists in your badges table
             'price' => '49.99',
-            'thumb_images_url' => 'https://i.pinimg.com/736x/f4/e1/88/f4e1886e073cd7c4be3e9d81973d5828.jpg', // you can store this image in storage or public
+            'thumb_images_url' => 'https://i.pinimg.com/736x/f4/e1/88/f4e1886e073cd7c4be3e9d81973d5828.jpg',
+            // you can store this image in storage or public
             'description' => 'A beautiful purple dress perfect for summer events.',
             'stock' => '50',
             'status' => 'active',

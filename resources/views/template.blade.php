@@ -56,13 +56,15 @@
             <!-- Right Side Icons -->
             <div class="flex items-center space-x-4">
                 <!-- Cart Icon -->
-                <a href="{{ route('cart.index') }}" class="text-gray-500 hover:text-indigo-600 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                         viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 7M7 13l-1.293 1.293a1 1 0 001.414 1.414L9 14h6l1.293 1.293a1 1 0 001.414-1.414L17 13M9 21h6a2 2 0 100-4H9a2 2 0 100 4z"/>
-                    </svg>
-                </a>
+                <div class="relative">
+                    <a href="{{ route('cart.index') }}">
+                        <svg class="h-6 w-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 7M7 13l-1.293 1.293a1 1 0 001.414 1.414L9 14h6l1.293 1.293a1 1 0 001.414-1.414L17 13M9 21h6a2 2 0 100-4H9a2 2 0 100 4z"/>                        </svg>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full cart-count">0</span>
+                    </a>
+                </div>
 
                     <!-- Profile Dropdown -->
                     <div class="relative" x-data="{ open: false }">
@@ -114,6 +116,19 @@
         <p>&copy; 2025 Pretty Aura. All rights reserved.</p>
     </div>
 </footer>
+<script>
+    function fetchCartQuantity() {
+        fetch("/cart/quantity")
+            .then(res => res.json())
+            .then(data => {
+                const badge = document.querySelector('.cart-count');
+                if (badge) badge.textContent = data.quantity;
+            })
+            .catch(err => console.error("Cart count error:", err));
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchCartQuantity);
+</script>
 <script>
     $(document).ready(function () {
         $('#search').on('keyup', function () {

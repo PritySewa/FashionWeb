@@ -27,10 +27,11 @@
                     <th>Phone Number</th>
                     <th>Total Amount</th>
                     <th>Payment Mode</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody id="searchResults">
-                @include('orders.searchresult', ['order' => $orders])
+                @include('orders.searchresult', ['order' => $order])
                 </tbody>
             </table>
         </div>

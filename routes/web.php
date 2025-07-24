@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -89,16 +90,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('carts', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
     Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::get('/cart/quantity', [CartController::class, 'cartQuantity'])->name('cart.quantity');
     Route::get('/buy-now', [BuyController::class, 'buyNow'])->name('buy.now');
     Route::get('/search-about-us', [AboutUsController::class, 'search'])->name('about_us.search');
     Route::get('/search/categories', [CategoryController::class, 'search'])->name('categories.search');
     Route::get('/search/products', [ProductController::class, 'searchindex'])->name('products.searchindex');
     Route::get('/search/homedesign', [HomeController::class, 'search'])->name('home_design.search');
     Route::get('/search/orders', [OrderController::class, 'search'])->name('orders.search');
-
+    Route::get('/users/search', [UserController::class, 'search'])->name('users.search');
 
 });
-Route::get('/collection', [CollectionController::class, 'show'])->name('collection');
+Route::get('/collection', [CollectionController::class, 'index'])->name('collection');
+
+
+//Route::get('/collection', [CollectionController::class, 'show'])->name('collection');
 
 Route::get('/aboutus', [AboutUsController::class, 'view'])->name('aboutus.view');
 Route::get('/filter-products', [CollectionController::class, 'filter']);

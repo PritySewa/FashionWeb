@@ -40,6 +40,12 @@ class CartController extends Controller
         }
         return redirect()->route('cart.index')->with('success', 'Product added to cart!');
     }
+    public function cartQuantity()
+    {
+        $userId = auth()->id();
+        $quantity = $userId ? Cart::where('user_id', $userId)->sum('quantity') : 0;
+        return response()->json(['quantity' => $quantity]);
+    }
 
 
     public function index()
