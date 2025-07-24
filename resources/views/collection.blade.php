@@ -95,14 +95,14 @@
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @forelse($products as $product)
                 <a href="{{ route('view', ['id' => $product->id]) }}" class="block">
-<<<<<<< HEAD
-                    <div class="bg-white rounded-lg shadow hover:shadow-md transition p-8 space-y-1 hover:ring-2 hover:ring-[#BD806B]">
-                        <img src="{{ $product->thumb_images_url }}"
-                             alt="{{ $product->title }}"
-=======
+{{--<<<<<<< HEAD--}}
+{{--                    <div class="bg-white rounded-lg shadow hover:shadow-md transition p-8 space-y-1 hover:ring-2 hover:ring-[#BD806B]">--}}
+{{--                        <img src="{{ $product->thumb_images_url }}"--}}
+{{--                             alt="{{ $product->title }}"--}}
+{{--=======--}}
                     <div class="bg-white rounded-lg shadow hover:shadow-md transition p-4 space-y-2 hover:ring-2 hover:ring-[#BD806B]">
                         <img src="{{ $product->thumb_images_url }}" alt="{{ $product->title }}"
->>>>>>> prity-restore
+{{-->>>>>>> prity-restore--}}
                              class="w-full h-48 object-cover rounded-md hover:opacity-90 transition">
 
                         <h3 class="text-lg font-semibold text-gray-800">{{ $product->title }}</h3>

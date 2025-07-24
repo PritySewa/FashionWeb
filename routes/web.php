@@ -90,7 +90,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('carts', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
     Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
-    Route::get('/cart/quantity', [CartController::class, 'cartQuantity'])->name('cart.quantity');
+//    Route::get('/cart/quantity', [CartController::class, 'cartQuantity'])->name('cart.quantity');
     Route::get('/buy-now', [BuyController::class, 'buyNow'])->name('buy.now');
     Route::get('/search-about-us', [AboutUsController::class, 'search'])->name('about_us.search');
     Route::get('/search/categories', [CategoryController::class, 'search'])->name('categories.search');

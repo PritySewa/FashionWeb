@@ -25,7 +25,7 @@ class OrderController extends BaseController
     {
 
         $info = $this->crudInfo();
-        $info['order'] = Order::with(['user', 'orderitems.product'])->get();
+        $info['orders'] = Order::with(['user', 'orderitems.product'])->get();
         return view($this->indexResource(), $info);
     }
 
