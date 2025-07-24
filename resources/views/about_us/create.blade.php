@@ -8,11 +8,15 @@
         </div>
     </div>
 
-    <div class="p-6 container mt-4 bg-white rounded shadow max-w-3xl mx-auto">
-        <form action="{{ route('about_us.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+    <div style="padding: 2rem; background-color: #fff; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 768px; margin: 2rem auto;">
+        <form action="{{ route('about_us.store') }}" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.25rem;">
             @csrf
             @include('about_us.form')
-            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Save</button>
+
+            <button type="submit" style="background-color: #9F8170; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem;">
+                Save
+            </button>
         </form>
     </div>
+
 @endsection

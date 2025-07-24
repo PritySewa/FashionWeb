@@ -1,42 +1,27 @@
 @extends('templates.show')
 @section('show_content')
-    <div class="p-6 bg-white rounded shadow max-w-4xl mx-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-semibold text-gray-800">About Us Details</h2>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-            <!-- Textual Info -->
-            <div class="space-y-4">
-                <div>
-                    <h3 class="font-semibold text-gray-700">Name</h3>
-                    <p class="text-gray-900">{{ $aboutU->name }}</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-700">Introduction</h3>
-                    <p class="text-gray-900">{{ $aboutU->introduction }}</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-700">Description</h3>
-                    <p class="text-gray-900">{{ $aboutU->description }}</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-700">Features</h3>
-                    <p class="text-gray-900">{{ $aboutU->features }}</p>
-                </div>
-            </div>
-
-            <!-- Image -->
-            <div class="flex items-center justify-center">
-                <div class="w-64 h-64 overflow-hidden rounded-lg shadow-lg">
-                    <img src="{{ asset('storage/' . $aboutU->images) }}"
-                         alt="About Us Image"
-                         class="w-full h-full object-cover">
-                </div>
-            </div>
+    <div style="display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+        <a href="{{ route('about_us.index') }}" class="btn" style="background-color: #654321; color: white;">Go back</a>
+    </div>
+    <div style="text-align: center;">
+        <div style="background-color: rgba(169, 116, 110, 0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+            <h1 style="color: #8B4513; font-size: 1.25rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin: 0;">
+                About Us Details
+            </h1>
         </div>
     </div>
+
+    <div style="padding: 2rem; background-color: #fff; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 768px; margin: 2rem auto;">
+        @if(Str::startsWith($aboutU->images, ['http://', 'https://']))
+            <img src="{{$aboutU->images }}" alt="Category Image" style="width: 200px; height: auto; display: block; margin: 0 auto;">
+        @else
+            <img src="{{ asset('storage/' . $aboutU->images) }}" style="width: 200px; height: auto; display: block; margin: 0 auto;">
+        @endif
+
+        <p ><strong>Name:</strong><br> {{  $aboutU->name }}</p>
+        <p><strong>Introduction:</strong> {{$aboutU->introduction }}</p>
+        <p><strong>Description:</strong> {{ $aboutU->description}}</p>
+        <p><strong>Feature:</strong> {{ $aboutU->features }}</p>
+    </div>
+
 @endsection

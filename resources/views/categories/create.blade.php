@@ -1,5 +1,9 @@
 @extends('templates.create')
 @section('create_content')
+    <div style="display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+        <a href="{{ route('categories.index') }}" class="btn" style="background-color: #654321; color: white;">Go back</a>
+    </div>
+
     <div style="text-align: center;">
         <div style="background-color: rgba(169, 116, 110, 0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem;">
             <h1 style="color: #8B4513; font-size: 1.25rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin: 0;">
@@ -8,63 +12,44 @@
         </div>
     </div>
 
+    <div style="padding: 2rem; background-color: #fff; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 768px; margin: 2rem auto;">
+        <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.25rem;">
+            @csrf
 
-        <div class="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-            <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-lg border border-gray-200">
-                <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
-                    @csrf
-
-                    {{-- Title --}}
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Title</label>
-                        <input type="text" name="title" value="{{ old('title') }}"
-                               class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 @error('title') border-red-500 @enderror">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Title*</label>
+                        <input type="text" name="title" class="form-control @error('title') border-red-500 @enderror"" value="{{ old('title') }}" required>
                         @error('title')
                         <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-
-                    {{-- Image --}}
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Image <span class="text-red-500">*</span></label>
-                        <div class="relative flex items-center gap-4">
-                            <label class="cursor-pointer px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">
-                                Choose File
-                                <input type="file" name="images" accept="image/*" class="hidden @error('images') border-red-500 @enderror">
-                            </label>
-                            <span class="text-sm text-gray-500">No file chosen</span>
-                        </div>
+                    <div class="mb-4">
+                        <label class="block font-medium mb-1">Image</label>
+                        <input type="file" name="images" class="w-full border p-2 rounded @error('images') border-red-500 @enderror">
                         @error('images')
-                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
-                    </div>
 
-                    {{-- Status --}}
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                        <select name="status"
-                                class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 @error('status') border-red-500 @enderror">
-                            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
-                            <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                        </select>
-                        @error('status')
-                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
-                        @enderror
                     </div>
-
-                    {{-- Buttons --}}
-                    <div class="flex justify-between items-center pt-4">
-                        <a href="{{ route('categories.index') }}"
-                           class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-800">
-                            Back
-                        </a>
-                        <button type="submit"
-                                class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700">
-                            Create
-                        </button>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Status*</label>
+                            <select name="status" class="form-select @error('status') border-red-500 @enderror" required>
+                                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
+                                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                            </select>
+                            @error('status')
+                            <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-
+            <button type="submit" style="background-color: #9F8170; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem;">
+                Create
+            </button>
+        </form>
+    </div>
 @endsection

@@ -16,8 +16,8 @@
         </td>
 
         <td class="py-2 px-4 border-b">{{ $home->phone_no }}</td>
-        <td class="py-2 px-4 border-b">{{ $home->Address }}</td>
-        <td class="py-2 px-4 border-b">{{ $home->Email }}</td>
+        <td class="py-2 px-4 border-b">{{ $home->address }}</td>
+        <td class="py-2 px-4 border-b">{{ $home->email }}</td>
 
         <td class="py-2 px-4 border-b">
             <a href="{{ route('home_design.edit', $home->id) }}" class="btn btn-sm  text-white" style="background-color: #9F8170;">Edit</a>

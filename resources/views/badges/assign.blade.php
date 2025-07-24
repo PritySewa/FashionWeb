@@ -8,9 +8,9 @@
                 </h1>
             </div>
         </div>
-        <!-- Search and Filter Form -->
-        <form method="GET" action="{{ route('badges.assign') }}" class="flex gap-4 items-center mb-4">
-            <div>
+
+        <div style="padding: 2rem; background-color: #fff; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 768px; margin: 2rem auto;">
+            <form action="{{ route('badges.assign') }}" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.25rem;">
                 <label class="block text-sm font-medium">Badge</label>
                 <select name="badge_id" class="form-control">
                     <option value="">Select Badge</option>
@@ -20,9 +20,7 @@
                         </option>
                     @endforeach
                 </select>
-            </div>
 
-            <div>
                 <label class="block text-sm font-medium">Category</label>
                 <select name="category_id" class="form-control">
                     <option value="">Select Category</option>
@@ -33,12 +31,10 @@
                         </option>
                     @endforeach
                 </select>
-            </div>
-
-            <div class="mt-4">
-                <button type="submit" class="btn btn-info">Search</button>
-            </div>
-        </form>
+                <button type="submit" style="background-color: #9F8170; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem;">
+                    Search
+                </button>
+            </form>
 
         <!-- Products Grid -->
         @if($products->count() > 0)
@@ -69,6 +65,7 @@
         @elseif(request()->has('category_id'))
             <p>No eligible products found in this category without a badge.</p>
         @endif
+    </div>
     </div>
 @endsection
 @push('css')

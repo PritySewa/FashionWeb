@@ -1,5 +1,9 @@
 @extends('templates.create')
 @section('create_content')
+    <div style="display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+        <a href="{{ route('products.index') }}" class="btn" style="background-color: #654321; color: white;">Go back</a>
+    </div>
+
     <div style="text-align: center;">
         <div style="background-color: rgba(169, 116, 110, 0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem;">
             <h1 style="color: #8B4513; font-size: 1.25rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin: 0;">
@@ -8,19 +12,8 @@
         </div>
     </div>
 
-    <div class="card">
-    <div class="card-body">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form action="{{ route($route . 'store') }}" method="POST" enctype="multipart/form-data">
+    <div style="padding: 2rem; background-color: #fff; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 768px; margin: 2rem auto;">
+        <form action="{{ route($route . 'store') }}" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.25rem;">
             @csrf
 
             <div class="row">
@@ -58,9 +51,6 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
-
-                <div class="col-md-6">
                     <div class="mb-3">
                         <label class="form-label">Price*</label>
                         <input type="text" name="price" class="form-control" value="{{ old('price') }}" required>
@@ -72,69 +62,68 @@
                         <small class="text-muted">Max 2MB (JPEG, PNG, JPG, GIF)</small>
                     </div>
 
-{{--                    <div class="mb-3">--}}
-{{--                        <label class="form-label">Product Images</label> <!-- Removed * from label -->--}}
-{{--                        <input type="file" name="image_urls[]" class="form-control" accept="image/*" multiple> <!-- Removed 'required' attribute -->--}}
-{{--                        <small class="text-muted">Multiple images allowed (Max 2MB each). Optional.</small> <!-- Added 'Optional' clarification -->--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label class="form-label">Status*</label>
-                        <select name="status" class="form-select" required>
-                            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
-                            <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                        </select>
-                    </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label class="form-label">Stock*</label>
-                        <input type="number" name="stock" class="form-control" value="{{ old('stock') }}" required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label class="form-label">Is Variant</label>
-                        <select name="is_variant" class="form-select">
-                            <option value="0" {{ old('is_variant') == '0' ? 'selected' : '' }}>No</option>
-                            <option value="1" {{ old('is_variant') == '1' ? 'selected' : '' }}>Yes</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label">Description*</label>
-                <textarea name="description" class="form-control" rows="3" required>{{ old('description') }}</textarea>
-            </div>
-
-            <div class="row">
                 <div class="col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label">Size</label>
-                        <input type="text" name="size" class="form-control" value="{{ old('size') }}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">Status*</label>
+                                <select name="status" class="form-select" required>
+                                    <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
+                                    <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">Stock*</label>
+                                <input type="number" name="stock" class="form-control" value="{{ old('stock') }}" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">Is Variant</label>
+                                <select name="is_variant" class="form-select">
+                                    <option value="0" {{ old('is_variant') == '0' ? 'selected' : '' }}>No</option>
+                                    <option value="1" {{ old('is_variant') == '1' ? 'selected' : '' }}>Yes</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
+
                     <div class="mb-3">
-                        <label class="form-label">Color</label>
-                        <input type="text" name="color" class="form-control" value="{{ old('color') }}">
+                        <label class="form-label">Description*</label>
+                        <textarea name="description" class="form-control" rows="3" required>{{ old('description') }}</textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Size</label>
+                                <input type="text" name="size" class="form-control" value="{{ old('size') }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Color</label>
+                                <input type="text" name="color" class="form-control" value="{{ old('color') }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Specifications</label>
+                        <textarea name="specifications" class="form-control" rows="3">{{ old('specifications') }}</textarea>
                     </div>
                 </div>
             </div>
-
-            <div class="mb-3">
-                <label class="form-label">Specifications</label>
-                <textarea name="specifications" class="form-control" rows="3">{{ old('specifications') }}</textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Create Product</button>
-            <a href="{{ route($route . 'index') }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" style="background-color: #9F8170; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem;">
+                Create
+            </button>
         </form>
     </div>
-</div>
 @endsection
+
+
