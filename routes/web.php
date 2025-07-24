@@ -103,6 +103,8 @@ Route::get('/collection', [CollectionController::class, 'show'])->name('collecti
 Route::get('/aboutus', [AboutUsController::class, 'view'])->name('aboutus.view');
 Route::get('/filter-products', [CollectionController::class, 'filter']);
 
+Route::get('/dashboard', [\App\Http\Controllers\UserController::class, 'dashboard'])->name('dashboard');
+
 
 // Auth routes (login, register, etc.)
 require __DIR__.'/auth.php';

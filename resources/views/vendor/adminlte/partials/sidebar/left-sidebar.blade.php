@@ -1,4 +1,30 @@
-<aside class="main-sidebar {{ config('adminlte.classes_sidebar', 'sidebar-dark-primary elevation-4') }}">
+<style>
+    /* Sidebar menu text consistently black */
+    .main-sidebar .nav-sidebar .nav-link {
+        color: #000 !important;
+    }
+
+    .main-sidebar .nav-sidebar .nav-link.active {
+        background-color: rgba(101, 67, 33, 0.3) !important; /* your #654321 shade */
+        color: #000 !important;
+    }
+
+    .main-sidebar .nav-sidebar .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: #000 !important;
+    }
+
+    /* Remove underline from the brand logo */
+    .brand-link {
+        border-bottom: none !important;
+    }
+
+    .brand-link:hover {
+        border-bottom: none !important;
+    }
+</style>
+
+<aside class="main-sidebar {{ config('adminlte.classes_sidebar', 'sidebar-dark-primary elevation-4') }}" style="background-color: #654321;">
 
     {{-- Sidebar brand logo --}}
     @if(config('adminlte.logo_img_xl'))
@@ -8,7 +34,7 @@
     @endif
 
     {{-- Sidebar menu --}}
-    <div class="sidebar">
+    <div class="sidebar" style="background-color: #9F8170;">
         <nav class="pt-2">
             <ul class="nav nav-pills nav-sidebar flex-column {{ config('adminlte.classes_sidebar_nav', '') }}"
                 data-widget="treeview" role="menu"

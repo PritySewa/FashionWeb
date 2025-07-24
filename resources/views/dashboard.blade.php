@@ -17,16 +17,54 @@
 {{--</x-app-layout>--}}
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Admin Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Admin Dashboard</h1>
 @stop
 
 @section('content')
-    <div class="card">
-        <div class="card-body">
-            {{ __("You're logged in!") }}
+    <div class="row">
+        <!-- Total Users -->
+        <div class="col-md-3">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $totalUsers }}</h3>
+                    <p>Total Users</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Users -->
+        <div class="col-md-3">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{ $activeUsers }}</h3>
+                    <p>Active Users</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Users -->
+        <div class="col-md-3">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{ $newUsers }}</h3>
+                    <p>New Users</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+            </div>
         </div>
     </div>
+
 @stop
+
+

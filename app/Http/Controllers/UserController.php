@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,18 @@ public function index(){
         $info =$this->crudInfo();
         $info['users']= User::all();
         return view($this->indexResource(),$info);
+    }
+
+    public function dashboard()
+    {
+        $totalUsers = User::count();
+
+        $newUsers = User::where('created_at', '>=', now()->subDays(7))->count();
+
+        // Just set activeUsers to totalUsers or 0 for now
+        $activeUsers = 0; // or $totalUsers if you want
+
+        return view('dashboard', compact('totalUsers', 'activeUsers', 'newUsers'));
     }
 
 

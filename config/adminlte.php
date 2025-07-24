@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Pretty_Aura</b>Admin',
+    'logo' => '<b class="text-white">Pretty_Aura</b><span class="text-white"> Admin</span>',
     'logo_img' => 'pretty_logo.jpeg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -190,13 +190,13 @@ return [
     |
     */
 
-    'classes_body' => '',
+    'classes_body' => 'layout-fixed',
     'classes_brand' => '',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -257,7 +257,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -265,7 +265,6 @@ return [
     'password_email_url' => 'password/email',
     'profile_url' => false,
     'disable_darkmode_routes' => false,
-
     /*
     |--------------------------------------------------------------------------
     | Laravel Asset Bundling
@@ -318,38 +317,60 @@ return [
         [
             'text' => 'Categories',
             'route' => 'categories.index',
+            'icon' => 'fas fa-layer-group',
+            'classes' => 'text-black',
         ],
+
         [
             'text' => 'Products',
             'route' => 'products.index',
+            'icon' => 'fas fa-tshirt',
+            'classes' => 'text-black',
         ],
         [
             'text' => 'Badge',
             'route' => 'badges.index',
+            'icon' => 'fas fa-tags',
+            'classes' => 'text-black',
         ],
         [
             'text' => 'Badges_assign',
             'route' => 'badges.assign',
+            'icon' => 'fas fa-archive',
+            'classes' => 'text-black',
 
         ],
         [
             'text' => 'Offers',
             'route' => 'offers.index',
-        ], [
+            'icon' => 'fas fa-percent',
+            'classes' => 'text-black',
+        ],
+        [
             'text' => 'Users',
             'route' => 'users.index',
+            'icon' => 'fas fa-users',
+            'classes' => 'text-black',
         ],
 
         [
             'text' => 'Orders',
             'route' => 'orders.index',
+            'icon' => 'fas fa-cart-plus',
+            'classes' => 'text-black',
         ],
         [
             'text' => 'AboutUs',
-            'route' => 'about_us.index'],
+            'route' => 'about_us.index',
+            'icon' => 'fas fa-info-circle',
+            'classes' => 'text-black',
+        ],
+
            [
             'text' => 'HomeDesign',
             'route' => 'home_design.index',
+               'icon' => 'fas fa-desktop',
+               'classes' => 'text-black',
         ],
 //        [
 //            'text' => 'pages',
