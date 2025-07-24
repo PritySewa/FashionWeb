@@ -44,7 +44,7 @@
 
 <!-- Header -->
 <header class="sticky top-0 z-50 bg-[#fdf6f0]">
-    <div class="container mx-auto px-6 lg:px-8 border border-black">
+    <div class="container mx-auto px-6 lg:px-8 ">
         <div class="flex items-center py-4">
             <!-- Left: Logo -->
             <div class="flex-shrink-0">
