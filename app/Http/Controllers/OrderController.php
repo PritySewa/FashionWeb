@@ -160,3 +160,4 @@ class OrderController extends BaseController
 
         return view('orders.searchresult', ['order' => $orders]);    }
 }
+

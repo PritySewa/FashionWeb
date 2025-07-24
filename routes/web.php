@@ -32,9 +32,9 @@ Route::get('/view{id}', [WelcomeController::class, 'show'])->name('view');
 
 
 // Dashboard - only for authenticated, verified, and admin users
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'checkadmin'])->name('dashboard');
+Route::get('/dashboard', [UserController::class, 'admin'])
+    ->middleware(['auth', 'verified', 'checkadmin'])
+    ->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -107,6 +107,8 @@ Route::get('/collection', [CollectionController::class, 'index'])->name('collect
 
 Route::get('/aboutus', [AboutUsController::class, 'view'])->name('aboutus.view');
 Route::get('/filter-products', [CollectionController::class, 'filter']);
+
+//Route::get('/dashboard', [\App\Http\Controllers\UserController::class, 'dashboard'])->name('dashboard');
 
 
 // Auth routes (login, register, etc.)

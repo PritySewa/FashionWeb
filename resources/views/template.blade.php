@@ -208,16 +208,15 @@
     x-transition
     class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
 >
-    <div
-        class="bg-[#EFDECD] w-full max-w-md mx-4 rounded-lg p-6 relative"
-    >
+    <div class="bg-[#EFDECD] w-full max-w-md mx- p-6 relative">
         <!-- Close Button -->
         <button
             @click="showLogin = false"
-            class="absolute top-2 right-3 text-2xl text-gray-600 hover:text-black"
+            class="absolute -top-0 -right-0 w-7 h-7 bg-white border border-gray-300 shadow text-3xl text-gray-600 hover:text-black hover:bg-gray-100 flex items-center justify-center z-50"
         >
             &times;
         </button>
+
 
         <!-- Login Card -->
         <div class="bg-white rounded-lg shadow p-6">
@@ -229,14 +228,13 @@
                     <x-input-label for="email" :value="__('Email')" />
                     <input
                         id="email"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        style="color: black"
+                        class="block mt-1 w-full bg-white text-black border border-black rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         type="email"
                         name="email"
                         required
                         autofocus
                     />
-
-
 
                     <x-input-error
                         :messages="$errors->get('email')"
@@ -249,7 +247,7 @@
                     <x-input-label for="password" :value="__('Password')" />
                     <input
                         id="password"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        class="block mt-1 w-full bg-white text-black border border-black rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         type="password"
                         name="password"
                         required
@@ -296,15 +294,16 @@
     class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
 >
     <div
-        class="bg-[#EFDECD] w-full max-w-md mx-4 rounded-lg p-6 relative"
+        class="bg-[#EFDECD] w-full max-w-md mx-4  p-6 relative"
     >
         <!-- Close Button -->
         <button
             @click="showRegister = false"
-            class="absolute top-2 right-3 text-2xl text-gray-600 hover:text-black"
+            class="absolute -top-0 -right-0 w-7 h-7  bg-white border border-gray-300 shadow text-xl text-gray-600 hover:text-black hover:bg-gray-100 flex items-center justify-center z-50"
         >
             &times;
         </button>
+
 
         <!-- Register Form -->
         <div class="bg-white rounded-lg shadow p-6">
