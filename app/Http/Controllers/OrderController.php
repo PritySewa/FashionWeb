@@ -55,6 +55,12 @@ class OrderController extends BaseController
         $product = Product::findOrFail($request->product_id);
         $user = auth()->user();
         $quantity = $request->quantity;
+        // ⚠️ Add this stock check here
+//        if ($product->stock < $quantity) {
+//            return back()->with('error', 'Not enough stock for this product.');
+//        }
+
+
         $total_price = $request->quantity * $product->price;
         // Calculate payment status
         $isPaid = $request->paid_amount >= $total_price;
@@ -70,8 +76,17 @@ class OrderController extends BaseController
             'payment_status' => $isPaid ? 'paid' : 'unpaid',
             'completed_at_sales_total' => null,
         ]);
+        if ($isPaid) {
+            $product->stock -= $quantity;
 
-                Order_Item::create([
+            // Prevent negative stock
+            if ($product->stock < 0) {
+                $product->stock = 0;
+            }
+
+            $product->save();
+        }
+        Order_Item::create([
             'order_id' => $order->id,
             'product_id' => $product->id,
             'quantity' => $quantity,
@@ -79,9 +94,8 @@ class OrderController extends BaseController
             'product_image_url' => $product->thumb_images_url,
             'product_price' => $product->price,
             'total_price' => $total_price,
-
-
         ]);
+
                 $user->notify(new OrderConfirmed($order));
 //                Redirect to Skypay if selected
         if ($request->payment_method === "skypay") {

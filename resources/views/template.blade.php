@@ -43,6 +43,7 @@
 >
 <!-- Header -->
 <header class="sticky top-0 z-50 bg-[#fdf6f0]">
+<<<<<<< HEAD
     <div class="container mx-auto px-6 lg:px-8 border border-black">
         <div class="flex items-center py-4">
             <!-- Left: Logo -->
@@ -117,6 +118,42 @@
                             />
                         </svg>
                     </a>
+=======
+    <div class="container mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between py-4">
+            <!-- Logo -->
+            <a href="/" class="text-4xl font-bold text-gray-800 hover:text-indigo-800 transition-colors">
+                Pretty Aura
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
+                <a href="/" class="hover:text-indigo-600 transition">Home</a>
+                <a href="/collection" class="hover:text-indigo-600 transition">Collection</a>
+                <a href="/aboutus" class="hover:text-indigo-600 transition">About Us</a>
+            </nav>
+
+            <!-- Search Bar -->
+            <form action="{{ route('products.search') }}" method="GET" class="hidden md:flex items-center">
+                <input type="text" name="query" id="search"
+                       placeholder="Search products..."
+                       class="form-input border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            </form>
+
+            @auth
+            <!-- Right Side Icons -->
+            <div class="flex items-center space-x-4">
+                <!-- Cart Icon -->
+                <div class="relative">
+                    <a href="{{ route('cart.index') }}">
+                        <svg class="h-6 w-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 7M7 13l-1.293 1.293a1 1 0 001.414 1.414L9 14h6l1.293 1.293a1 1 0 001.414-1.414L17 13M9 21h6a2 2 0 100-4H9a2 2 0 100 4z"/>                        </svg>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full cart-count">0</span>
+                    </a>
+                </div>
+>>>>>>> prity-restore
 
                     <!-- Profile Dropdown -->
                     <div class="relative" x-data="{ open: false }">
@@ -437,6 +474,19 @@
 </div>
 
 <!-- Search Script -->
+<script>
+    function fetchCartQuantity() {
+        fetch("/cart/quantity")
+            .then(res => res.json())
+            .then(data => {
+                const badge = document.querySelector('.cart-count');
+                if (badge) badge.textContent = data.quantity;
+            })
+            .catch(err => console.error("Cart count error:", err));
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchCartQuantity);
+</script>
 <script>
     $(document).ready(function () {
         $("#search").on("keyup", function () {

@@ -170,6 +170,8 @@ class ProductController extends BaseController
 
         return view('products.searchresult', ['entries' => $results])->render();
     }
+//
+
 }
 //
 //    public function searchProducts(Request $request, $view = 'search') {
