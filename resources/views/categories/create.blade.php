@@ -1,9 +1,16 @@
 @extends('templates.create')
 @section('create_content')
+    <div style="text-align: center;">
+        <div style="background-color: rgba(169, 116, 110, 0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+            <h1 style="color: #8B4513; font-size: 1.25rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin: 0;">
+                Create New Category
+            </h1>
+        </div>
+    </div>
+
+
         <div class="min-h-screen bg-gray-100 flex items-center justify-center px-4">
             <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-lg border border-gray-200">
-                <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Create New Category</h2>
-
                 <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
 

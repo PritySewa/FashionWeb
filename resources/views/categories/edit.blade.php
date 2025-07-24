@@ -1,4 +1,5 @@
 @extends('templates.edit')
+
 @section('edit_content')
 <div class="container">
             <h2>Edit Category</h2>

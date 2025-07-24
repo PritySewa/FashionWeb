@@ -13,8 +13,8 @@
             @endif
         </td>
         <td>
-            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
-            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-outline-secondary">Show</a>
+            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm text-white" style="background-color: #9F8170;">Edit</a>
+            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm  text-white" style="background-color: #9F8170;">Show</a>
             <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline-block;">
                 @csrf
                 @method('DELETE')

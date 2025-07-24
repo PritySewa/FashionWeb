@@ -372,6 +372,12 @@ return [
                'icon' => 'fas fa-desktop',
                'classes' => 'text-black',
         ],
+        [
+            'text' => 'Go back',
+            'route' => 'welcome',
+            'icon' => 'fas fa-backward',
+            'classes' => 'text-black',
+        ],
 //        [
 //            'text' => 'pages',
 //            'url' => 'admin/pages',

@@ -44,6 +44,47 @@
         </div>
     </div>
 
+    <section class="py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Our Products</h2>
+
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                @forelse($products->take(8) as $product)
+                    <a href="{{ route('view', ['id' => $product->id]) }}" class="block relative">
+                        <div class="bg-white rounded-lg shadow hover:shadow-md transition p-4 space-y-2 hover:ring-2 hover:ring-[#BD806B] relative">
+                            {{-- Badge --}}
+                            @if(!empty($product->badge) && !empty($product->badge->icon_path))
+                                <img
+                                    src="{{ $product->badge->icon_path }}"
+                                    alt="Badge"
+                                    class="absolute top-2 left-2 w-8 h-8 object-contain bg-white rounded-full p-1 shadow"
+                                />
+                            @endif
+
+                            <img src="{{ $product->thumb_images_url }}" alt="{{ $product->title }}"
+                                 class="w-full h-48 object-cover rounded-md transition">
+
+                            <h3 class="text-lg font-semibold text-gray-800">{{ $product->title }}</h3>
+                            <p class="text-sm text-gray-500">{{ Str::limit($product->description, 60) }}</p>
+
+                            <div class="flex justify-between items-center">
+                                <span class="text-[#BD806B] font-bold text-lg">Rs. {{ $product->price }}</span>
+                                <span class="text-xs text-gray-600">Stock: {{ $product->stock }}</span>
+                            </div>
+
+                            <div class="text-sm text-gray-600">Color: {{ $product->color }}</div>
+                        </div>
+                    </a>
+                @empty
+                    <div class="col-span-4 text-center text-gray-500">
+                        No products found in this category.
+                    </div>
+                @endforelse
+            </div>
+        </div>
+    </section>
+
+
     <!-- Featured Collections Section -->
 {{--    <div class="mt-0 px-4 md:px-0">--}}
 {{--        <div class="bg-white bg-opacity-20 backdrop-blur-md rounded-xl p-6">--}}

@@ -1,20 +1,56 @@
 @extends('templates.index')
 
 @section('index_content')
+    <style>
+        /* Search input styling */
+        #search {
+            border: 2px solid #8B4513;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0.375rem; /* rounded */
+            width: 100%;
+        }
+
+        /* Table header */
+        thead th {
+            background-color: #654321;
+            color: white;
+            text-align: center;  /* <-- centered text */
+        }
+
+        #searchResults tr td {
+            text-align: center; /* center body cells text */
+        }
+
+        #searchResults tr {
+            background-color: white;
+            color: black;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <div class="p-6 bg-white rounded shadow">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold">About Us Entries</h2>
-            <a href="{{ route('about_us.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">+ Add New</a>
+    <div style="text-align: center;">
+        <div style="background-color: rgba(169, 116, 110, 0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+            <h1 style="color: #8B4513; font-size: 1.25rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin: 0;">
+                About Us Entries
+            </h1>
         </div>
+    </div>
 
-        <input
-            type="text"
-            id="search"
-            placeholder="Search entries..."
-            class="border p-2 mb-4 rounded w-full"
-        />
+    <div class="container mt-4">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Search entries..."
+    />
+
+    <div class="p-6 bg-white rounded shadow">
 
         <table class="w-full table-auto border">
             <thead class="bg-gray-100">
@@ -31,6 +67,7 @@
             @include('about_us.searchresult', ['entries' => $aboutUs])
             </tbody>
         </table>
+    </div>
     </div>
 
     <script>

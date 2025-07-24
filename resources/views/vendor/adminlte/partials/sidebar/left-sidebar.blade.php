@@ -5,12 +5,12 @@
     }
 
     .main-sidebar .nav-sidebar .nav-link.active {
-        background-color: rgba(101, 67, 33, 0.3) !important; /* your #654321 shade */
+        background-color: #EFDECD !important; /* your #654321 shade */
         color: #000 !important;
     }
 
     .main-sidebar .nav-sidebar .nav-link:hover {
-        background-color: rgba(255, 255, 255, 0.1) !important;
+        background-color: #EFDECD !important;
         color: #000 !important;
     }
 

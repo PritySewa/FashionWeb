@@ -15,12 +15,15 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!auth()->check()) {
+            return redirect('/login'); // or route('login')
+        }
 
-            if (auth()->user()->role == "admin") {
-                return $next($request);
-            } else {
-               return redirect('/');
-            }
+        if (auth()->user()->role === 'admin') {
+            return $next($request);
+        }
 
+        return redirect('/'); // or to user dashboard
     }
+
 }
