@@ -20,7 +20,6 @@ class CollectionController extends Controller
         // Get all categories
         $categories = Category::all();
         $badges = Badge::all();
-        $products = Product::all();
 
         // Base query
         $query = Product::query();
@@ -51,7 +50,7 @@ class CollectionController extends Controller
 
 
         // Fetch products
-        $products = $query->get();
+        $products = $query->with('badge')->get();
 
         return view('collection', compact('products', 'categories','badges','products'));
     }

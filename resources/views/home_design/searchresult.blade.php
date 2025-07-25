@@ -16,16 +16,16 @@
         </td>
 
         <td class="py-2 px-4 border-b">{{ $home->phone_no }}</td>
-        <td class="py-2 px-4 border-b">{{ $home->Address }}</td>
-        <td class="py-2 px-4 border-b">{{ $home->Email }}</td>
+        <td class="py-2 px-4 border-b">{{ $home->address }}</td>
+        <td class="py-2 px-4 border-b">{{ $home->email }}</td>
 
         <td class="py-2 px-4 border-b">
-            <a href="{{ route('home_design.show', $home->id) }}" class="text-blue-500">Show</a> |
-            <a href="{{ route('home_design.edit', $home->id) }}" class="text-yellow-500">Edit</a> |
+            <a href="{{ route('home_design.edit', $home->id) }}" class="btn btn-sm  text-white" style="background-color: #9F8170;">Edit</a>
+            <a href="{{ route('home_design.show', $home->id) }}" class="btn btn-sm  text-white" style="background-color: #9F8170;">Show</a>
             <form action="{{ route('home_design.destroy', $home->id) }}" method="POST" class="inline" onsubmit="return confirm('Delete this item?');">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="text-red-500">Delete</button>
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>
         </td>
     </tr>

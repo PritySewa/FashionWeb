@@ -16,12 +16,12 @@
             @endif
         </td>
         <td>
-            <a href="{{ route('about_us.edit', $item->id) }}" class="text-blue-600 hover:underline">Edit</a>
-            <a href="{{ route('about_us.show', $item->id) }}" class="text-red-600 hover:underline">Show</a>
+            <a href="{{ route('about_us.edit', $item->id) }}" class="btn btn-sm text-white" style="background-color: #9F8170;">Edit</a>
+            <a href="{{ route('about_us.show', $item->id) }}" class="btn btn-sm text-white" style="background-color: #9F8170;">Show</a>
             <form action="{{ route('about_us.destroy', $item->id) }}" method="POST" style="display:inline-block;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="text-red-500 hover:underline" onclick="return confirm('Delete this item?')">Delete</button>
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this item?')">Delete</button>
             </form>
         </td>
     </tr>

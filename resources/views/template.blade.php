@@ -38,12 +38,13 @@
     </style>
 </head>
 <body
-    class="antialiased bg-[#fdf6f0] text-gray-800"
+    class="antialiased bg-[#EFDECD] text-gray-800"
     x-data="{ showLogin: false, showRegister: false }"
 >
+
 <!-- Header -->
 <header class="sticky top-0 z-50 bg-[#fdf6f0]">
-    <div class="container mx-auto px-6 lg:px-8 border border-black">
+    <div class="container mx-auto px-6 lg:px-8 ">
         <div class="flex items-center py-4">
             <!-- Left: Logo -->
             <div class="flex-shrink-0">
@@ -89,6 +90,7 @@
                         name="query"
                         id="search"
                         placeholder="Search products..."
+                        value="{{ request('query') }}"
                         class="form-input border border-black rounded-md px-3 py-1 text-m focus:outline-none focus:ring-2 focus:ring-amber-800"
                     />
                 </form>
@@ -139,11 +141,10 @@
                             @click.away="open = false"
                             class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50"
                         >
-                            <a
-                                href="{{ route('dashboard') }}"
-                                class="block px-4 py-2 hover:bg-gray-100"
-                            >Dashboard</a
-                            >
+                            @if(Auth::check() && Auth::user()->role === 'admin')
+                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+                            @endif
+
                             <a
                                 href="/profile"
                                 class="block px-4 py-2 hover:bg-gray-100"

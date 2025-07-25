@@ -18,9 +18,24 @@
 @extends('adminlte::page')
 
 @section('title', 'Admin Dashboard')
+@section('adminlte_css')
+    <style>
+        .content-wrapper, .main-footer, .main-header {
+            background-color: #EFDECD !important;
+        }
+        body {
+            background-color: #EFDECD !important;
+        }
+    </style>
+@stop
+
 
 @section('content_header')
-    <h1>Admin Dashboard</h1>
+    <div style="background-color: rgba(169, 116, 110, 0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+        <h1 style="color: #8B4513; font-size: 1.25rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin: 0;">
+            Admin Dashboard
+        </h1>
+    </div>
 @stop
 
 @section('content')

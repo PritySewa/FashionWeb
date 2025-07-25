@@ -13,5 +13,3 @@
     <label class="form-label">Description</label>
     <textarea name="description" class="form-control" rows="3">{{ old('description', $badge->description ?? '') }}</textarea>
 </div>
-
-<button type="submit" class="btn btn-success">Save</button>

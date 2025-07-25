@@ -27,12 +27,12 @@
         </td>
         <td>
             <div class="flex-col gap-5">
-                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-outline-secondary btn-sm">Edit</a>
-                <a href="{{ route('products.show', $product->id) }}" class="btn btn-outline-secondary btn-sm">Show</a>
+                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm text-white" style="background-color: #9F8170;">Edit</a>
+                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm text-white" style="background-color: #9F8170;">Show</a>
                 <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-outline-secondary btn-sm">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
             </div>
         </td>

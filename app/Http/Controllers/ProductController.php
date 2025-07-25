@@ -152,12 +152,14 @@ class ProductController extends BaseController
     {
         $query = $request->input('query');
 
-        $products = Product::where('title', 'like', '%' . $query . '%')
+        $products = Product::with('badge') // 👈 Eager load badge here
+        ->where('title', 'like', '%' . $query . '%')
             ->orWhere('description', 'like', '%' . $query . '%')
             ->get();
 
         return view('search', compact('products', 'query'));
     }
+
     public function searching(Request $request)
     {
         $query = $request->get('query');
