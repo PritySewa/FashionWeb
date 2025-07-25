@@ -18,7 +18,6 @@ class CartController extends Controller
 
         $product = Product::findOrFail($request->product_id);
 
-        // Optional: Check if product already exists in user's cart
         $existingCart = Cart::where('user_id', auth()->id())
             ->where('product_id', $product->id)
             ->first();
@@ -30,51 +29,74 @@ class CartController extends Controller
         } else {
             Cart::create([
                 'user_id' => auth()->id(),
-                'product_id' => $product->id, // ✅ This was missing
+                'product_id' => $product->id,
                 'product_title' => $product->title,
                 'product_price' => $product->price,
                 'quantity' => $request->quantity,
                 'total_price' => $product->price * $request->quantity,
                 'thumb_images_url' => $product->thumb_images_url,
+                'color' => $request->color ?? null,
+                'size' => $request->size ?? null
             ]);
         }
+
         return redirect()->route('cart.index')->with('success', 'Product added to cart!');
     }
-//    public function cartQuantity()
-//    {
-//        $userId = auth()->id();
-//        $quantity = $userId ? Cart::where('user_id', $userId)->sum('quantity') : 0;
-//        return response()->json(['quantity' => $quantity]);
-//    }
-    public function cartQuantity()
-    {
-        // Get total quantity of items in the cart for the logged-in user
-        $quantity = Cart::where('user_id', auth()->id())->sum('quantity');
-
-        return response()->json(['quantity' => $quantity]);
-    }
-
 
     public function index()
     {
-
         $cartItems = Cart::where('user_id', auth()->id())->get();
-
         return view('users.cart.index', compact('cartItems'));
     }
 
     public function destroy($id)
-{
-    $cartItem = \App\Models\Cart::findOrFail($id);
+    {
+        $cartItem = Cart::where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
 
-    // Optional: check if the cart item belongs to the current user
-    if ($cartItem->user_id !== auth()->id()) {
-        abort(403, 'Unauthorized action.');
+        $cartItem->delete();
+
+        return redirect()->route('cart.index')->with('success', 'Item removed from cart.');
     }
-    $cartItem->delete();
 
-    return redirect()->route('cart.index')->with('success', 'Item removed from cart.');
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'quantity' => 'required|numeric|min:1'
+        ]);
+
+        $cartItem = Cart::where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
+
+        $product = Product::findOrFail($cartItem->product_id);
+
+        $cartItem->update([
+            'quantity' => $request->quantity,
+            'total_price' => $product->price * $request->quantity
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'item_total' => number_format($cartItem->total_price, 2),
+            'cart_total' => number_format(auth()->user()->cartItems()->sum('total_price'), 2),
+            'item_count' => auth()->user()->cartItems()->sum('quantity')
+        ]);
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $request->validate([
+            'item_ids' => 'required|array',
+            'item_ids.*' => 'exists:carts,id,user_id,'.auth()->id()
+        ]);
+
+        Cart::where('user_id', auth()->id())
+            ->whereIn('id', $request->item_ids)
+            ->delete();
+
+        return redirect()->route('cart.index')
+            ->with('success', 'Selected items removed successfully!');
+    }
 }
-}
-
-

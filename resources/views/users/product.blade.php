@@ -32,7 +32,7 @@
 
                 <!-- Action Buttons -->
                 <div class="flex space-x-4 mt-4">
-                    <form method="POST" action="{{ route('cart.add') }}" onsubmit="syncFormInputs()">
+                    <form method="POST" action="{{ route('cart.store') }}" onsubmit="syncFormInputs()">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $products->id }}">
                         <input type="hidden" name="quantity" id="formQuantity" value="1">

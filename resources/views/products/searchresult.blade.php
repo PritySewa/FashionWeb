@@ -15,11 +15,8 @@
         </td>
         <td class="px-4 py-3">{{ $product->category->title ?? 'N/A' }}</td>
         <td class="px-4 py-3">{{ $product->badge->title ?? 'N/A' }}</td>
-        <td class="px-4 py-3">${{ number_format($product->price, 2) }}</td>
-        <td class="px-4 py-3">
-        <span class="inline-block px-2 py-1 text-xs font-medium text-white rounded-md bg-{{ $product->status === 'active' ? 'green' : 'red' }}-500">
-            {{ ucfirst($product->status) }}
-        </span>
+        <td class="px-4 py-3">Rs{{ number_format($product->price, 2) }}</td>
+        <td class="px-4 py-3">{{$product->status}}
         </td>
         <td class="px-4 py-3">{{ $product->stock }}</td>
         <td class="px-4 py-3">{{ $product->is_variant ? 'Yes' : 'No' }}</td>

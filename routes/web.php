@@ -85,12 +85,24 @@ Route::get('/search', [ProductController::class, 'search'])->name('products.sear
 Route::get('/searching', [ProductController::class, 'searching'])->name('products.searching');
 
 //Route::get('/contact', [WelcomeController::class, 'contact'])->name('contact');
+Route::prefix('cart')->middleware(['auth'])->group(function () {
+    // Display cart
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
 
+    // Add item to cart
+    Route::post('/', [CartController::class, 'store'])->name('cart.store');
+
+    // Update cart item quantity (AJAX)
+    Route::post('/{id}', [CartController::class, 'update'])->name('cart.update');
+
+    // Remove single item
+    Route::delete('/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+    // Bulk delete items
+    Route::delete('/bulk-delete', [CartController::class, 'bulkDelete'])->name('cart.bulkDelete');
+});
 Route::middleware(['auth'])->group(function () {
-    Route::get('carts', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
-    Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
-//    Route::get('/cart/quantity', [CartController::class, 'cartQuantity'])->name('cart.quantity');
+
     Route::get('/buy-now', [BuyController::class, 'buyNow'])->name('buy.now');
     Route::get('/search-about-us', [AboutUsController::class, 'search'])->name('about_us.search');
     Route::get('/search/categories', [CategoryController::class, 'search'])->name('categories.search');

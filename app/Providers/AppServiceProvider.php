@@ -22,16 +22,17 @@ class AppServiceProvider extends ServiceProvider
      */
 
         public function boot(): void
-    {
-        View::composer('*', function ($view) {
-            $cartCount = 0;
+        {
+            View::composer('*', function ($view) {
+                $productCount = 0;
 
-            if (Auth::check()) {
-                $cartCount = Cart::where('user_id', Auth::id())->count();
-            }
+                if (Auth::check()) {
+                    // Counts number of distinct products (rows in cart)
+                    $productCount = Cart::where('user_id', Auth::id())->count();
+                }
 
-            $view->with('cartCount', $cartCount);
-        });
-    }
+                $view->with('cartQuantity', $productCount);
+            });
+        }
 
 }
