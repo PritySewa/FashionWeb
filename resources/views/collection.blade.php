@@ -9,7 +9,7 @@
 {{--<<<<<<< HEAD--}}
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Filters Sidebar -->
-            <div class="lg:w-1/4">
+            <div class="lg:w-1/2">
                 <form method="GET" action="{{ route('collection') }}" class="space-y-6">
                     <!-- Category Filter -->
                     <div class="bg-white p-4 rounded-lg shadow-sm">
