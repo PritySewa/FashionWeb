@@ -14,6 +14,11 @@
         @endif
 
         <div class="flex justify-between items-center mb-8">
+            <div class="mt-8  justify-end space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="{{ route('collection') }}" class="inline-flex justify-center items-center px-5 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#BD806B]">
+                    Continue Shopping
+                </a>
+            </div>
             <h1 class="text-3xl font-bold text-gray-900">Your Shopping Cart</h1>
             <span class="text-gray-600">
                 <span id="cart-item-count">{{ $cartItems->sum('quantity') }}</span>
@@ -35,7 +40,9 @@
                 </div>
             </div>
         @else
-            <!-- Bulk Delete Form (hidden, will be populated by JavaScript) -->
+                <div class="container mx-auto -ml-8">
+
+                <!-- Bulk Delete Form (hidden, will be populated by JavaScript) -->
                 <form id="bulk-delete-form" method="POST" action="{{ route('cart.bulkDelete') }}">
                     @csrf
                     @method('DELETE')
@@ -150,27 +157,7 @@
                                 </div>
                             </div>
 
-                            <!-- Action Buttons -->
-                            <div class="mt-8 flex flex-col sm:flex-row justify-end space-y-4 sm:space-y-0 sm:space-x-4">
-                                <a href="{{ route('collection') }}" class="inline-flex justify-center items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#BD806B]">
-                                    Continue Shopping
-                                </a>
-                                <form method="GET" action="{{ route('buy.now') }}">
-                                    @csrf
-
-                                    @foreach ($cartItems as $item)
-                                        <input type="hidden" name="product_ids[]" value="{{ $item->product_id }}">
-                                        <input type="hidden" name="quantities[{{ $item->product_id }}]" value="{{ $item->quantity }}">
-                                    @endforeach
-
-                                    <button type="submit" class="inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#BD806B] hover:bg-[#a36d5a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#BD806B]">
-                                        Proceed to Checkout (Selected Items)
-                                    </button>
-                                </form>
-
-                            </div>
                         </form>
-                        @endif
                     </div>
 
                     <!-- 💳 Right: Payment Section -->
@@ -235,8 +222,10 @@
                     </div>
                     </div>
                 </div>
+                </div>
+                    @endif
     </div>
-
+    </div>
 
             <style>
             .quantity-selector {

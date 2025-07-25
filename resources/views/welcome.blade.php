@@ -24,7 +24,7 @@
         <!-- Right: Content -->
         <div class="w-full md:w-1/2 lg:w-3/5 p-8 md:p-12 flex flex-col justify-center" style="background-color: #EFDECD;">
             <!-- Tagline -->
-            <div class="bg-[#A9746E] bg-opacity-20 inline-block w-fit px-3 py-1  mb-4 rounded-lg ">
+            <div class="bg-[#A9746E] bg-opacity-20 inline-block w-fit mt-12 px-3 py-1  mb-4 rounded-lg ">
                 <span class="text-l font-medium tracking-widest text-[#8B4513] uppercase">ONLINE SHOPPING IN NEPAL</span>
             </div>
 
@@ -41,75 +41,62 @@
                     </p>
                 </div>
             </div>
-        </div>
-    </div>
-
-
-    <!-- Category Navigation -->
-    <!-- Category Navigation with Images -->
-    <div class="mb-16">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-2xl font-bold text-gray-800">Shop by Category</h2>
-            <a href="{{ route('collection') }}" class="text-sm font-medium text-[#BD806B] hover:text-[#a36d5a] transition flex items-center">
-                View all <span class="ml-1">→</span>
-            </a>
-        </div>
-
-        <form method="GET" action="{{ route('collection') }}" id="categoryFilterForm">
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <!-- All Categories Button -->
-{{--                <button type="submit" name="category" value=""--}}
-{{--                        class="group relative block rounded-xl overflow-hidden shadow-sm hover:shadow-md transition h-40--}}
-{{--                    {{ !request('category') ? 'ring-2 ring-[#BD806B]' : '' }}">--}}
-{{--                    <div class="absolute inset-0 bg-gradient-to-br from-[#BD806B] to-[#a36d5a] flex items-center justify-center">--}}
-{{--                        <div class="text-center p-4">--}}
-{{--                            <span class="text-white text-lg font-bold block">All</span>--}}
-{{--                            <span class="text-white text-opacity-80 text-sm">Categories</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </button>--}}
-
-                <!-- Category Buttons with Images -->
-                @foreach($categories as $category)
-                    <button type="submit"
-                            name="category"
-                            value="{{ $category->id }}"
-                            class="group relative block rounded-xl overflow-hidden shadow-sm hover:shadow-md transition h-40
-                        {{ request('category') == $category->id ? 'ring-2 ring-[#BD806B]' : '' }}">
-                        @if($category->images)
-                            @if(Str::startsWith($category->images, ['http://', 'https://']))
-                                <img src="{{ $category->images }}" alt="{{ $category->title }}" class="absolute inset-0 w-full h-full object-cover">
-                            @else
-                                <img src="{{ asset('storage/' . $category->images) }}" alt="{{ $category->title }}" class="absolute inset-0 w-full h-full object-cover">
-                            @endif
-                        @else
-                            <div class="absolute inset-0 bg-gray-200 flex items-center justify-center text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                            </div>
-                        @endif
-                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-20 transition"></div>
-                        <div class="absolute inset-0 flex items-end p-4">
-                            <span class="text-white font-bold text-shadow">{{ $category->title }}</span>
+            {{--    CategoryGrid--}}
+            <section class="py-8 px-1">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center -mt-6 mb-4">
+                        <div class="bg-[#A9746E] bg-opacity-20 inline-block px-3 py-1 rounded-lg w-fit">
+                            <span class="text-l font-medium tracking-widest text-[#8B4513] uppercase">Our Categories</span>
                         </div>
-                    </button>
-                @endforeach
+                    </div>
+                    <a href="{{ route('collection') }}" class="text-m font-medium text-[#BD806B] hover:text-[#a36d5a] transition flex items-center">
+                        View all <span class="ml-1">→</span>
+                    </a>
+                    <form method="GET" action="{{ route('collection') }}" id="categoryFilterForm">
+                        <div id="categoryGrid" class="grid grid-cols-5 gap-2">
 
-                <!-- Hidden inputs to preserve other query parameters -->
-                @foreach(request()->except('category', '_token') as $key => $value)
-                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                @endforeach
-            </div>
-        </form>
+                            @foreach($categories as $category)
+                                <button type="submit"
+                                        name="category"
+                                        value="{{ $category->id }}"
+                                        class="group relative block rounded-xl overflow-hidden transition h-40 {{ request('category') == $category->id ? 'ring-2 ring-[#BD806B]' : '' }}">
+                                    @if(Str::startsWith($category->images, ['http://', 'https://']))
+                                        <img src="{{ $category->images }}" alt="{{ $category->title }}" class="absolute inset-0 w-full h-full object-cover">
+                                    @else
+                                        <img src="{{ asset($category->images) }}" alt="{{ $category->title }}" class="absolute inset-0 w-full h-full object-cover">
+                                    @endif
+
+                                        <div class="absolute border border-black inset-0 transition group-hover:opacity-20" style="background-color: rgba(169, 116, 110, 0.3);"></div>
+                                    <div class="absolute inset-0 flex items-end p-4">
+                                        <span class="text-white font-extrabold text-lg [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000]">
+                                            {{ $category->title }}
+                                        </span>
+
+                                    </div>
+                                </button>
+                            @endforeach
+
+                            @foreach(request()->except('category', '_token') as $key => $value)
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endforeach
+
+                        </div>
+                    </form>
+
+                </div>
+        </section>
+        </div>
     </div>
 
 
-
+{{--    ProductGrid--}}
     <section class="py-12 px-4">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Our Products</h2>
-
+            <div class="text-center -mt-2 mb-4">
+                <div class="bg-[#A9746E] bg-opacity-20 inline-block px-3 py-1 rounded-lg w-fit">
+                    <span class="text-xl font-medium tracking-widest text-[#8B4513] uppercase">Our Products</span>
+                </div>
+            </div>
             <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @forelse($products->take(8) as $product)
                     <a href="{{ route('view', ['id' => $product->id]) }}" class="block relative">
@@ -145,10 +132,6 @@
             </div>
         </div>
     </section>
-
-
-{{--  --}}
-
 
 @endsection
 

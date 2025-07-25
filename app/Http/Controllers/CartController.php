@@ -45,10 +45,8 @@ class CartController extends Controller
 
     public function index()
     {
-        $cartItems = Cart::where('user_id', auth()->id())->with('product')->get();
+        $cartItems = Cart::where('user_id', auth()->id())->get();
         return view('users.cart.index', compact('cartItems'));
-
-
     }
 
     public function destroy($id)
@@ -94,10 +92,8 @@ class CartController extends Controller
             'item_ids.*' => 'exists:carts,id'
         ]);
 
-        Cart::whereIn('id', $request->item_ids)
-            ->where('user_id', auth()->id())
-            ->delete();
+        Cart::whereIn('id', $request->item_ids)->delete();
 
         return redirect()->route('cart.index')->with('success', 'Selected items removed from cart');
-    }
+        }
 }
