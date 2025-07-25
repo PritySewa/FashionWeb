@@ -21,7 +21,7 @@
             </div>
 
             <!-- Payment Form -->
-            <form action="{{ route('checkout.store') }}" method="POST" class="w-full md:w-1/2 bg-white p-8 rounded-lg shadow space-y-6">
+            <form action="{{ route('orders.store') }}" method="POST" class="w-full md:w-1/2 bg-white p-8 rounded-lg shadow space-y-6">
                 @csrf
 
                 <!-- ✅ Hidden fields -->
