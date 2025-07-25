@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('product_image_url');
             $table->integer('product_price');
             $table->integer('total_price');
-            $table->integer('status');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

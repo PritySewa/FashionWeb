@@ -39,11 +39,6 @@
 
         <p class="mt-3"><strong>Specifications:</strong></p>
         <div class="p-3 border rounded bg-gray-50">{{ $product->specifications }}</div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            @foreach($product->image_urls ?? [] as $img)
-                <img src="{{ asset('storage/' . $img) }}" class="w-full h-32 object-cover rounded shadow">
-            @endforeach
-        </div>
     </div>
 
 
