@@ -44,6 +44,68 @@
         </div>
     </div>
 
+
+    <!-- Category Navigation -->
+    <!-- Category Navigation with Images -->
+    <div class="mb-16">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-800">Shop by Category</h2>
+            <a href="{{ route('collection') }}" class="text-sm font-medium text-[#BD806B] hover:text-[#a36d5a] transition flex items-center">
+                View all <span class="ml-1">→</span>
+            </a>
+        </div>
+
+        <form method="GET" action="{{ route('collection') }}" id="categoryFilterForm">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- All Categories Button -->
+{{--                <button type="submit" name="category" value=""--}}
+{{--                        class="group relative block rounded-xl overflow-hidden shadow-sm hover:shadow-md transition h-40--}}
+{{--                    {{ !request('category') ? 'ring-2 ring-[#BD806B]' : '' }}">--}}
+{{--                    <div class="absolute inset-0 bg-gradient-to-br from-[#BD806B] to-[#a36d5a] flex items-center justify-center">--}}
+{{--                        <div class="text-center p-4">--}}
+{{--                            <span class="text-white text-lg font-bold block">All</span>--}}
+{{--                            <span class="text-white text-opacity-80 text-sm">Categories</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </button>--}}
+
+                <!-- Category Buttons with Images -->
+                @foreach($categories as $category)
+                    <button type="submit"
+                            name="category"
+                            value="{{ $category->id }}"
+                            class="group relative block rounded-xl overflow-hidden shadow-sm hover:shadow-md transition h-40
+                        {{ request('category') == $category->id ? 'ring-2 ring-[#BD806B]' : '' }}">
+                        @if($category->images)
+                            @if(Str::startsWith($category->images, ['http://', 'https://']))
+                                <img src="{{ $category->images }}" alt="{{ $category->title }}" class="absolute inset-0 w-full h-full object-cover">
+                            @else
+                                <img src="{{ asset('storage/' . $category->images) }}" alt="{{ $category->title }}" class="absolute inset-0 w-full h-full object-cover">
+                            @endif
+                        @else
+                            <div class="absolute inset-0 bg-gray-200 flex items-center justify-center text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        @endif
+                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-20 transition"></div>
+                        <div class="absolute inset-0 flex items-end p-4">
+                            <span class="text-white font-bold text-shadow">{{ $category->title }}</span>
+                        </div>
+                    </button>
+                @endforeach
+
+                <!-- Hidden inputs to preserve other query parameters -->
+                @foreach(request()->except('category', '_token') as $key => $value)
+                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                @endforeach
+            </div>
+        </form>
+    </div>
+
+
+
     <section class="py-12 px-4">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Our Products</h2>
@@ -85,70 +147,8 @@
     </section>
 
 
-    <!-- Featured Collections Section -->
-{{--    <div class="mt-0 px-4 md:px-0">--}}
-{{--        <div class="bg-white bg-opacity-20 backdrop-blur-md rounded-xl p-6">--}}
-{{--            <!-- Heading -->--}}
-{{--            <div class="mb-2">--}}
-{{--                <h2 class="text-2xl font-bold text-gray-800">Featured Collections</h2>--}}
-{{--            </div>--}}
+{{--  --}}
 
-{{--            <!-- Horizontal Scroll Wrapper - Removed all gaps -->--}}
-{{--            <div class="flex overflow-x-auto scrollbar-hide -mx-[1px]">--}}
-{{--                @foreach($categories as $category)--}}
-{{--                    <div class="flex-shrink-0 relative">--}}
-{{--                        <!-- Image Container - Maintained original size -->--}}
-{{--                        <div class="h-60 w-[250px] overflow-hidden border-r border-transparent">--}}
-{{--                            @if ($category->images)--}}
-{{--                                @if(Str::startsWith($category->images, ['http://', 'https://']))--}}
-{{--                                    <img src="{{ $category->images }}" alt="{{ $category->title }}" class="w-full h-full object-cover">--}}
-{{--                                @else--}}
-{{--                                    <img src="{{ asset('storage/' . $category->images) }}" alt="{{ $category->title }}" class="w-full h-full object-cover">--}}
-{{--                                @endif--}}
-{{--                            @else--}}
-{{--                                <div class="flex items-center justify-center h-full w-[250px] text-gray-400 bg-gray-100">No Image</div>--}}
-{{--                            @endif--}}
-{{--                        </div>--}}
-{{--                        <!-- Title -->--}}
-{{--                        <h3 class="text-lg font-semibold text-center text-gray-800 mt-2">{{ $category->title }}</h3>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-            {{--            <!-- Simple CTA Button -->--}}
-{{--            <button class="self-start bg-[#cda991] text-white px-8 py-3 rounded hover:bg-opacity-90 transition">--}}
-{{--                Shop Now--}}
-{{--            </button>--}}
 
-            <!-- Footer note - subtle -->
-
-{{--    <!-- Ensure the image scales properly -->--}}
-{{--            <img src="{{ asset('images/welcome.png') }}" class="w-full h-auto rounded-xl object-cover">--}}
-{{--        </div>--}}
-
-{{--        <!-- Product Grid -->--}}
-{{--        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-16">--}}
-{{--            @foreach($products as $product)--}}
-{{--                <div class="bg-white border rounded-xl shadow-md p-6 transition-transform transform hover:scale-105 hover:shadow-xl">--}}
-
-{{--                    <!-- Product Image -->--}}
-{{--                    <a href="{{ route('view', $product->id) }}" class="block">--}}
-{{--                        <img src="{{  $product->thumb_images_url }}"--}}
-{{--                             class="w-full h-60 sm:h-72 object-cover rounded-lg transition-opacity duration-300 hover:opacity-85">--}}
-{{--                    </a>--}}
-
-{{--                    <!-- Product Details -->--}}
-{{--                    <div class="mt-5 text-center">--}}
-{{--                        <h2 class="text-xl font-semibold text-gray-800">{{ $product->title }}</h2>--}}
-{{--                        <p class="text-lg font-medium text-indigo-600 mt-2">--}}
-{{--                            ${{ $product->price }}--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-
-{{--                </div>--}}
-{{--            @endforeach--}}
-{{--        </div>--}}
-
-{{--    </div>--}}
 @endsection
+

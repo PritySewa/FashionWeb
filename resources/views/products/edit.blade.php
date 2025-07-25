@@ -124,8 +124,27 @@
                         <label class="form-label">Specifications</label>
                         <textarea name="specifications" class="form-control" rows="3">{{ old('specifications', $product->specifications) }}</textarea>
                     </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700">Existing Gallery</label>
+                        <div class="flex gap-2 flex-wrap">
+                            @foreach($product->image_urls ?? [] as $img)
+                                <div class="relative">
+                                    <img src="{{ asset('storage/' . $img) }}" class="w-24 h-24 object-cover rounded">
+                                    <input type="checkbox" name="remove_images[]" value="{{ $img }}"
+                                           class="absolute top-1 right-1 bg-white rounded text-red-500">
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="mb-4 mt-2">
+                        <label class="block text-sm font-medium text-gray-700">Add New Gallery Images</label>
+                        <input type="file" name="gallery_images[]" multiple accept="image/*"
+                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                    </div>
                 </div>
             </div>
+
             <button type="submit" style="background-color: #9F8170; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem;">
                 Update Product
             </button>

@@ -17,20 +17,33 @@
                             <span>Category</span>
                         </h3>
                         <div class="space-y-2">
-                            <a href="{{ route('collection') }}"
-                               class="block px-3 py-2 rounded text-sm transition
-                           {{ !request('category') ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                All Categories
-                            </a>
-                            @foreach($categories as $category)
-                                <button name="category" value="{{ $category->id }}"
-                                        class="block w-full text-left px-3 py-2 rounded text-sm transition
-                                {{ request('category') == $category->id ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                    {{ $category->title }}
-                                </button>
-                            @endforeach
+                            <!-- All Categories Link -->
+                            <form method="GET" action="{{ route('collection') }}" id="categoryFilterForm">
+                                <a href="{{ route('collection') }}"
+                                   class="block px-3 py-2 rounded text-sm transition
+               {{ !request('category') ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
+                                    All Categories
+                                </a>
+
+                                <!-- Category Filter Buttons -->
+                                @foreach($categories as $category)
+                                    <button type="submit"
+                                            name="category"
+                                            value="{{ $category->id }}"
+                                            class="block w-full text-left px-3 py-2 rounded text-sm transition
+                        {{ request('category') == $category->id ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
+                                        {{ $category->title }}
+                                    </button>
+                                @endforeach
+
+                                <!-- Hidden input to preserve other query parameters -->
+                                @foreach(request()->except('category', '_token') as $key => $value)
+                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                @endforeach
+                            </form>
                         </div>
                     </div>
+
 
                     <!-- Badge Filter -->
                     <div class="bg-white p-4 rounded-lg shadow-sm">

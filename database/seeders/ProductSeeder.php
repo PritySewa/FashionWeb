@@ -43,6 +43,12 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Purple',
             'specifications' => 'Stretchable',
+            'image_urls' => json_encode([
+                'products/gallery/sample1.jpg',
+                'products/gallery/sample2.jpg',
+                'products/gallery/sample3.jpg',
+            ]),
+
         ]);
         Product::create([
             'title' => 'tshirt',
@@ -58,6 +64,12 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'pink',
             'specifications' => 'Stretchable',
+            'image_urls' => json_encode([
+                'products/gallery/sample1.jpg',
+                'products/gallery/sample2.jpg',
+                'products/gallery/sample3.jpg',
+            ]),
+
         ]);
         Product::create([
             'title' => 'Jacket',
@@ -73,6 +85,12 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Purple',
             'specifications' => 'Stretchable',
+            'image_urls' => json_encode([
+                'products/gallery/sample1.jpg',
+                'products/gallery/sample2.jpg',
+                'products/gallery/sample3.jpg',
+            ]),
+
         ]);
         Product::create([
             'title' => 'Bodycon',
@@ -88,6 +106,12 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Purple',
             'specifications' => 'Stretchable',
+            'image_urls' => json_encode([
+                'products/gallery/sample1.jpg',
+                'products/gallery/sample2.jpg',
+                'products/gallery/sample3.jpg',
+            ]),
+
         ]);
         Product::create([
             'title' => 'Formal Dress',
@@ -103,6 +127,12 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Purple',
             'specifications' => 'Stretchable',
+            'image_urls' => json_encode([
+                'products/gallery/sample1.jpg',
+                'products/gallery/sample2.jpg',
+                'products/gallery/sample3.jpg',
+            ]),
+
         ]);
         Product::create([
             'title' => 'Formal Pant',
@@ -118,6 +148,12 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'black',
             'specifications' => 'Stretchable',
+            'image_urls' => json_encode([
+                'products/gallery/sample1.jpg',
+                'products/gallery/sample2.jpg',
+                'products/gallery/sample3.jpg',
+            ]),
+
         ]);
              Product::create([
                  'title' => 'Shirt',
@@ -133,6 +169,12 @@ class ProductSeeder extends Seeder
                  'size' => 'M',
                  'color' => 'White',
                  'specifications' => 'Cutton',
+                 'image_urls' => json_encode([
+                     'products/gallery/sample1.jpg',
+                     'products/gallery/sample2.jpg',
+                     'products/gallery/sample3.jpg',
+                 ]),
+
              ]);
         Product::create([
             'title' => 'Long Skirt',
@@ -148,6 +190,12 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'black',
             'specifications' => 'Stretchable',
+            'image_urls' => json_encode([
+                'products/gallery/sample1.jpg',
+                'products/gallery/sample2.jpg',
+                'products/gallery/sample3.jpg',
+            ]),
+
         ]);
         Product::create([
             'title' => 'Baggy Jeans',
@@ -163,6 +211,12 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Blue',
             'specifications' => 'Hard',
+            'image_urls' => json_encode([
+                'products/gallery/sample1.jpg',
+                'products/gallery/sample2.jpg',
+                'products/gallery/sample3.jpg',
+            ]),
+
         ]);
         Product::create([
             'title' => 'Mini Skirt',
@@ -178,6 +232,12 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Pink',
             'specifications' => 'cute',
+            'image_urls' => json_encode([
+                'products/gallery/sample1.jpg',
+                'products/gallery/sample2.jpg',
+                'products/gallery/sample3.jpg',
+            ]),
+
         ]);
         Product::create([
             'title' => 'Coat',
@@ -193,6 +253,12 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Moron',
             'specifications' => 'Long and trendy',
+            'image_urls' => json_encode([
+                'products/gallery/sample1.jpg',
+                'products/gallery/sample2.jpg',
+                'products/gallery/sample3.jpg',
+            ]),
+
         ]);
 
 

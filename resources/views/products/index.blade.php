@@ -72,6 +72,7 @@
                     <th class="px-4 py-3">Size</th>
                     <th class="px-4 py-3">Color</th>
                     <th class="px-4 py-3">Description</th>
+                    <th class="px-4 py-3">Multiple Images</th>
                     <th class="px-4 py-3 text-center">Actions</th>
                 </tr>
                 </thead>
