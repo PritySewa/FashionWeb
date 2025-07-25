@@ -89,14 +89,11 @@ class CartController extends Controller
     {
         $request->validate([
             'item_ids' => 'required|array',
-            'item_ids.*' => 'exists:carts,id,user_id,'.auth()->id()
+            'item_ids.*' => 'exists:cart,id'
         ]);
 
-        Cart::where('user_id', auth()->id())
-            ->whereIn('id', $request->item_ids)
-            ->delete();
+        Cart::whereIn('id', $request->item_ids)->delete();
 
-        return redirect()->route('cart.index')
-            ->with('success', 'Selected items removed successfully!');
+        return redirect()->route('cart.index')->with('success', 'Selected items removed from cart');
     }
 }
