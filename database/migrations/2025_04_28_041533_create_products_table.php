@@ -18,9 +18,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade')->nullable();
             $table->foreignId('badge_id')->nullable()->constrained()->nullOnDelete();            $table->string('price');
             $table->text('thumb_images_url');
-
 // In your migration file (e.g., create_products_table.php)
-            $table->json('image_urls')->nullable();
+//            $table->json('image_urls')->nullable();
             $table->text('description');
             $table->text('stock');
             $table->enum('status', ['active','inactive']);

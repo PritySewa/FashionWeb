@@ -8,23 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 
 {
-//    protected $casts= [
-//    'title',
-//    'parent_id',
-//    'category_id',
-//    'badge_id',
-//    'price',
-//    'thumb_images_url',
-//    'image_urls' => 'array',
-//    'description',
-//    'stock',
-//    'status',
-//    'is_variant',
-//    'size',
-//    'color',
-//    'specifications',
-//
-//];
+    protected $fillable= [
+    'title',
+    'parent_id',
+    'category_id',
+    'badge_id',
+    'price',
+    'thumb_images_url',
+    'image_urls' => 'array',
+    'description',
+    'stock',
+    'status',
+    'is_variant',
+    'size',
+    'color',
+    'specifications',
+
+];
     protected $casts = [
         'image_urls' => 'array',
         'thumb_images_url' => 'array', // Only if this is JSON too

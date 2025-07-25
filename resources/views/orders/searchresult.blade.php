@@ -9,6 +9,7 @@
             <td>{{ $orders->phone_number }}</td>
             <td>{{ $item->total_price }}</td>
             <td>{{ $orders->payment_method }}</td>
+            <td>{{$orders->payment_status}}</td>
         </tr>
     @endforeach
 @endforeach

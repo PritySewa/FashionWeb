@@ -94,11 +94,18 @@ class OrderController extends BaseController
             'product_image_url' => $product->thumb_images_url,
             'product_price' => $product->price,
             'total_price' => $total_price,
+            'status' => 0, // 👈 this fixes your error
+
+
         ]);
 
                 $user->notify(new OrderConfirmed($order));
 //                Redirect to Skypay if selected
+        $total_price = $request->source == 'direct'
+            ?$request->quantity * $product->price
+            :$request->cart_total_price;
         if ($request->payment_method === "skypay") {
+
             $redirectUrl = sprintf(
                 'https://checkout.skypay.dev?api_key=%s&amount=%s&code=%s&success_url=%s&failure_url=%s',
                 env('SKYPAY_API_KEY'),
