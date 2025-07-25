@@ -51,25 +51,36 @@ class ProductController extends BaseController
             'size' => 'required|string',
             'color' => 'required|string',
             'specifications' => 'required|string',
+            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $product = new Product();
         $product->fill($validated);
 
-        // Handle thumbnail upload
+        // 🖼️ Handle thumbnail upload
         if ($request->hasFile('thumb_images_url')) {
             $image = $request->file('thumb_images_url');
-            $path = $image->store('products', 'public'); // saves to storage/app/public/products
+            $path = $image->store('products', 'public');
             $product->thumb_images_url = $path;
         } else {
-            $product->thumb_images_url = 'images/img.png'; // default placeholder
+            $product->thumb_images_url = 'images/img.png';
+        }
+
+        // 🖼️ Handle multiple gallery image uploads
+        $galleryImages = [];
+
+        if ($request->hasFile('gallery_images')) {
+            foreach ($request->file('gallery_images') as $galleryImage) {
+                $galleryPath = $galleryImage->store('products/gallery', 'public');
+                $galleryImages[] = $galleryPath;
+            }
+            $product->image_urls = $galleryImages; // Casted to JSON
         }
 
         $product->save();
 
         return redirect()->route($this->route . 'index')->with('success', 'Product created successfully.');
     }
-
 
 
     public function edit(string $id)
@@ -99,21 +110,38 @@ class ProductController extends BaseController
             'size' => 'required|string',
             'color' => 'required|string',
             'specifications' => 'required|string',
+            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $product->fill($validated);
 
-        // Check if a new thumbnail is uploaded
+        // 🔄 Handle thumbnail update
         if ($request->hasFile('thumb_images_url')) {
-            // Optionally delete the old image
             if ($product->thumb_images_url) {
                 Storage::disk('public')->delete($product->thumb_images_url);
             }
 
-            // Store the new one
             $image = $request->file('thumb_images_url');
             $path = $image->store('products', 'public');
             $product->thumb_images_url = $path;
+        }
+
+        // 🔄 Handle gallery image updates
+        if ($request->hasFile('gallery_images')) {
+            // Optionally delete old gallery images
+            if ($product->image_urls) {
+                foreach ($product->image_urls as $oldImg) {
+                    Storage::disk('public')->delete($oldImg);
+                }
+            }
+
+            $galleryImages = [];
+            foreach ($request->file('gallery_images') as $galleryImage) {
+                $galleryPath = $galleryImage->store('products/gallery', 'public');
+                $galleryImages[] = $galleryPath;
+            }
+
+            $product->image_urls = $galleryImages;
         }
 
         $product->save();
@@ -138,8 +166,8 @@ class ProductController extends BaseController
         }
 
         // Delete gallery images
-        if ($product->image_urls) {
-            foreach (json_decode($product->image_urls, true) as $imgPath) {
+        if (!empty($product->image_urls)) {
+            foreach ($product->image_urls as $imgPath) {
                 Storage::disk('public')->delete($imgPath);
             }
         }

@@ -26,6 +26,19 @@
             {{ Str::limit($product->description, 50) }}
         </td>
         <td>
+            <div class="flex gap-2">
+                @foreach(array_slice($product->image_urls ?? [], 0, 3) as $img)
+                    <img src="{{ asset('storage/' . $img) }}" class="w-10 h-10 object-cover rounded">
+                @endforeach
+                @if(count($product->image_urls ?? []) > 3)
+                    <span class="text-xs text-gray-500">+{{ count($product->image_urls) - 3 }} more</span>
+                @endif
+            </div>
+        </td>
+        <td><a href="{{ route('products.edit', $product->id) }}" class="text-blue-500">Edit</a></td>
+    </tr>
+
+    <td>
             <div class="flex-col gap-5">
                 <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm text-white" style="background-color: #9F8170;">Edit</a>
                 <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm text-white" style="background-color: #9F8170;">Show</a>

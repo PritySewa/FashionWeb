@@ -41,10 +41,10 @@
                     @method('DELETE')
                 </form>
 
-                <div class="flex flex-col lg:flex-row gap-6">
-
+                <div class="container mx-auto -ml-8">
+                    <div class="flex flex-col lg:flex-row gap-4">
                     <!-- 🛒 Left: Cart Section -->
-                    <div class="w-full lg:w-2/3">
+                    <div class="w-full lg:w-5/6 ml-0">
                         <form id="checkout-form" method="POST" action="{{ route('cart.store') }}" onsubmit="syncFormInputs()">
                             @csrf
                             <input type="hidden" name="selected_items" id="selected-items-input">
@@ -175,10 +175,10 @@
 
                     <!-- 💳 Right: Payment Section -->
                     <div class="w-full lg:w-1/3 bg-white shadow-md rounded-lg p-6">
-                        <h2 class="text-lg font-bold mb-4">Payment Details</h2>
+                        <h2 class="text-lg font-bold mb-2">Payment Details</h2>
 
                         <!-- Payment Form -->
-                        <form action="{{ route('orders.store') }}" method="POST" class="w-full md:w-1/2 bg-white p-8 rounded-lg shadow space-y-6">
+                        <form action="{{ route('orders.store') }}" method="POST" class="shadow space-y-3">
                             @csrf
 
                             <!-- ✅ Hidden fields for all cart items -->
@@ -213,13 +213,6 @@
                                 </p>
                             </div>
 
-                            <!-- Paid Amount -->
-                            <div>
-                                <label class="block font-medium mb-1">Paid Amount <span class="text-red-500">*</span></label>
-                                <input type="number" name="paid_amount" value="{{ old('paid_amount') }}"
-                                       class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                                       required>
-                            </div>
 
                             <!-- Payment Method -->
                             <div>
@@ -240,7 +233,7 @@
                             </button>
                         </form>
                     </div>
-
+                    </div>
                 </div>
     </div>
 
