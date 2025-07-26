@@ -15,7 +15,7 @@ class Product extends Model
     'badge_id',
     'price',
     'thumb_images_url',
-    'image_urls' => 'array',
+    'image_urls' ,
     'description',
     'stock',
     'status',
@@ -27,10 +27,7 @@ class Product extends Model
 ];
     protected $casts = [
         'image_urls' => 'array',
-        'thumb_images_url' => 'array', // Only if this is JSON too
-        'price' => 'float',
-        'stock' => 'integer',
-        'is_variant' => 'boolean',
+
     ];
 
     public function Order(){

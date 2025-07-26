@@ -2,17 +2,30 @@
     <tr class="hover:bg-gray-50 transition">
         <td class="px-4 py-3">{{ $product->id }}</td>
         <td class="px-4 py-3">{{ $product->title }}</td>
+
         <td class="py-2 px-4 border-b">
             @if ($product->thumb_images_url)
                 @if(Str::startsWith($product->thumb_images_url, ['http://', 'https://']))
-                    <img src="{{ $product->thumb_images_url }}" alt="Image" style="width: 100px;">
+                    <img src="{{ $product->thumb_images_url }}" alt="Category Image" style="width: 100px;">
                 @else
-                    <img src="{{ asset('storage/' . $product->thumb_images_url) }}" alt="Image" style="width: 100px;">
+                    <img src="{{ asset('storage/' . $product->thumb_images_url) }}" alt="Category Image" style="width: 100px;">
                 @endif
             @else
                 <span class="text-gray-400 italic">No image</span>
             @endif
         </td>
+
+{{--        <td class="py-2 px-4 border-b">--}}
+{{--            @if ($product->thumb_images_url)--}}
+{{--                @if(Str::startsWith($product->thumb_images_url, ['http://', 'https://']))--}}
+{{--                    <img src="{{ $product->thumb_images_url }}" alt="Image" style="width: 100px;">--}}
+{{--                @else--}}
+{{--                    <img src="{{ asset('storage/' . $product->thumb_images_url) }}" alt="Image" style="width: 100px;">--}}
+{{--                @endif--}}
+{{--            @else--}}
+{{--                <span class="text-gray-400 italic">No image</span>--}}
+{{--            @endif--}}
+{{--        </td>--}}
         <td class="px-4 py-3">{{ $product->category->title ?? 'N/A' }}</td>
         <td class="px-4 py-3">{{ $product->badge->title ?? 'N/A' }}</td>
         <td class="px-4 py-3">Rs{{ number_format($product->price, 2) }}</td>
@@ -22,6 +35,35 @@
         <td class="px-4 py-3">{{ $product->is_variant ? 'Yes' : 'No' }}</td>
         <td class="px-4 py-3">{{ $product->size }}</td>
         <td class="px-4 py-3">{{ $product->color }}</td>
+        <td>
+
+                        @if(is_array($product->image_urls))
+                @foreach($product->image_urls as $url)
+{{--                    @if(Str::startsWith($url, ['http://', 'https://']))--}}
+                        <img src="{{ $url }}" alt="Gallery" style="height: 40px; width: 40px; object-fit: cover; border-radius: 4px; border: 1px solid #ccc; margin-right: 4px; margin-bottom: 4px;">
+{{--                    @else--}}
+{{--                        <img src="{{ asset('storage/' . $url) }}" alt="Gallery Image" style="width: 100px;">--}}
+{{--                    @endif--}}
+
+                @endforeach
+            @else
+                <span class="text-muted">N/A</span>
+            @endif
+        </td>
+
+{{--        <td>--}}
+{{--            @if ($product->image_urls && is_array($product->image_urls))--}}
+{{--                @foreach ($product->image_urls as $url)--}}
+{{--                    @if(Str::startsWith($url, ['http://', 'https://']))--}}
+{{--                        <img src="{{ $url }}" alt="Gallery Image" style="width: 100px;">--}}
+{{--                    @else--}}
+{{--                        <img src="{{ asset('storage/' . ltrim($url, '/')) }}" alt="Gallery Image" style="width: 100px;">--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
+{{--            @else--}}
+{{--                <span class="text-gray-400 italic">No gallery images</span>--}}
+{{--            @endif--}}
+{{--        </td>--}}
         <td class="px-4 py-3 max-w-xs truncate" title="{{ $product->description }}">
             {{ Str::limit($product->description, 50) }}
         </td>
@@ -44,3 +86,5 @@
         <td colspan="13" class="text-center text-muted">No matching products found.</td>
     </tr>
 @endif
+
+

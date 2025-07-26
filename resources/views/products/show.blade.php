@@ -37,6 +37,18 @@
         <p><strong>Description:</strong></p>
         <div class="p-3 border rounded bg-gray-50">{{ $product->description }}</div>
 
+        <!-- Image URLs -->
+        @if($product->image_urls)
+            <h3 class="mt-4">Additional Images:</h3>
+            <div class="row">
+                @foreach($product->image_urls as $image)
+                    <div class="col-md-4 mb-3">
+                        <img src="{{ $image }}" alt="Product Image" class="img-fluid" style="max-height: 200px; object-fit: cover;">
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
         <p class="mt-3"><strong>Specifications:</strong></p>
         <div class="p-3 border rounded bg-gray-50">{{ $product->specifications }}</div>
     </div>

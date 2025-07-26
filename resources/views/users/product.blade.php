@@ -56,7 +56,8 @@
             </div>
         </div>
     </div>
-
+{{--    @include('users.payment.buy', ['product' => $product, 'quantity' => $quantity])--}}
+{{--    <x-users-buy :product="$product" :quantity="$quantity" />--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         const price = {{ $products->price }};
