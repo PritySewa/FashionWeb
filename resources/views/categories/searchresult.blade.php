@@ -5,12 +5,15 @@
             @if ($category->images)
                 @if(Str::startsWith($category->images, ['http://', 'https://']))
                     <img src="{{ $category->images }}" alt="Category Image" style="width: 100px;">
-                @else
+                @elseif(file_exists(public_path('storage/' . $category->images)))
                     <img src="{{ asset('storage/' . $category->images) }}" alt="Category Image" style="width: 100px;">
+                @else
+                    <img src="{{ asset($category->images) }}" alt="Category Image" style="width: 100px;">
                 @endif
             @else
                 <span class="text-gray-400 italic">No image</span>
             @endif
+
         </td>
         <td>
             <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm text-white" style="background-color: #9F8170;">Edit</a>

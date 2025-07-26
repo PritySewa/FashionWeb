@@ -41,6 +41,7 @@
                     </p>
                 </div>
             </div>
+
             {{--    CategoryGrid--}}
             <section class="py-8 px-1">
                 <div class="max-w-4xl mx-auto">

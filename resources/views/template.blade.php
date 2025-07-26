@@ -224,7 +224,7 @@
                     <input
                         id="email"
                         style="color: black"
-                        class="block mt-1 w-full bg-white text-black border border-black rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        class="block mt-1 w-full bg-white text-black border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800"
                         type="email"
                         name="email"
                         required
@@ -242,7 +242,7 @@
                     <x-input-label for="login_password" :value="__('Password')" />
                     <input
                         id="login_password"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md text-black focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        class="block mt-1 w-full bg-white border border-black rounded-md text-black focus:outline-none focus:ring-2 focus:ring-amber-800"
                         type="password"
                         name="password"
                         required
@@ -263,7 +263,7 @@
                         <input
                             id="remember_me"
                             type="checkbox"
-                            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                            class="rounded border-gray-300 text-black shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-800"
                             name="remember"
                         />
                         <span class="ml-2 text-sm text-gray-600"
@@ -296,7 +296,7 @@
         <!-- Close Button -->
         <button
             @click="showRegister = false"
-            class="absolute -top-0 -right-0 w-7 h-7  bg-white border border-gray-300 shadow text-xl text-gray-600 hover:text-black hover:bg-gray-100 flex items-center justify-center z-50"
+            class="absolute -top-0 -right-0 w-7 h-7  bg-white border border-black rounded-md shadow text-xl text-gray-600 hover:text-black hover:bg-gray-100 flex items-center justify-center z-50"
         >
             &times;
         </button>
@@ -312,7 +312,7 @@
                     <x-input-label for="name" :value="__('Name')" />
                     <input
                         id="name"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
+                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black"
                         type="name"
                         name="name"
                         :value="old('name')"
@@ -330,7 +330,7 @@
                     <x-input-label for="email" :value="__('Email')" />
                     <input
                         id="email"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
+                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black"
                         type="email"
                         name="email"
                         :value="old('email')"
@@ -349,7 +349,7 @@
                     <x-input-label for="address" :value="__('Address')" />
                     <input
                         id="address"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
+                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black"
                         type="address"
                         name="address"
                         :value="old('address')"
@@ -370,7 +370,7 @@
                     />
                     <input
                         id="phone_number"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
+                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black"
                         type="phone_number"
                         name="phone_number"
                         :value="old('phone_number')"
@@ -388,7 +388,7 @@
                     <x-input-label for="register_password" :value="__('Password')" />
                     <input
                         id="register_password"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md text-black focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        class="block mt-1 w-full bg-white border border-black rounded-md text-black focus:outline-none focus:ring-2 focus:ring-amber-800"
                         type="password"
                         name="password"
                         required
@@ -409,7 +409,7 @@
                     <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                     <input
                         id="password_confirmation"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md text-black focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        class="block mt-1 w-full bg-white border border-black rounded-md text-black focus:outline-none focus:ring-2 focus:ring-amber-800"
                         type="password"
                         name="password_confirmation"
                         required
