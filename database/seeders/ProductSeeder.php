@@ -28,11 +28,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Purple',
             'specifications' => 'Made with cotton. Lightweight and breathable.',
-            'image_urls' => json_encode([
-                'products/gallery/sample1.jpg',
-                'products/gallery/sample2.jpg',
-                'products/gallery/sample3.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
         ]);
         Product::create([
             'title' => 'Leather Skirt',
@@ -48,11 +47,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Purple',
             'specifications' => 'Stretchable',
-            'image_urls' => json_encode([
-                'products/gallery/sample1.jpg',
-                'products/gallery/sample2.jpg',
-                'products/gallery/sample3.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
 
         ]);
         Product::create([
@@ -69,11 +67,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'pink',
             'specifications' => 'Stretchable',
-            'image_urls' => json_encode([
-                'products/gallery/sample1.jpg',
-                'products/gallery/sample2.jpg',
-                'products/gallery/sample3.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
 
         ]);
         Product::create([
@@ -90,11 +87,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Purple',
             'specifications' => 'Stretchable',
-            'image_urls' => json_encode([
-                'products/gallery/sample1.jpg',
-                'products/gallery/sample2.jpg',
-                'products/gallery/sample3.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
 
         ]);
         Product::create([
@@ -111,11 +107,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Purple',
             'specifications' => 'Stretchable',
-            'image_urls' => json_encode([
-                'products/gallery/sample1.jpg',
-                'products/gallery/sample2.jpg',
-                'products/gallery/sample3.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
 
         ]);
         Product::create([
@@ -132,11 +127,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Purple',
             'specifications' => 'Stretchable',
-            'image_urls' => json_encode([
-                'products/gallery/sample1.jpg',
-                'products/gallery/sample2.jpg',
-                'products/gallery/sample3.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
 
         ]);
         Product::create([
@@ -153,11 +147,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'black',
             'specifications' => 'Stretchable',
-            'image_urls' => json_encode([
-                'products/gallery/sample1.jpg',
-                'products/gallery/sample2.jpg',
-                'products/gallery/sample3.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
 
         ]);
              Product::create([
@@ -174,11 +167,10 @@ class ProductSeeder extends Seeder
                  'size' => 'M',
                  'color' => 'White',
                  'specifications' => 'Cutton',
-                 'image_urls' => json_encode([
-                     'products/gallery/sample1.jpg',
-                     'products/gallery/sample2.jpg',
-                     'products/gallery/sample3.jpg',
-                 ]),
+                 'image_urls' =>[
+                     'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                     'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+                 ],
 
              ]);
         Product::create([
@@ -195,11 +187,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'black',
             'specifications' => 'Stretchable',
-            'image_urls' => json_encode([
-                'products/gallery/sample1.jpg',
-                'products/gallery/sample2.jpg',
-                'products/gallery/sample3.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
 
         ]);
         Product::create([
@@ -216,11 +207,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Blue',
             'specifications' => 'Hard',
-            'image_urls' => json_encode([
-                'products/gallery/sample1.jpg',
-                'products/gallery/sample2.jpg',
-                'products/gallery/sample3.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
 
         ]);
         Product::create([
@@ -237,11 +227,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Pink',
             'specifications' => 'cute',
-            'image_urls' => json_encode([
-                'https://i.pinimg.com/736x/28/68/0e/28680e346d7309ff141e20fc75e0814f.jpg', // you can store this image in storage or public
-                'https://i.pinimg.com/736x/28/68/0e/28680e346d7309ff141e20fc75e0814f.jpg',
-                'https://i.pinimg.com/736x/28/68/0e/28680e346d7309ff141e20fc75e0814f.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
 
         ]);
         Product::create([
@@ -258,11 +247,10 @@ class ProductSeeder extends Seeder
             'size' => 'M',
             'color' => 'Moron',
             'specifications' => 'Long and trendy',
-            'image_urls' => json_encode([
-                'products/gallery/sample1.jpg',
-                'products/gallery/sample2.jpg',
-                'products/gallery/sample3.jpg',
-            ]),
+            'image_urls' =>[
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_01_5.jpg',
+                'https://cdn.panhomestores.com/cdn-cgi/image/width=627px,quality=60,%20format=auto,%20dpr=1/media/catalog/product/0/7/072GDB0800029_03_3.jpg',
+            ],
 
         ]);
 

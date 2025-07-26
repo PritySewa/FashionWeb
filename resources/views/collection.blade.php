@@ -123,9 +123,18 @@
                             <div class="bg-[#fdf6f0] border border-[#A9746E] rounded-lg shadow hover:shadow-md transition-all h-full flex flex-col hover:ring-2 hover:ring-[#BD806B]">
                                 <!-- Product Image -->
                                 <div class="relative p-4">
-                                    <img src="{{ $product->thumb_images_url }}"
-                                         alt="{{ $product->title }}"
-                                         class="w-full h-48 object-contain scale-105 rounded-t-lg group-hover:opacity-90 transition">
+                                    @php
+                                        $image = $product->thumb_images_url;
+                                    @endphp
+
+                                    @if(Str::startsWith($image, ['http://', 'https://']))
+                                        <img src="{{ $image }}" alt="{{ $product->title }}"
+                                             class="w-full h-48 object-contain scale-105 rounded-t-lg group-hover:opacity-90 transition">
+                                    @else
+                                        <img src="{{ asset('storage/' . $image) }}" alt="{{ $product->title }}"
+                                             class="w-full h-48 object-contain scale-105 rounded-t-lg group-hover:opacity-90 transition">
+                                    @endif
+
                                     @if(!empty($product->badge) && !empty($product->badge->icon_path))
                                         <img
                                             src="{{ $product->badge->icon_path }}"
