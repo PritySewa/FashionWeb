@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 42bbac28f40a99229df9caefb3ad8c19f8265554
 @extends('template')
 
 @section('content')
