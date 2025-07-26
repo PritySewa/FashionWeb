@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->ondelete('cascade');
             $table->enum('payment_method',['cash_on_delivery','skypay']);
             $table->timestamp('payment_verified_at')->nullable();
-            $table->datetime('cancelled_at_status');
+            $table->datetime('cancelled_at_status')->nullable();
             $table->text('address');
             $table->enum('payment_status',['paid','unpaid']);
             $table->timestamp('completed_at_sales_total')->nullable();

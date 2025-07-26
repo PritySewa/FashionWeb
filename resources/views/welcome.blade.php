@@ -1,5 +1,20 @@
 @extends('template')
 @section('content')
+    @if(session('success'))
+        <div class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg shadow-lg z-50 flex items-center justify-between max-w-md">
+            <span>{{ session('success') }}</span>
+            <button onclick="this.parentElement.style.display='none'" class="ml-4 font-bold text-xl leading-none">&times;</button>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-lg shadow-lg z-50 flex items-center justify-between max-w-md">
+            <span>{{ session('error') }}</span>
+            <button onclick="this.parentElement.style.display='none'" class="ml-4 font-bold text-xl leading-none">&times;</button>
+        </div>
+    @endif
+
+
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display&display=swap" rel="stylesheet">
         <style>

@@ -40,7 +40,7 @@
                 </div>
             </div>
         @else
-                <div class="container mx-auto -ml-8">
+            <div class="container mx-auto -ml-8">
 
                 <!-- Bulk Delete Form (hidden, will be populated by JavaScript) -->
                 <form id="bulk-delete-form" method="POST" action="{{ route('cart.bulkDelete') }}">
@@ -50,236 +50,250 @@
 
                 <div class="container mx-auto -ml-8">
                     <div class="flex flex-col lg:flex-row gap-4">
-                    <!-- 🛒 Left: Cart Section -->
-                    <div class="w-full lg:w-5/6 ml-0">
-                        <form id="checkout-form" method="POST" action="{{ route('cart.store') }}" onsubmit="syncFormInputs()">
-                            @csrf
-                            <input type="hidden" name="selected_items" id="selected-items-input">
+                        <!-- 🛒 Left: Cart Section -->
+                        <div class="w-full lg:w-5/6 ml-0">
+                            <form id="checkout-form" method="POST" action="{{ route('cart.store') }}" onsubmit="syncFormInputs()">
+                                @csrf
+                                <input type="hidden" name="selected_items" id="selected-items-input">
 
-                            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                                <!-- Bulk Actions Bar -->
-                                <div class="bg-gray-50 px-6 py-3 border-b border-gray-200 flex justify-between items-center">
-                                    <div class="flex items-center">
-                                        <input type="checkbox" id="select-all" class="h-4 w-4 text-[#BD806B] rounded border-gray-300 focus:ring-[#BD806B]">
-                                        <label for="select-all" class="ml-2 text-sm text-gray-700">Select all</label>
+                                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                                    <!-- Bulk Actions Bar -->
+                                    <div class="bg-gray-50 px-6 py-3 border-b border-gray-200 flex justify-between items-center">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="select-all" class="h-4 w-4 text-[#BD806B] rounded border-gray-300 focus:ring-[#BD806B]">
+                                            <label for="select-all" class="ml-2 text-sm text-gray-700">Select all</label>
+                                        </div>
+                                        <button type="button" id="delete-selected" class="btn inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-red-600 hover:bg-red-700" >
+                                            <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                            Remove Selected
+                                        </button>
                                     </div>
-                                    <button type="button" id="delete-selected" class="btn inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-red-600 hover:bg-red-700" >
-                                        <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg>
-                                        Remove Selected
-                                    </button>
-                                </div>
 
-                                <!-- Cart Items Table -->
-                                <div class="overflow-x-auto">
-                                    <table class="min-w-full divide-y divide-gray-200">
-                                        <thead class="bg-gray-50">
-                                        <tr>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
-                                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach($cartItems as $item)
-                                            <tr class="hover:bg-gray-50 transition-colors" data-item-id="{{ $item->id }}">
-                                                <td class="px-6 py-4">
-                                                    <div class="flex items-center">
-                                                        <input type="checkbox" class="cart-checkbox" value="{{ $item->id }}">
-                                                        <div class="flex-shrink-0 h-20 w-20">
-                                                            <img class="h-full w-full rounded-md object-cover" src="{{ $item->thumb_images_url }}" alt="{{ $item->product_title }}">
-                                                        </div>
-                                                        <div class="ml-4">
-                                                            <div class="text-sm font-medium text-gray-900">{{ $item->product_title }}</div>
-                                                            <div class="text-sm text-gray-500">Color: {{ $item->product->color }}</div>
-                                                            <div class="text-sm text-gray-500">Size: {{ $item->product->size }}</div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    Rs. {{ number_format($item->product_price, 2) }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    <form class="update-quantity-form" data-item-id="{{ $item->id }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="quantity-selector">
-                                                            <button type="button" class="quantity-btn decrease">
-                                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
-                                                                </svg>
-                                                            </button>
-                                                            <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" class="quantity-input">
-                                                            <button type="button" class="quantity-btn increase">
-                                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 item-total">
-                                                    Rs. {{ number_format($item->total_price, 2) }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <form class="delete-item-form" action="{{ route('cart.destroy', $item->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="text-red-600 hover:text-red-900">
-                                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                            </svg>
-                                                        </button>
-                                                    </form>
-                                                </td>
+                                    <!-- Cart Items Table -->
+                                    <div class="overflow-x-auto">
+                                        <table class="min-w-full divide-y divide-gray-200">
+                                            <thead class="bg-gray-50">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            </thead>
+                                            <tbody class="bg-white divide-y divide-gray-200">
+                                            @foreach($cartItems as $item)
+                                                <tr class="hover:bg-gray-50 transition-colors" data-item-id="{{ $item->id }}" data-price="{{ $item->product_price }}">
+                                                    <td class="px-6 py-4">
+                                                        <div class="flex items-center">
+                                                            <input type="checkbox" class="cart-checkbox" value="{{ $item->id }}">
+                                                            <div class="flex-shrink-0 h-20 w-20">
+                                                                <img class="h-full w-full rounded-md object-cover" src="{{ $item->thumb_images_url }}" alt="{{ $item->product_title }}">
+                                                            </div>
+                                                            <div class="ml-4">
+                                                                <div class="text-sm font-medium text-gray-900">{{ $item->product_title }}</div>
+                                                                <div class="text-sm text-gray-500">Color: {{ $item->product->color }}</div>
+                                                                <div class="text-sm text-gray-500">Size: {{ $item->product->size }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                        Rs. {{ number_format($item->product_price, 2) }}
+                                                    </td>
 
-                                <!-- Cart Summary -->
-                                <div class="border-t border-gray-200 px-6 py-4 bg-gray-50">
-                                    <div class="flex justify-between items-center">
-                                        <div class="text-right">
-                                            <div class="text-base text-gray-600">
-                                                Subtotal:
-                                                <span class="text-xl font-bold text-gray-900 ml-2" id="cart-total">
-                                        Rs. {{ number_format($cartItems->sum('total_price'), 2) }}
-                                    </span>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <form class="update-quantity-form" data-item-id="{{ $item->id }}">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="quantity-selector">
+                                                                <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" class="quantity-input w-16 text-center border border-gray-300 rounded">
+                                                            </div>
+
+                                                        </form>
+                                                    </td>
+
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 item-total">
+                                                        Rs. {{ number_format($item->total_price, 2) }}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                        <form class="delete-item-form" action="{{ route('cart.destroy', $item->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="text-red-600 hover:text-red-900">
+                                                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Cart Summary -->
+                                    <div class="border-t border-gray-200 px-6 py-4 bg-gray-50">
+                                        <div class="flex justify-between items-center">
+                                            <div class="text-right">
+                                                <div class="text-base text-gray-600">
+                                                    Subtotal:
+                                                    <span class="text-xl font-bold text-gray-900 ml-2" id="cart-summary-total">
+                                                        Rs. {{ number_format($cartItems->sum('total_price'), 2) }}
+                                                    </span>
+
+                                                </div>
+                                                <p class="mt-1 text-sm text-gray-500">Shipping and taxes calculated at checkout</p>
                                             </div>
-                                            <p class="mt-1 text-sm text-gray-500">Shipping and taxes calculated at checkout</p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </form>
+                            </form>
+                        </div>
+
+                <form action="{{ route('checkout.store') }}" method="POST" class="w-full md:w-1/2 bg-white p-8 rounded-lg shadow space-y-6">
+                    @csrf
+
+                    <!-- These hidden fields are important -->
+                    <input type="hidden" name="source" value="cart">
+                    <input type="hidden" name="selected_ids" id="selected_ids">
+                    <input type="hidden" name="selected_total" id="selected_total">
+
+                    <!-- Address -->
+                    <div>
+                        <label class="block font-medium mb-1">Address</label>
+                        <input type="text" name="address" required class="w-full border-gray-300 rounded px-3 py-2">
                     </div>
 
-                    <!-- 💳 Right: Payment Section -->
-                    <div class="w-full lg:w-1/3 bg-white shadow-md rounded-lg p-6">
-                        <h2 class="text-lg font-bold mb-2">Payment Details</h2>
-
-                        <!-- Payment Form -->
-                        <form action="{{ route('orders.store') }}" method="POST" class="shadow space-y-3">
-                            @csrf
-
-                            <!-- ✅ Hidden fields for all cart items -->
-                            @foreach ($cartItems as $item)
-                                <input type="hidden" name="product_ids[]" value="{{ $item->product_id }}">
-                                <input type="hidden" name="quantities[{{ $item->product_id }}]" value="{{ $item->quantity }}">
-                            @endforeach
-
-                            <h3 class="text-2xl font-semibold text-center mb-6 text-gray-800">Delivery Information</h3>
-
-                            <!-- Address -->
-                            <div>
-                                <label class="block font-medium mb-1">Address <span class="text-red-500">*</span></label>
-                                <input type="text" name="address" value="{{ old('address') }}"
-                                       class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                                       required>
-                            </div>
-
-                            <!-- Phone Number -->
-                            <div>
-                                <label class="block font-medium mb-1">Phone Number <span class="text-red-500">*</span></label>
-                                <input type="number" name="phone_number" value="{{ old('phone_number') }}"
-                                       class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                                       required>
-                            </div>
-
-                            <!-- Total Amount (Display Only) -->
-                            <div>
-                                <label class="block font-medium mb-1">Total Amount</label>
-                                <p class="text-lg font-semibold text-gray-800">
-                                    Rs. {{ $cartItems->sum(fn($item) => $item->quantity * $item->product->price) }}
-                                </p>
-                            </div>
-
-
-                            <!-- Payment Method -->
-                            <div>
-                                <label class="block font-semibold mb-1 text-gray-800">Payment Method <span class="text-red-500">*</span></label>
-                                <select name="payment_method"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                                        required>
-                                    <option value="">Select method</option>
-                                    <option value="cash_on_delivery" {{ old('payment_method') == 'cash_on_delivery' ? 'selected' : '' }}>Cash</option>
-                                    <option value="skypay" {{ old('payment_method') == 'skypay' ? 'selected' : '' }}>Skypay</option>
-                                </select>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <button type="submit"
-                                    class="w-full bg-[#BD806B] hover:bg-[#C4957A] text-white text-lg py-3 rounded-lg shadow-md transition">
-                                Confirm Pay
-                            </button>
-                        </form>
+                    <!-- Phone Number -->
+                    <div>
+                        <label class="block font-medium mb-1">Phone Number</label>
+                        <input type="text" name="phone_number" required class="w-full border-gray-300 rounded px-3 py-2">
                     </div>
+
+                    <!-- Payment Method -->
+                    <div>
+                        <label class="block font-semibold mb-1 text-gray-800">Payment Method <span class="text-red-500">*</span></label>
+                        <select name="payment_method" required class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                            <option value="">Select method</option>
+                            <option value="cash_on_delivery">Cash</option>
+                            <option value="skypay">Skypay</option>
+                        </select>
                     </div>
-                </div>
-                </div>
-                    @endif
-    </div>
-    </div>
 
-            <style>
-            .quantity-selector {
-                @apply flex items-center border border-gray-300 rounded-md overflow-hidden;
-            }
-            .quantity-btn {
-                @apply h-8 w-8 flex items-center justify-center bg-white text-gray-600 hover:bg-gray-50 focus:outline-none;
-            }
-            .quantity-input {
-                @apply w-12 h-8 text-center border-x border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#BD806B];
-                -moz-appearance: textfield;
-            }
-            .quantity-input::-webkit-outer-spin-button,
-            .quantity-input::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-        </style>
+                    <!-- Total -->
+                    <div>
+                        <label class="block font-medium mb-1">Total</label>
+                        <p class="text-lg font-bold" id="cart-total">Rs. 0.00</p>
+                    </div>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const deleteSelectedBtn = document.getElementById('delete-selected');
-                    const bulkDeleteForm = document.getElementById('bulk-delete-form');
-                    const cartCheckboxes = document.querySelectorAll('.cart-checkbox');
+                    <!-- Submit -->
+                    <button type="submit" class="w-full bg-[#BD806B] text-white py-2 rounded hover:bg-[#a76d5a]">
+                        Confirm & Pay
+                    </button>
+                </form>
 
-                    if (deleteSelectedBtn && bulkDeleteForm && cartCheckboxes.length) {
-                        deleteSelectedBtn.addEventListener('click', function () {
-                            const selected = Array.from(cartCheckboxes).filter(cb => cb.checked);
+            </div>
+        </form>
 
-                            if (selected.length === 0) {
-                                alert('Please select at least one item to delete.');
-                                return;
-                            }
+    @endif
+</div>
 
-                            // Clear old hidden inputs if any
-                            bulkDeleteForm.querySelectorAll('input[name="item_ids[]"]').forEach(el => el.remove());
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const checkboxes = document.querySelectorAll('.cart-checkbox');
+                        const selectAll = document.getElementById('select-all');
+                        const cartSummaryTotal = document.getElementById('cart-summary-total');
+                        const checkoutTotal = document.getElementById('cart-total');
+                        const selectedIdsInput = document.getElementById('selected_ids');
+                        const selectedTotalInput = document.getElementById('selected_total');
+                        const deleteSelectedBtn = document.getElementById('delete-selected');
+                        const bulkDeleteForm = document.getElementById('bulk-delete-form');
+                        const quantityInputs = document.querySelectorAll('.quantity-input');
 
-                            // Add selected IDs as hidden inputs
-                            selected.forEach(cb => {
-                                const hiddenInput = document.createElement('input');
-                                hiddenInput.type = 'hidden';
-                                hiddenInput.name = 'item_ids[]';
-                                hiddenInput.value = cb.value;
-                                bulkDeleteForm.appendChild(hiddenInput);
+                        function updateCartSummary() {
+                            let total = 0;
+                            let selectedIds = [];
+
+                            checkboxes.forEach(cb => {
+                                if (cb.checked) {
+                                    const row = cb.closest('tr');
+                                    const totalCell = row.querySelector('.item-total');
+                                    const amount = parseFloat(totalCell.textContent.replace('Rs.', '').replace(',', '').trim());
+                                    total += amount;
+                                    selectedIds.push(cb.value);
+                                }
                             });
 
-                            // Submit the form
-                            bulkDeleteForm.submit();
-                        });
-                    } else {
-                        console.error("Delete button, form, or checkboxes not found.");
-                    }
-                });
-            </script>
+                            // Update total and hidden input fields
+                            if (cartSummaryTotal) cartSummaryTotal.textContent = `Rs. ${total.toFixed(2)}`;
+                            if (checkoutTotal) checkoutTotal.textContent = `Rs. ${total.toFixed(2)}`;
+                            if (selectedTotalInput) selectedTotalInput.value = total.toFixed(2);
+                            if (selectedIdsInput) selectedIdsInput.value = selectedIds.join(',');
+                        }
 
-    </div>
+                        // Attach change listeners to all cart checkboxes
+                        checkboxes.forEach(cb => cb.addEventListener('change', updateCartSummary));
+
+                        // Handle "Select All" checkbox
+                        if (selectAll) {
+                            selectAll.addEventListener('change', () => {
+                                checkboxes.forEach(cb => cb.checked = selectAll.checked);
+                                updateCartSummary();
+                            });
+                        }
+
+                        // Handle bulk delete button
+                        if (deleteSelectedBtn && bulkDeleteForm && checkboxes.length) {
+                            deleteSelectedBtn.addEventListener('click', () => {
+                                const selected = Array.from(checkboxes).filter(cb => cb.checked);
+
+                                if (selected.length === 0) {
+                                    alert('Please select at least one item to delete.');
+                                    return;
+                                }
+
+                                // Clear any previously added hidden inputs
+                                bulkDeleteForm.querySelectorAll('input[name="item_ids[]"]').forEach(el => el.remove());
+
+                                // Add selected item IDs as hidden inputs
+                                selected.forEach(cb => {
+                                    const hiddenInput = document.createElement('input');
+                                    hiddenInput.type = 'hidden';
+                                    hiddenInput.name = 'item_ids[]';
+                                    hiddenInput.value = cb.value;
+                                    bulkDeleteForm.appendChild(hiddenInput);
+                                });
+
+                                // Submit the form
+                                bulkDeleteForm.submit();
+                            });
+                        }
+
+                        // Handle quantity input change
+                        quantityInputs.forEach(input => {
+                            input.addEventListener('change', () => {
+                                const row = input.closest('tr');
+                                const price = parseFloat(row.dataset.price);
+                                const quantity = parseInt(input.value);
+
+                                if (!isNaN(price) && !isNaN(quantity)) {
+                                    const itemTotalCell = row.querySelector('.item-total');
+                                    const newTotal = price * quantity;
+                                    itemTotalCell.textContent = `Rs. ${newTotal.toFixed(2)}`;
+                                    updateCartSummary();
+                                }
+                            });
+                        });
+
+                        // Initial summary update
+                        updateCartSummary();
+                    });
+                </script>
+
+
+
 @endsection
