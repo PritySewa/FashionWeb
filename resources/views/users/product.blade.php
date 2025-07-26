@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 42bbac28f40a99229df9caefb3ad8c19f8265554
 @extends('template')
 
 @section('content')
@@ -65,6 +70,7 @@
                             <div class="flex items-center">
                                 <input type="number" id="quantity" value="1" min="1" max="{{ $product->stock }}"
                                        class="w-20 border border-gray-200 rounded-md px-3 py-2 text-center focus:ring-1 focus:ring-[#BD806B] focus:border-[#BD806B]">
+
                             </div>
                         </div>
 
