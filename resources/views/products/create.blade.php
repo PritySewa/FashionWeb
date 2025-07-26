@@ -113,6 +113,14 @@
                         </div>
                     </div>
 
+
+
+                    <div class="mb-3">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Gallery Images *</label>
+                        <input type="file" name="gallery_images[]" multiple
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500">
+                    </div>
+
                     <div class="mb-3">
                         <label class="form-label">Specifications</label>
                         <textarea name="specifications" class="form-control" rows="3">{{ old('specifications') }}</textarea>

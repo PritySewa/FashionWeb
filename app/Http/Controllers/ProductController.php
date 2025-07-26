@@ -37,6 +37,7 @@ class ProductController extends BaseController
 
     public function store(Request $request)
     {
+//        dd($request->file('gallery_images'));
         $validated = $request->validate([
             'title' => 'required|string',
             'parent_id' => 'nullable|string',
@@ -44,6 +45,7 @@ class ProductController extends BaseController
             'badge_id' => 'nullable|exists:badges,id',
             'price' => 'required|string',
             'thumb_images_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'required|string',
             'stock' => 'required|string',
             'status' => 'required|in:active,inactive',
@@ -53,24 +55,27 @@ class ProductController extends BaseController
             'specifications' => 'required|string',
         ]);
 
-        $product = new Product();
-        $product->fill($validated);
+        // 🔵 Store thumbnail
+        $thumbPath = $request->file('thumb_images_url')->store('products', 'public');
+        $validated['thumb_images_url'] = $thumbPath;
 
-        // Handle thumbnail upload
-        if ($request->hasFile('thumb_images_url')) {
-            $image = $request->file('thumb_images_url');
-            $path = $image->store('products', 'public'); // saves to storage/app/public/products
-            $product->thumb_images_url = $path;
-        } else {
-            $product->thumb_images_url = 'images/img.png'; // default placeholder
+        // 🔵 Store gallery images
+        $galleryUrls = [];
+        if ($request->hasFile('gallery_images')) {
+            foreach ($request->file('gallery_images') as $image) {
+                $path = $image->store('gallery', 'public');
+                $galleryUrls[] = '/storage/' . $path;
+            }
         }
+        $validated['image_urls'] = array_values(array_unique(array_filter($galleryUrls)));
+//        dd($validated['image_urls']);
 
-        $product->save();
+        // 💾 Save product to DB
+        Product::create($validated);
 
-        return redirect()->route($this->route . 'index')->with('success', 'Product created successfully.');
+        return redirect()->route($this->route . 'index')
+            ->with('success', 'Product created successfully with multiple images.');
     }
-
-
 
     public function edit(string $id)
     {
@@ -92,6 +97,7 @@ class ProductController extends BaseController
             'badge_id' => 'nullable|exists:badges,id',
             'price' => 'required|string',
             'thumb_images_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'required|string',
             'stock' => 'required|string',
             'status' => 'required|in:active,inactive',
@@ -101,24 +107,32 @@ class ProductController extends BaseController
             'specifications' => 'required|string',
         ]);
 
-        $product->fill($validated);
-
-        // Check if a new thumbnail is uploaded
+        // 🔄 Replace thumbnail if new one uploaded
         if ($request->hasFile('thumb_images_url')) {
-            // Optionally delete the old image
             if ($product->thumb_images_url) {
                 Storage::disk('public')->delete($product->thumb_images_url);
             }
-
-            // Store the new one
-            $image = $request->file('thumb_images_url');
-            $path = $image->store('products', 'public');
-            $product->thumb_images_url = $path;
+            $path = $request->file('thumb_images_url')->store('products', 'public');
+            $validated['thumb_images_url'] = $path;
         }
 
-        $product->save();
+        // 🔄 Replace gallery images if new ones uploaded, otherwise retain existing
+        if ($request->hasFile('gallery_images')) {
+            $galleryUrls = [];
+            foreach ($request->file('gallery_images') as $image) {
+                $path = $image->store('gallery', 'public');
+                $galleryUrls[] = '/storage/' . $path;
+            }
+            $validated['image_urls'] = array_values(array_unique(array_filter($galleryUrls)));
+        } else {
+            $validated['image_urls'] = $product->image_urls; // Preserve old images
+        }
 
-        return redirect()->route($this->route . 'index')->with('success', 'Product updated successfully.');
+        // 💾 Save update
+        $product->update($validated);
+
+        return redirect()->route($this->route . 'index')
+            ->with('success', 'Product updated successfully.');
     }
 
     public function show(string $id)
@@ -137,16 +151,17 @@ class ProductController extends BaseController
             Storage::disk('public')->delete($product->thumb_images_url);
         }
 
-        // Delete gallery images
+        // Delete gallery images — no json_decode needed
         if ($product->image_urls) {
-            foreach (json_decode($product->image_urls, true) as $imgPath) {
-                Storage::disk('public')->delete($imgPath);
+            foreach ($product->image_urls as $imgPath) {
+                Storage::disk('public')->delete(str_replace('/storage/', '', $imgPath));
             }
         }
 
         $product->delete();
 
-        return redirect()->route($this->route . 'index')->with('success', 'Product deleted successfully.');
+        return redirect()->route($this->route . 'index')
+            ->with('success', 'Product and associated images deleted.');
     }
     public function search(Request $request)
     {

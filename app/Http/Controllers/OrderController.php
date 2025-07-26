@@ -76,16 +76,16 @@ class OrderController extends BaseController
             'payment_status' => $isPaid ? 'paid' : 'unpaid',
             'completed_at_sales_total' => null,
         ]);
-        if ($isPaid) {
-            $product->stock -= $quantity;
+//        if ($isPaid) {
+//            $product->stock -= $quantity;
+//
+//            // Prevent negative stock
+//            if ($product->stock < 0) {
+//                $product->stock = 0;
+//            }
 
-            // Prevent negative stock
-            if ($product->stock < 0) {
-                $product->stock = 0;
-            }
-
-            $product->save();
-        }
+//            $product->save();
+//        }
         Order_Item::create([
             'order_id' => $order->id,
             'product_id' => $product->id,
@@ -101,9 +101,9 @@ class OrderController extends BaseController
 
                 $user->notify(new OrderConfirmed($order));
 //                Redirect to Skypay if selected
-        $total_price = $request->source == 'direct'
-            ?$request->quantity * $product->price
-            :$request->cart_total_price;
+//        $total_price = $request->source == 'direct'
+//            ?$request->quantity * $product->price
+//            :$request->cart_total_price;
         if ($request->payment_method === "skypay") {
 
             $redirectUrl = sprintf(
