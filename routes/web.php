@@ -30,6 +30,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WelcomeController::class, 'create'])->name('welcome');
 Route::get('/view{id}', [WelcomeController::class, 'show'])->name('view');
 
+Route::get('/profile/edit', function () {
+    // return your profile edit view
+})->name('profile.edit');
 
 // Dashboard - only for authenticated, verified, and admin users
 Route::get('/dashboard', [UserController::class, 'admin'])
@@ -68,8 +71,8 @@ Route::middleware(['auth', 'verified', 'checkadmin'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/success', [CheckoutController::class, 'success'])->name('success');
-    Route::get('/failure', [ CheckoutController::class, 'failure'])->name('failure');
+    Route::get('/payment-success', [CheckoutController::class, 'success'])->name('success');
+    Route::get('/payment-failure', [CheckoutController::class, 'failure'])->name('failure');
 });
 
 Route::middleware(['auth', 'verified', 'checkadmin'])->group(function () {
@@ -87,7 +90,7 @@ Route::get('/searching', [ProductController::class, 'searching'])->name('product
 //Route::get('/contact', [WelcomeController::class, 'contact'])->name('contact');
 Route::prefix('cart')->middleware(['auth'])->group(function () {
     // Display cart
-    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/index', [CartController::class, 'index'])->name('cart.index');
 
     // Add item to cart
     Route::post('/', [CartController::class, 'store'])->name('cart.store');
@@ -99,7 +102,7 @@ Route::prefix('cart')->middleware(['auth'])->group(function () {
     Route::delete('/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
     // Bulk delete items
-    Route::delete('/bulk-delete', [CartController::class, 'bulkDelete'])->name('cart.bulkDelete');
+    Route::delete('/cart/bulk-delete', [CartController::class, 'bulkDelete'])->name('cart.bulkDelete');
 });
 Route::middleware(['auth'])->group(function () {
 

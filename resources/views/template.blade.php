@@ -7,10 +7,9 @@
     <script src="//unpkg.com/alpinejs" defer></script>
 
     <!-- Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display&display=swap"
-        rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Tailwind CSS -->
@@ -239,21 +238,23 @@
                 </div>
 
                 <!-- Password -->
-                <div class="mt-4">
-                    <x-input-label for="password" :value="__('Password')" />
+                <div class="relative mt-4">
+                    <x-input-label for="login_password" :value="__('Password')" />
                     <input
-                        id="password"
-                        class="block mt-1 w-full bg-white text-black border border-black rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        id="login_password"
+                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md text-black focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         type="password"
                         name="password"
                         required
-                        autofocus
                     />
-
-                    <x-input-error
-                        :messages="$errors->get('password')"
-                        class="mt-2"
-                    />
+                    <button
+                        type="button"
+                        class="absolute top-7 right-2 text-gray-600"
+                        onclick="togglePassword('login_password', this)"
+                    >
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
 
                 <!-- Remember Me -->
@@ -343,24 +344,6 @@
                     />
                 </div>
 
-                <!-- Password -->
-                <div class="mt-4">
-                    <x-input-label for="password" :value="__('Password')" />
-                    <input
-                        id="password"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
-                        type="password"
-                        name="password"
-                        :value="old('password')"
-                        required
-                        autocomplete="new-password"
-                    />
-                    <x-input-error
-                        :messages="$errors->get('password')"
-                        class="mt-2"
-                    />
-                </div>
-
                 <!-- Address -->
                 <div class="mt-4">
                     <x-input-label for="address" :value="__('Address')" />
@@ -400,25 +383,46 @@
                     />
                 </div>
 
-                <!-- Confirm Password -->
-                <div class="mt-4">
-                    <x-input-label
-                        for="password_confirmation"
-                        :value="__('Confirm Password')"
+                <!-- Password -->
+                <div class="relative mt-4">
+                    <x-input-label for="register_password" :value="__('Password')" />
+                    <input
+                        id="register_password"
+                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md text-black focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        type="password"
+                        name="password"
+                        required
+                        autocomplete="new-password"
                     />
+                    <button
+                        type="button"
+                        class="absolute top-7 right-2 text-gray-600"
+                        onclick="togglePassword('register_password', this)"
+                    >
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="relative mt-4">
+                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                     <input
                         id="password_confirmation"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
-                        type="password_confirmation"
+                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md text-black focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        type="password"
                         name="password_confirmation"
-                        :value="old('password_confirmation')"
                         required
-                        autocomplete="new_password"
+                        autocomplete="new-password"
                     />
-                    <x-input-error
-                        :messages="$errors->get('password_confirmation')"
-                        class="mt-2"
-                    />
+                    <button
+                        type="button"
+                        class="absolute top-7 right-2  text-gray-600"
+                        onclick="togglePassword('password_confirmation', this)"
+                    >
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
 
                 <!-- Submit -->
@@ -431,6 +435,24 @@
         </div>
     </div>
 </div>
+
+<!-- Password Toggle Script -->
+<script>
+    function togglePassword(inputId, btn) {
+        const input = document.getElementById(inputId);
+        const icon = btn.querySelector("i");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+</script>
 
 <!-- Search Script -->
 <script>

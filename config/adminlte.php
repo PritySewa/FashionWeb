@@ -318,65 +318,65 @@ return [
             'text' => 'Categories',
             'route' => 'categories.index',
             'icon' => 'fas fa-layer-group',
-            'classes' => 'text-black',
+            'classes' => 'text-white',
         ],
 
         [
             'text' => 'Products',
             'route' => 'products.index',
             'icon' => 'fas fa-tshirt',
-            'classes' => 'text-black',
+            'classes' => 'text-white',
         ],
         [
             'text' => 'Badge',
             'route' => 'badges.index',
             'icon' => 'fas fa-tags',
-            'classes' => 'text-black',
+            'classes' => 'text-white',
         ],
         [
             'text' => 'Badges_assign',
             'route' => 'badges.assign',
             'icon' => 'fas fa-archive',
-            'classes' => 'text-black',
+            'classes' => 'text-white',
 
         ],
         [
             'text' => 'Offers',
             'route' => 'offers.index',
             'icon' => 'fas fa-percent',
-            'classes' => 'text-black',
+            'classes' => 'text-white',
         ],
         [
             'text' => 'Users',
             'route' => 'users.index',
             'icon' => 'fas fa-users',
-            'classes' => 'text-black',
+            'classes' => 'text-white',
         ],
 
         [
             'text' => 'Orders',
             'route' => 'orders.index',
             'icon' => 'fas fa-cart-plus',
-            'classes' => 'text-black',
+            'classes' => 'text-white',
         ],
         [
             'text' => 'AboutUs',
             'route' => 'about_us.index',
             'icon' => 'fas fa-info-circle',
-            'classes' => 'text-black',
+            'classes' => 'text-white',
         ],
 
            [
             'text' => 'HomeDesign',
             'route' => 'home_design.index',
                'icon' => 'fas fa-desktop',
-               'classes' => 'text-black',
+               'classes' => 'text-white',
         ],
         [
             'text' => 'Go back',
             'route' => 'welcome',
             'icon' => 'fas fa-backward',
-            'classes' => 'text-black',
+            'classes' => 'text-white',
         ],
 //        [
 //            'text' => 'pages',
