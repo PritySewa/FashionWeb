@@ -24,8 +24,8 @@ class WelcomeController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id);
-        $images = $product->image_urls; // no need to decode if casted in model
-        return view('users.product', compact('product', 'images'));
+        $images = $product->image_urls; // already an array if casted
+                return view('users.product', compact('product', 'images'));
     }
 
 
