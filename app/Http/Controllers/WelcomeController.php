@@ -23,7 +23,11 @@ class WelcomeController extends Controller
 
     public function show($id)
     {
-        $products = Product::findorfail($id); // ✅ Gets a single product by ID
-        return view('users.product', compact('products'));
+        $product = Product::findOrFail($id);
+        $images = $product->image_urls; // no need to decode if casted in model
+        return view('users.product', compact('product', 'images'));
     }
+
+
+
 }

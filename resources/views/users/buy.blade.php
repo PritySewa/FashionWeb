@@ -54,12 +54,12 @@
                 </div>
 
                 <!-- Paid Amount -->
-                <div>
-                    <label class="block font-medium mb-1">Paid Amount <span class="text-red-500">*</span></label>
-                    <input type="number" name="paid_amount" value="{{ old('paid_amount') }}"
-                           class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                           required>
-                </div>
+{{--                <div>--}}
+{{--                    <label class="block font-medium mb-1">Paid Amount <span class="text-red-500">*</span></label>--}}
+{{--                    <input type="number" name="paid_amount" value="{{ old('paid_amount') }}"--}}
+{{--                           class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-indigo-500"--}}
+{{--                           required>--}}
+{{--                </div>--}}
 
                 <!-- Payment Method -->
                 <div>

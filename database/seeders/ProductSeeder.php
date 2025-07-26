@@ -33,6 +33,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/5bb08339-1244-4951-ae76-4b1067bca41b.jpg?imageView2/2/w/800/q/70/format/webp',
                 'https://img.kwcdn.com/product/fancy/54569706-5550-43fb-844a-54691f369ccc.jpg?imageView2/2/w/800/q/70/format/webp',
             ]),
+
         ]);
         Product::create([
             'title' => 'drawstrings Side Skirt ',
@@ -52,6 +53,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/d3fbf383-a1b1-465b-a774-ac2a0dec606f.jpg?imageView2/2/w/800/q/70/format/webp',
                 'https://img.kwcdn.com/product/fancy/fb153651-0e12-4b70-9b08-126d6d83174c.jpg?imageView2/2/w/800/q/70/format/webp',
             ]),
+
 
         ]);
         Product::create([
@@ -74,6 +76,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/df759b1d-3f33-4825-a7ce-a15bdf3ea573.jpg?imageView2/2/w/800/q/70/format/webp',
             ]),
 
+
         ]);
         Product::create([
             'title' => 'Hooded Jacket',
@@ -94,6 +97,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/4533330f-bf9a-4d73-9280-83d4a52ce202.jpg?imageView2/2/w/800/q/70/format/webp',
 
             ]),
+
 
         ]);
         Product::create([
@@ -116,6 +120,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/cb05a698-2a66-4b9f-910b-2e00c9aa8a0b.jpg?imageView2/2/w/800/q/70/format/webp',
             ]),
 
+
         ]);
         Product::create([
             'title' => 'Floral Print Corset Top',
@@ -137,6 +142,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/f60315b9-5445-4242-b63c-34a7675782fa.jpg?imageView2/2/w/800/q/70/format/webp',
             ]),
 
+
         ]);
         Product::create([
             'title' => 'Embroidered Flare Jeans',
@@ -156,6 +162,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/c1305833-df10-437b-8747-a6f145a80fa5.jpg?imageView2/2/w/800/q/70/format/webp',
                 'https://img.kwcdn.com/product/fancy/d385e66c-c874-4f36-afd6-4c2b0e6fc1b4.jpg?imageView2/2/w/800/q/70/format/webp',
             ]),
+
 
         ]);
              Product::create([
@@ -178,6 +185,7 @@ class ProductSeeder extends Seeder
                      'https://img.kwcdn.com/product/fancy/51f0002b-a4b0-44a2-8dae-9f272a38264b.jpg?imageView2/2/w/800/q/70/format/webp',
                  ]),
 
+
              ]);
         Product::create([
             'title' => 'Winter Jacket with Hood',
@@ -198,6 +206,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/e81e8af9-c37b-42f4-b8ea-b27676f88fe3.jpg?imageView2/2/w/800/q/70/format/webp',
                 'https://img.kwcdn.com/product/fancy/28fe5ef3-27e8-4bd0-9319-730d2a433efa.jpg?imageView2/2/w/800/q/70/format/webp',
             ]),
+
 
         ]);
         Product::create([
@@ -220,6 +229,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/1d15a52a-1794-4d97-b266-a0bb7843cbc4.jpg?imageView2/2/w/800/q/70/format/webp',
             ]),
 
+
         ]);
         Product::create([
             'title' => 'Ruffled Hem Skirt',
@@ -239,6 +249,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/1d15a52a-1794-4d97-b266-a0bb7843cbc4.jpg?imageView2/2/w/800/q/70/format/webp', // you can store this image in storage or public
                 'https://img.kwcdn.com/product/fancy/0cc3fec9-23c5-4846-a505-af57d9258fff.jpg?imageView2/2/w/800/q/70/format/webp',
             ]),
+
 
         ]);
         Product::create([
@@ -326,6 +337,7 @@ class ProductSeeder extends Seeder
                 'https://img.kwcdn.com/product/fancy/06121465-13fb-4cc2-bc49-d3019ec37656.jpg?imageView2/2/w/800/q/70/format/webp',
                 'https://img.kwcdn.com/product/fancy/9d9be8a5-e51a-4f81-a119-b04a269a10f0.jpg?imageView2/2/w/800/q/70/format/webp',
             ]),
+
 
         ]);
 

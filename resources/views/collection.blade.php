@@ -1,144 +1,146 @@
 @extends('template')
 
 @section('content')
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display&display=swap" rel="stylesheet">
+        <style>
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+             summary {
+                 cursor: pointer;
+             }
+        </style>
+    </head>
     <div class="max-w-7xl mx-auto px-4 py-6">
         <!-- Breadcrumbs -->
-        <div class="text-sm text-gray-600 mb-4">
-        </div>
 
-        <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex flex-col lg:flex-row gap-1">
             <!-- Filters Sidebar -->
-            <div class="lg:w-1/6">
-                <form method="GET" action="{{ route('collection') }}" class="space-y-6">
-                    <!-- Category Filter -->
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <h3 class="font-medium text-gray-900 mb-3 flex items-center justify-between">
-                            <span>Category</span>
-                        </h3>
-                        <div class="space-y-2">
-                            <!-- All Categories Link -->
-                            <form method="GET" action="{{ route('collection') }}" id="categoryFilterForm">
-                                <a href="{{ route('collection') }}"
-                                   class="block px-3 py-2 rounded text-sm transition
-               {{ !request('category') ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                    All Categories
-                                </a>
+            <div class="w-full lg:w-1/4">
+                <div class=" sticky top-24 mr-10 max-h-[calc(100vh-6rem)] overflow-y-auto pr-2">
 
-                                <!-- Category Filter Buttons -->
-                                @foreach($categories as $category)
-                                    <button type="submit"
-                                            name="category"
-                                            value="{{ $category->id }}"
-                                            class="block w-full text-left px-3 py-2 rounded text-sm transition
-                        {{ request('category') == $category->id ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                        {{ $category->title }}
-                                    </button>
-                                @endforeach
+                    <!-- Filters Container -->
+                    <div class=" bg-[#fdf6f0] border border-black p-4 rounded-lg shadow-md space-y-6">
+                        <h1 class="text-1xl text-center md:text-2xl font-serif font-bold mb-6 text-gray-900 text-shadow">
+                            Filters
+                        </h1>
 
-                                <!-- Hidden input to preserve other query parameters -->
-                                @foreach(request()->except('category', '_token') as $key => $value)
-                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                                @endforeach
-                            </form>
-                        </div>
+                        <form method="GET" action="{{ route('collection') }}" class="space-y-6">
+                            <!-- Category Filter -->
+                            <details class="bg-[#EFDECD] p-4 rounded-lg shadow-sm" {{ request('category') ? 'open' : '' }}>
+                                <summary class="text-l font-medium tracking-widest text-[#8B4513] uppercase">Category</summary>
+                                <div class="mt-2 space-y-2">
+                                    <a href="{{ route('collection') }}"
+                                       class="block px-3 py-2 rounded text-sm transition
+                               {{ !request('category') ? 'bg-[#fdf6f0]  text-black font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
+                                        All Categories
+                                    </a>
+                                    @foreach($categories as $category)
+                                        <button type="submit" name="category" value="{{ $category->id }}"
+                                                class="block w-full text-left px-3 py-2 rounded text-sm transition
+                                        {{ request('category') == $category->id ? 'bg-[#fdf6f0]  text-black font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
+                                            {{ $category->title }}
+                                        </button>
+                                    @endforeach
+                                </div>
+                            </details>
+
+                            <!-- Badge Filter -->
+                            <details class="bg-[#EFDECD] p-4 rounded-lg shadow-sm" {{ request('badge') ? 'open' : '' }}>
+                                <summary class="text-l font-medium tracking-widest text-[#8B4513] uppercase">Badge</summary>
+                                <div class="mt-2 space-y-2">
+                                    <a href="{{ route('collection') }}"
+                                       class="block px-3 py-2 rounded text-sm transition
+                               {{ !request('badge') ? 'bg-[#fdf6f0] text-black font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
+                                        All Badges
+                                    </a>
+                                    @foreach($badges as $badge)
+                                        <button name="badge" value="{{ $badge->id }}"
+                                                class="block w-full text-left px-3 py-2 rounded text-sm transition
+                                        {{ request('badge') == $badge->id ? 'bg-[#fdf6f0]  text-black font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
+                                            {{ $badge->title }}
+                                        </button>
+                                    @endforeach
+                                </div>
+                            </details>
+
+                            <!-- Color Filter -->
+                            <details class="bg-[#EFDECD] p-4 rounded-lg shadow-sm" {{ request('color') ? 'open' : '' }}>
+                                <summary class="text-l font-medium tracking-widest text-[#8B4513] uppercase">Color</summary>
+                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                    @foreach(['Blue', 'Grey', 'Red', 'Yellow'] as $color)
+                                        <button name="color" value="{{ strtolower($color) }}"
+                                                class="flex items-center px-3 py-2 rounded text-sm transition
+                                        {{ request('color') == strtolower($color) ? 'bg-[#fdf6f0]  text-black font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
+                                            <span class="w-3 h-3 rounded-full mr-2" style="background-color: {{ strtolower($color) }}"></span>
+                                            {{ $color }}
+                                        </button>
+                                    @endforeach
+                                </div>
+                            </details>
+
+                            <!-- Price Filter -->
+                            <details class="bg-[#EFDECD] p-4 rounded-lg shadow-sm" {{ request('price_range') ? 'open' : '' }}>
+                                <summary class="text-l font-medium tracking-widest text-[#8B4513] uppercase">Price</summary>
+                                <div class="grid grid-cols-3 gap-2 mt-2">
+                                    @foreach(['cheap', 'mid', 'expensive'] as $range)
+                                        <button name="price_range" value="{{ $range }}"
+                                                class="px-0 py-2 rounded text-sm transition
+                                        {{ request('price_range') == $range ? 'bg-[#fdf6f0]  text-black font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
+                                            {{ ucfirst($range) }}
+                                        </button>
+                                    @endforeach
+                                </div>
+                            </details>
+
+                            <!-- Size Filter -->
+                            <details class="bg-[#EFDECD] p-4 rounded-lg shadow-sm" {{ request('size') ? 'open' : '' }}>
+                                <summary class="text-l font-medium tracking-widest text-[#8B4513] uppercase">Size</summary>
+                                <div class="grid grid-cols-4 gap-2 mt-2">
+                                    @foreach(['S', 'M', 'L', 'XL'] as $size)
+                                        <button name="size" value="{{ $size }}"
+                                                class="px-3 py-2 rounded text-sm transition
+                                        {{ request('size') == $size ? 'bg-[#fdf6f0]  text-black font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
+                                            {{ $size }}
+                                        </button>
+                                    @endforeach
+                                </div>
+                            </details>
+                        </form>
                     </div>
-
-
-                    <!-- Badge Filter -->
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <h3 class="font-medium text-gray-900 mb-3 flex items-center justify-between">
-                            <span>Label</span>
-                        </h3>
-                        <div class="space-y-2">
-                            <a href="{{ route('collection') }}"
-                               class="block px-3 py-2 rounded text-sm transition
-                           {{ !request('badge') ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                All Labels
-                            </a>
-                            @foreach($badges as $badge)
-                                <button name="badge" value="{{ $badge->id }}"
-                                        class="block w-full text-left px-3 py-2 rounded text-sm transition
-                                {{ request('badge') == $badge->id ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                    {{ $badge->title }}
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <!-- Color Filter -->
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <h3 class="font-medium text-gray-900 mb-3 flex items-center justify-between">
-                            <span>Color</span>
-                        </h3>
-                        <div class="grid grid-cols-2 gap-2">
-                            @foreach(['Blue', 'Grey', 'Red', 'Yellow'] as $color)
-                                <button name="color" value="{{ strtolower($color) }}"
-                                        class="flex items-center px-3 py-2 rounded text-sm transition
-                                {{ request('color') == strtolower($color) ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                    <span class="w-3 h-3 rounded-full mr-2" style="background-color: {{ strtolower($color) }}"></span>
-                                    {{ $color }}
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <!-- Price Filter -->
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <h3 class="font-medium text-gray-900 mb-3 flex items-center justify-between">
-                            <span>Price</span>
-                        </h3>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button name="price_range" value="cheap"
-                                    class="px-3 py-2 rounded text-sm transition
-                                {{ request('price_range') == 'cheap' ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                Cheap
-                            </button>
-                            <button name="price_range" value="mid"
-                                    class="px-3 py-2 rounded text-sm transition
-                                {{ request('price_range') == 'mid' ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                Mid
-                            </button>
-                            <button name="price_range" value="expensive"
-                                    class="px-3 py-2 rounded text-sm transition
-                                {{ request('price_range') == 'expensive' ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                Expensive
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Size Filter -->
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <h3 class="font-medium text-gray-900 mb-3 flex items-center justify-between">
-                            <span>Size</span>
-                        </h3>
-                        <div class="grid grid-cols-4 gap-2">
-                            @foreach(['S', 'M', 'L', 'XL'] as $size)
-                                <button name="size" value="{{ $size }}"
-                                        class="px-3 py-2 rounded text-sm transition text-center
-                                {{ request('size') == $size ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                                    {{ $size }}
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
+
+
+
 
             <!-- Products Grid -->
             <div class="lg:w-3/4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class=" w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                     @forelse($products as $product)
                         <a href="{{ route('view', ['id' => $product->id]) }}" class="group">
-                            <div class="bg-white rounded-lg shadow hover:shadow-md transition-all h-full flex flex-col">
+                            <div class="bg-[#fdf6f0] border border-[#A9746E] rounded-lg shadow hover:shadow-md transition-all h-full flex flex-col hover:ring-2 hover:ring-[#BD806B]">
                                 <!-- Product Image -->
-                                <div class="relative">
-                                    <img src="{{ $product->thumb_images_url }}"
-                                         alt="{{ $product->title }}"
-                                         class="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition">
-                                    @if($product->badge)
-                                        <span class="absolute top-2 right-2 bg-[#BD806B] text-white text-xs font-medium px-2 py-1 rounded">
-                                {{ $product->badge->title }}
-                            </span>
+                                <div class="relative p-4">
+                                    @php
+                                        $image = $product->thumb_images_url;
+                                    @endphp
+
+                                    @if(Str::startsWith($image, ['http://', 'https://']))
+                                        <img src="{{ $image }}" alt="{{ $product->title }}"
+                                             class="w-full h-48 object-contain scale-105 rounded-t-lg group-hover:opacity-90 transition">
+                                    @else
+                                        <img src="{{ asset('storage/' . $image) }}" alt="{{ $product->title }}"
+                                             class="w-full h-48 object-contain scale-105 rounded-t-lg group-hover:opacity-90 transition">
+                                    @endif
+
+                                    @if(!empty($product->badge) && !empty($product->badge->icon_path))
+                                        <img
+                                            src="{{ $product->badge->icon_path }}"
+                                            alt="Badge"
+                                            class="absolute top-2 left-2 w-8 h-8 object-contain bg-white rounded-full p-1 shadow"
+                                        />
                                     @endif
                                 </div>
 

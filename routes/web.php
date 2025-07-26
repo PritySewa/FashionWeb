@@ -30,6 +30,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WelcomeController::class, 'create'])->name('welcome');
 Route::get('/view{id}', [WelcomeController::class, 'show'])->name('view');
 
+
+
 Route::get('/profile/edit', function () {
     // return your profile edit view
 })->name('profile.edit');

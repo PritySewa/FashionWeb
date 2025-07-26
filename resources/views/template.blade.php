@@ -1,4 +1,515 @@
-<!DOCTYPE html>
+{{--<!DOCTYPE html>--}}
+{{--<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">--}}
+{{--<head>--}}
+{{--    <meta charset="utf-8" />--}}
+{{--    <meta name="viewport" content="width=device-width, initial-scale=1" />--}}
+{{--    <title>@yield('title', 'Pretty Aura')</title>--}}
+{{--    <script src="//unpkg.com/alpinejs" defer></script>--}}
+
+{{--    <!-- Fonts -->--}}
+{{--    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display&display=swap" rel="stylesheet"/>--}}
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">--}}
+
+{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>--}}
+
+{{--    <!-- Tailwind CSS -->--}}
+{{--    <script src="https://cdn.tailwindcss.com"></script>--}}
+
+{{--    <style>--}}
+{{--        html,--}}
+{{--        body {--}}
+{{--            height: 100%;--}}
+{{--        }--}}
+
+{{--        body {--}}
+{{--            font-family: "Inter", sans-serif;--}}
+{{--            display: flex;--}}
+{{--            flex-direction: column;--}}
+{{--        }--}}
+
+{{--        main {--}}
+{{--            flex: 1;--}}
+{{--        }--}}
+
+{{--        [x-cloak] {--}}
+{{--            display: none !important;--}}
+{{--        }--}}
+{{--    </style>--}}
+{{--</head>--}}
+{{--<body--}}
+{{--    class="antialiased bg-[#EFDECD] text-gray-800"--}}
+{{--    x-data="{ showLogin: false, showRegister: false }"--}}
+{{-->--}}
+
+{{--<!-- Header -->--}}
+{{--<header class="sticky top-0 z-50 bg-[#fdf6f0]">--}}
+{{--    <div class="container mx-auto px-6 lg:px-8 ">--}}
+{{--        <div class="flex items-center py-4">--}}
+{{--            <!-- Left: Logo -->--}}
+{{--            <div class="flex-shrink-0">--}}
+{{--                <a--}}
+{{--                    href="/"--}}
+{{--                    class="text-4xl font-serif font-bold text-gray-800 hover:text-amber-800 transition-colors"--}}
+{{--                >--}}
+{{--                    Pretty Aura--}}
+{{--                </a>--}}
+{{--            </div>--}}
+
+{{--            <!-- Middle: Nav + Search -->--}}
+{{--            <div--}}
+{{--                class="flex flex-grow justify-center items-center space-x-8 font-medium"--}}
+{{--            >--}}
+{{--                <nav--}}
+{{--                    class="hidden md:flex space-x-8 text-amber-800 font-medium"--}}
+{{--                >--}}
+{{--                    <a--}}
+{{--                        href="/"--}}
+{{--                        class="hover:text-amber-800 text-m text-semibold text-black transition"--}}
+{{--                    >Home</a--}}
+{{--                    >--}}
+{{--                    <a--}}
+{{--                        href="/collection"--}}
+{{--                        class="hover:text-amber-800 text-black text-m transition"--}}
+{{--                    >Collection</a--}}
+{{--                    >--}}
+{{--                    <a--}}
+{{--                        href="/aboutus"--}}
+{{--                        class="hover:text-amber-800 text-m text-black transition"--}}
+{{--                    >About Us</a--}}
+{{--                    >--}}
+{{--                </nav>--}}
+
+{{--                <form--}}
+{{--                    action="{{ route('products.search') }}"--}}
+{{--                    method="GET"--}}
+{{--                    class="hidden md:flex items-center"--}}
+{{--                >--}}
+{{--                    <input--}}
+{{--                        type="text"--}}
+{{--                        name="query"--}}
+{{--                        id="search"--}}
+{{--                        placeholder="Search products..."--}}
+{{--                        value="{{ request('query') }}"--}}
+{{--                        class="form-input border border-black rounded-md px-3 py-1 text-m focus:outline-none focus:ring-2 focus:ring-amber-800"--}}
+{{--                    />--}}
+{{--                </form>--}}
+{{--            </div>--}}
+
+{{--            <!-- Right: Auth -->--}}
+{{--            <div class="flex-shrink-0 flex items-center space-x-4">--}}
+{{--                @auth--}}
+{{--                    <a href="{{ route('cart.index') }}" class="relative text-gray-500 hover:text-indigo-600 transition">--}}
+{{--                        <!-- Cart Icon -->--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"--}}
+{{--                             viewBox="0 0 24 24" stroke="currentColor">--}}
+{{--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
+{{--                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 7M7 13l-1.293 1.293a1 1 0 001.414 1.414L9 14h6l1.293 1.293a1 1 0 001.414-1.414L17 13M9 21h6a2 2 0 100-4H9a2 2 0 100 4z" />--}}
+{{--                        </svg>--}}
+
+{{--                        @if ($cartQuantity > 0)--}}
+{{--                            <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">--}}
+{{--                {{ $cartQuantity }}--}}
+{{--            </span>--}}
+{{--                        @endif--}}
+{{--                    </a>--}}
+
+
+
+{{--                <!-- Profile Dropdown -->--}}
+{{--                    <div class="relative" x-data="{ open: false }">--}}
+{{--                        <button--}}
+{{--                            @click="open = !open"--}}
+{{--                            class="flex items-center text-gray-500 hover:text-indigo-600 transition focus:outline-none"--}}
+{{--                        >--}}
+{{--                            <svg--}}
+{{--                                xmlns="http://www.w3.org/2000/svg"--}}
+{{--                                class="h-8 w-8 rounded-full bg-gray-200 p-1"--}}
+{{--                                viewBox="0 0 24 24"--}}
+{{--                                stroke="currentColor"--}}
+{{--                            >--}}
+{{--                                <path--}}
+{{--                                    stroke-linecap="round"--}}
+{{--                                    stroke-linejoin="round"--}}
+{{--                                    stroke-width="2"--}}
+{{--                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"--}}
+{{--                                />--}}
+{{--                            </svg>--}}
+{{--                        </button>--}}
+{{--                        <div--}}
+{{--                            x-show="open"--}}
+{{--                            @click.away="open = false"--}}
+{{--                            class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50"--}}
+{{--                        >--}}
+{{--                            @if(Auth::check() && Auth::user()->role === 'admin')--}}
+{{--                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>--}}
+{{--                            @endif--}}
+
+{{--                            <a--}}
+{{--                                href="/profile"--}}
+{{--                                class="block px-4 py-2 hover:bg-gray-100"--}}
+{{--                            >Profile</a--}}
+{{--                            >--}}
+{{--                            <form method="POST" action="{{ route('logout') }}">--}}
+{{--                                @csrf--}}
+{{--                                <button--}}
+{{--                                    type="submit"--}}
+{{--                                    class="w-full text-left block px-4 py-2 hover:bg-gray-100"--}}
+{{--                                >--}}
+{{--                                    Sign out--}}
+{{--                                </button>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                @else--}}
+{{--                    <!-- Trigger Login Modal -->--}}
+{{--                    <button--}}
+{{--                        type="button"--}}
+{{--                        @click="showLogin = true"--}}
+{{--                        class="px-4 py-2 rounded-md text-sm font-medium border border-black bg-white hover:text-amber-800 transition"--}}
+{{--                    >--}}
+{{--                        Login--}}
+{{--                    </button>--}}
+
+{{--                    @if (Route::has('register'))--}}
+{{--                        <button--}}
+{{--                            type="button"--}}
+{{--                            @click="showRegister = true"--}}
+{{--                            class="px-4 py-2 rounded-md text-sm font-medium border border-black bg-white hover:text-amber-800 transition"--}}
+{{--                        >--}}
+{{--                            Register--}}
+{{--                        </button>--}}
+{{--                    @endif--}}
+{{--                @endauth--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</header>--}}
+
+{{--<main>@yield('content')</main>--}}
+
+{{--<!-- Footer -->--}}
+{{--<footer--}}
+{{--    class="bg-gray-100 border-t border-gray-300 py-6 mt-10 text-center text-gray-600"--}}
+{{-->--}}
+{{--    <div class="max-w-7xl mx-auto px-4">--}}
+{{--        <p>&copy; 2025 Pretty Aura. All rights reserved.</p>--}}
+{{--    </div>--}}
+{{--</footer>--}}
+
+{{--<!-- Login Modal -->--}}
+{{--<div--}}
+{{--    x-cloak--}}
+{{--    x-show="showLogin"--}}
+{{--    x-transition--}}
+{{--    class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"--}}
+{{-->--}}
+{{--    <div class="bg-[#EFDECD] w-full max-w-md mx- p-6 relative">--}}
+{{--        <!-- Close Button -->--}}
+{{--        <button--}}
+{{--            @click="showLogin = false"--}}
+{{--            class="absolute -top-0 -right-0 w-7 h-7 bg-white border border-gray-300 shadow text-3xl text-gray-600 hover:text-black hover:bg-gray-100 flex items-center justify-center z-50"--}}
+{{--        >--}}
+{{--            &times;--}}
+{{--        </button>--}}
+
+
+{{--        <!-- Login Card -->--}}
+{{--        <div class="bg-white rounded-lg shadow p-6">--}}
+{{--            <form method="POST" action="{{ route('login') }}">--}}
+{{--                @csrf--}}
+
+{{--                <!-- Email -->--}}
+{{--                <div>--}}
+{{--                    <x-input-label for="email" :value="__('Email')" />--}}
+{{--                    <input--}}
+{{--                        id="email"--}}
+{{--                        style="color: black"--}}
+{{--                        class="block mt-1 w-full bg-white text-black border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800"--}}
+{{--                        type="email"--}}
+{{--                        name="email"--}}
+{{--                        required--}}
+{{--                        autofocus--}}
+{{--                    />--}}
+
+{{--                    <x-input-error--}}
+{{--                        :messages="$errors->get('email')"--}}
+{{--                        class="mt-2"--}}
+{{--                    />--}}
+{{--                </div>--}}
+
+{{--                <!-- Password -->--}}
+{{--                <div class="relative mt-4">--}}
+{{--                    <x-input-label for="login_password" :value="__('Password')" />--}}
+{{--                    <input--}}
+{{--                        id="login_password"--}}
+{{--                        class="block mt-1 w-full bg-white border border-black rounded-md text-black focus:outline-none focus:ring-2 focus:ring-amber-800"--}}
+{{--                        type="password"--}}
+{{--                        name="password"--}}
+{{--                        required--}}
+{{--                    />--}}
+{{--                    <button--}}
+{{--                        type="button"--}}
+{{--                        class="absolute top-7 right-2 text-gray-600"--}}
+{{--                        onclick="togglePassword('login_password', this)"--}}
+{{--                    >--}}
+{{--                        <i class="fa-solid fa-eye"></i>--}}
+{{--                    </button>--}}
+{{--                    <x-input-error :messages="$errors->get('password')" class="mt-2" />--}}
+{{--                </div>--}}
+
+{{--                <!-- Remember Me -->--}}
+{{--                <div class="block mt-4">--}}
+{{--                    <label for="remember_me" class="inline-flex items-center">--}}
+{{--                        <input--}}
+{{--                            id="remember_me"--}}
+{{--                            type="checkbox"--}}
+{{--                            class="rounded border-gray-300 text-black shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-800"--}}
+{{--                            name="remember"--}}
+{{--                        />--}}
+{{--                        <span class="ml-2 text-sm text-gray-600"--}}
+{{--                        >{{ __("Remember me") }}</span--}}
+{{--                        >--}}
+{{--                    </label>--}}
+{{--                </div>--}}
+
+{{--                <!-- Submit -->--}}
+{{--                <div class="flex items-center justify-end mt-4">--}}
+{{--                    <x-primary-button class="ms-3">--}}
+{{--                        {{ __("Log in") }}--}}
+{{--                    </x-primary-button>--}}
+{{--                </div>--}}
+{{--            </form>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
+
+{{--<!-- Register Modal -->--}}
+{{--<div--}}
+{{--    x-cloak--}}
+{{--    x-show="showRegister"--}}
+{{--    x-transition--}}
+{{--    class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"--}}
+{{-->--}}
+{{--    <div--}}
+{{--        class="bg-[#EFDECD] w-full max-w-md mx-4  p-6 relative"--}}
+{{--    >--}}
+{{--        <!-- Close Button -->--}}
+{{--        <button--}}
+{{--            @click="showRegister = false"--}}
+{{--            class="absolute -top-0 -right-0 w-7 h-7  bg-white border border-black rounded-md shadow text-xl text-gray-600 hover:text-black hover:bg-gray-100 flex items-center justify-center z-50"--}}
+{{--        >--}}
+{{--            &times;--}}
+{{--        </button>--}}
+
+
+{{--        <!-- Register Form -->--}}
+{{--        <div class="bg-white rounded-lg shadow p-6">--}}
+{{--            <form method="POST" action="{{ route('register') }}">--}}
+{{--                @csrf--}}
+
+{{--                <!-- Name -->--}}
+{{--                <div>--}}
+{{--                    <x-input-label for="name" :value="__('Name')" />--}}
+{{--                    <input--}}
+{{--                        id="name"--}}
+{{--                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black"--}}
+{{--                        type="name"--}}
+{{--                        name="name"--}}
+{{--                        :value="old('name')"--}}
+{{--                        required--}}
+{{--                        autocomplete="name"--}}
+{{--                    />--}}
+{{--                    <x-input-error--}}
+{{--                        :messages="$errors->get('name')"--}}
+{{--                        class="mt-2"--}}
+{{--                    />--}}
+{{--                </div>--}}
+
+{{--                <!-- Email -->--}}
+{{--                <div class="mt-4">--}}
+{{--                    <x-input-label for="email" :value="__('Email')" />--}}
+{{--                    <input--}}
+{{--                        id="email"--}}
+{{--                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black"--}}
+{{--                        type="email"--}}
+{{--                        name="email"--}}
+{{--                        :value="old('email')"--}}
+{{--                        required--}}
+{{--                        autocomplete="username"--}}
+{{--                    />--}}
+
+{{--                    <x-input-error--}}
+{{--                        :messages="$errors->get('email')"--}}
+{{--                        class="mt-2"--}}
+{{--                    />--}}
+{{--                </div>--}}
+
+{{--                <!-- Address -->--}}
+{{--                <div class="mt-4">--}}
+{{--                    <x-input-label for="address" :value="__('Address')" />--}}
+{{--                    <input--}}
+{{--                        id="address"--}}
+{{--                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black"--}}
+{{--                        type="address"--}}
+{{--                        name="address"--}}
+{{--                        :value="old('address')"--}}
+{{--                        required--}}
+{{--                        autocomplete="address"--}}
+{{--                    />--}}
+{{--                    <x-input-error--}}
+{{--                        :messages="$errors->get('address')"--}}
+{{--                        class="mt-2"--}}
+{{--                    />--}}
+{{--                </div>--}}
+
+{{--                <!-- Phone Number -->--}}
+{{--                <div class="mt-4">--}}
+{{--                    <x-input-label--}}
+{{--                        for="phone_number"--}}
+{{--                        :value="__('Phone Number')"--}}
+{{--                    />--}}
+{{--                    <input--}}
+{{--                        id="phone_number"--}}
+{{--                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black"--}}
+{{--                        type="phone_number"--}}
+{{--                        name="phone_number"--}}
+{{--                        :value="old('phone_number')"--}}
+{{--                        required--}}
+{{--                        autocomplete="phone_number"--}}
+{{--                    />--}}
+{{--                    <x-input-error--}}
+{{--                        :messages="$errors->get('phone_number')"--}}
+{{--                        class="mt-2"--}}
+{{--                    />--}}
+{{--                </div>--}}
+
+{{--                <!-- Password -->--}}
+{{--                <div class="relative mt-4">--}}
+{{--                    <x-input-label for="register_password" :value="__('Password')" />--}}
+{{--                    <input--}}
+{{--                        id="register_password"--}}
+{{--                        class="block mt-1 w-full bg-white border border-black rounded-md text-black focus:outline-none focus:ring-2 focus:ring-amber-800"--}}
+{{--                        type="password"--}}
+{{--                        name="password"--}}
+{{--                        required--}}
+{{--                        autocomplete="new-password"--}}
+{{--                    />--}}
+{{--                    <button--}}
+{{--                        type="button"--}}
+{{--                        class="absolute top-7 right-2 text-gray-600"--}}
+{{--                        onclick="togglePassword('register_password', this)"--}}
+{{--                    >--}}
+{{--                        <i class="fa-solid fa-eye"></i>--}}
+{{--                    </button>--}}
+{{--                    <x-input-error :messages="$errors->get('password')" class="mt-2" />--}}
+{{--                </div>--}}
+
+{{--                <!-- Confirm Password -->--}}
+{{--                <div class="relative mt-4">--}}
+{{--                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" />--}}
+{{--                    <input--}}
+{{--                        id="password_confirmation"--}}
+{{--                        class="block mt-1 w-full bg-white border border-black rounded-md text-black focus:outline-none focus:ring-2 focus:ring-amber-800"--}}
+{{--                        type="password"--}}
+{{--                        name="password_confirmation"--}}
+{{--                        required--}}
+{{--                        autocomplete="new-password"--}}
+{{--                    />--}}
+{{--                    <button--}}
+{{--                        type="button"--}}
+{{--                        class="absolute top-7 right-2  text-gray-600"--}}
+{{--                        onclick="togglePassword('password_confirmation', this)"--}}
+{{--                    >--}}
+{{--                        <i class="fa-solid fa-eye"></i>--}}
+{{--                    </button>--}}
+{{--                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />--}}
+{{--                </div>--}}
+
+{{--                <!-- Submit -->--}}
+{{--                <div class="flex items-center justify-end mt-4">--}}
+{{--                    <x-primary-button class="ms-4">--}}
+{{--                        {{ __("Register") }}--}}
+{{--                    </x-primary-button>--}}
+{{--                </div>--}}
+{{--            </form>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
+
+{{--<!-- Password Toggle Script -->--}}
+{{--<script>--}}
+{{--    function togglePassword(inputId, btn) {--}}
+{{--        const input = document.getElementById(inputId);--}}
+{{--        const icon = btn.querySelector("i");--}}
+
+{{--        if (input.type === "password") {--}}
+{{--            input.type = "text";--}}
+{{--            icon.classList.remove("fa-eye");--}}
+{{--            icon.classList.add("fa-eye-slash");--}}
+{{--        } else {--}}
+{{--            input.type = "password";--}}
+{{--            icon.classList.remove("fa-eye-slash");--}}
+{{--            icon.classList.add("fa-eye");--}}
+{{--        }--}}
+{{--    }--}}
+{{--</script>--}}
+
+{{--<!-- Search Script -->--}}
+{{--<script>--}}
+{{--    function fetchCartQuantity() {--}}
+{{--        fetch("/cart/quantity")--}}
+{{--            .then(res => res.json())--}}
+{{--            .then(data => {--}}
+{{--                const badge = document.querySelector('.cart-count');--}}
+{{--                if (badge) badge.textContent = data.quantity;--}}
+{{--            })--}}
+{{--            .catch(err => console.error("Cart count error:", err));--}}
+{{--    }--}}
+
+{{--    document.addEventListener("DOMContentLoaded", fetchCartQuantity);--}}
+{{--</script>--}}
+{{--<script>--}}
+{{--    $(document).ready(function () {--}}
+{{--        $("#search").on("keyup", function () {--}}
+{{--            let query = $(this).val();--}}
+
+{{--            if (query.length === 0) {--}}
+{{--                $("#searchResults").html("");--}}
+{{--                return;--}}
+{{--            }--}}
+
+{{--            $.ajax({--}}
+{{--                url: "{{ route("products.search") }}",--}}
+{{--                type: "GET",--}}
+{{--                data: { query: query },--}}
+{{--                success: function (data) {--}}
+{{--                    let html = "";--}}
+
+{{--                    if (data.length === 0) {--}}
+{{--                        html =--}}
+{{--                            '<p class="text-gray-500">No products found.</p>';--}}
+{{--                    } else {--}}
+{{--                        data.forEach(function (product) {--}}
+{{--                            html += `--}}
+{{--                                <div class="p-4 border-b">--}}
+{{--                                    <h4 class="text-lg font-semibold">${product.title}</h4>--}}
+{{--                                    <p class="text-sm text-gray-600">${product.description}</p>--}}
+{{--                                    <span class="text-green-600 font-bold">Rs.${product.price}</span>--}}
+{{--                                </div>--}}
+{{--                            `;--}}
+{{--                        });--}}
+{{--                    }--}}
+
+{{--                    $("#searchResults").html(html);--}}
+{{--                },--}}
+{{--            });--}}
+{{--        });--}}
+{{--    });--}}
+{{--</script>--}}
+{{--</body>--}}
+{{--</html>--}}
+
+    <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8" />
@@ -38,84 +549,71 @@
 </head>
 <body
     class="antialiased bg-[#EFDECD] text-gray-800"
-    x-data="{ showLogin: false, showRegister: false }"
+    x-data="{ showLogin: false, showRegister: false, mobileMenuOpen: false }"
 >
 
 <!-- Header -->
 <header class="sticky top-0 z-50 bg-[#fdf6f0]">
-    <div class="container mx-auto px-6 lg:px-8 ">
-        <div class="flex items-center py-4">
-            <!-- Left: Logo -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between py-4">
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button
+                    @click="mobileMenuOpen = !mobileMenuOpen"
+                    class="text-gray-700 focus:outline-none"
+                >
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Logo -->
             <div class="flex-shrink-0">
                 <a
                     href="/"
-                    class="text-4xl font-serif font-bold text-gray-800 hover:text-amber-800 transition-colors"
+                    class="text-2xl md:text-4xl font-serif font-bold text-gray-800 hover:text-amber-800 transition-colors"
                 >
                     Pretty Aura
                 </a>
             </div>
 
-            <!-- Middle: Nav + Search -->
-            <div
-                class="flex flex-grow justify-center items-center space-x-8 font-medium"
-            >
-                <nav
-                    class="hidden md:flex space-x-8 text-amber-800 font-medium"
-                >
-                    <a
-                        href="/"
-                        class="hover:text-amber-800 text-m text-semibold text-black transition"
-                    >Home</a
-                    >
-                    <a
-                        href="/collection"
-                        class="hover:text-amber-800 text-black text-m transition"
-                    >Collection</a
-                    >
-                    <a
-                        href="/aboutus"
-                        class="hover:text-amber-800 text-m text-black transition"
-                    >About Us</a
-                    >
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex flex-grow justify-center items-center space-x-4 lg:space-x-8 font-medium">
+                <nav class="flex space-x-4 lg:space-x-8 text-amber-800 font-medium">
+                    <a href="/" class="hover:text-amber-800 text-sm md:text-base text-semibold text-black transition">Home</a>
+                    <a href="/collection" class="hover:text-amber-800 text-black text-sm md:text-base transition">Collection</a>
+                    <a href="/aboutus" class="hover:text-amber-800 text-sm md:text-base text-black transition">About Us</a>
                 </nav>
 
-                <form
-                    action="{{ route('products.search') }}"
-                    method="GET"
-                    class="hidden md:flex items-center"
-                >
+                <form action="{{ route('products.search') }}" method="GET" class="hidden lg:flex items-center ml-4">
                     <input
                         type="text"
                         name="query"
                         id="search"
                         placeholder="Search products..."
                         value="{{ request('query') }}"
-                        class="form-input border border-black rounded-md px-3 py-1 text-m focus:outline-none focus:ring-2 focus:ring-amber-800"
+                        class="form-input border border-black rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-amber-800 w-40 md:w-48"
                     />
                 </form>
             </div>
 
-            <!-- Right: Auth -->
-            <div class="flex-shrink-0 flex items-center space-x-4">
+            <!-- Auth/Cart -->
+            <div class="flex-shrink-0 flex items-center space-x-2 md:space-x-4">
                 @auth
                     <a href="{{ route('cart.index') }}" class="relative text-gray-500 hover:text-indigo-600 transition">
-                        <!-- Cart Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 7M7 13l-1.293 1.293a1 1 0 001.414 1.414L9 14h6l1.293 1.293a1 1 0 001.414-1.414L17 13M9 21h6a2 2 0 100-4H9a2 2 0 100 4z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 7M7 13l-1.293 1.293a1 1 0 001.414 1.414L9 14h6l1.293 1.293a1 1 0 001.414-1.414L17 13M9 21h6a2 2 0 100-4H9a2 2 0 100 4z" />
                         </svg>
 
                         @if ($cartQuantity > 0)
                             <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
-                {{ $cartQuantity }}
-            </span>
+                                {{ $cartQuantity }}
+                            </span>
                         @endif
                     </a>
 
-
-
-                <!-- Profile Dropdown -->
+                    <!-- Profile Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <button
                             @click="open = !open"
@@ -123,7 +621,7 @@
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                class="h-8 w-8 rounded-full bg-gray-200 p-1"
+                                class="h-7 w-7 md:h-8 md:w-8 rounded-full bg-gray-200 p-1"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
                             >
@@ -141,31 +639,23 @@
                             class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50"
                         >
                             @if(Auth::check() && Auth::user()->role === 'admin')
-                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Dashboard</a>
                             @endif
 
-                            <a
-                                href="/profile"
-                                class="block px-4 py-2 hover:bg-gray-100"
-                            >Profile</a
-                            >
+                            <a href="/profile" class="block px-4 py-2 text-sm hover:bg-gray-100">Profile</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button
-                                    type="submit"
-                                    class="w-full text-left block px-4 py-2 hover:bg-gray-100"
-                                >
+                                <button type="submit" class="w-full text-left block px-4 py-2 text-sm hover:bg-gray-100">
                                     Sign out
                                 </button>
                             </form>
                         </div>
                     </div>
                 @else
-                    <!-- Trigger Login Modal -->
                     <button
                         type="button"
                         @click="showLogin = true"
-                        class="px-4 py-2 rounded-md text-sm font-medium border border-black bg-white hover:text-amber-800 transition"
+                        class="px-3 py-1 md:px-4 md:py-2 rounded-md text-xs md:text-sm font-medium border border-black bg-white hover:text-amber-800 transition"
                     >
                         Login
                     </button>
@@ -174,7 +664,7 @@
                         <button
                             type="button"
                             @click="showRegister = true"
-                            class="px-4 py-2 rounded-md text-sm font-medium border border-black bg-white hover:text-amber-800 transition"
+                            class="px-3 py-1 md:px-4 md:py-2 rounded-md text-xs md:text-sm font-medium border border-black bg-white hover:text-amber-800 transition"
                         >
                             Register
                         </button>
@@ -182,17 +672,34 @@
                 @endauth
             </div>
         </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden py-4 border-t border-gray-200">
+            <nav class="flex flex-col space-y-4">
+                <a href="/" class="text-black hover:text-amber-800 transition">Home</a>
+                <a href="/collection" class="text-black hover:text-amber-800 transition">Collection</a>
+                <a href="/aboutus" class="text-black hover:text-amber-800 transition">About Us</a>
+            </nav>
+
+            <form action="{{ route('products.search') }}" method="GET" class="mt-4">
+                <input
+                    type="text"
+                    name="query"
+                    placeholder="Search products..."
+                    value="{{ request('query') }}"
+                    class="w-full form-input border border-black rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-800"
+                />
+            </form>
+        </div>
     </div>
 </header>
 
 <main>@yield('content')</main>
 
 <!-- Footer -->
-<footer
-    class="bg-gray-100 border-t border-gray-300 py-6 mt-10 text-center text-gray-600"
->
+<footer class="bg-gray-100 border-t border-gray-300 py-6 mt-10 text-center text-gray-600">
     <div class="max-w-7xl mx-auto px-4">
-        <p>&copy; 2025 Pretty Aura. All rights reserved.</p>
+        <p class="text-sm md:text-base">&copy; 2025 Pretty Aura. All rights reserved.</p>
     </div>
 </footer>
 
@@ -201,20 +708,19 @@
     x-cloak
     x-show="showLogin"
     x-transition
-    class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
+    class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
 >
-    <div class="bg-[#EFDECD] w-full max-w-md mx- p-6 relative">
+    <div class="bg-[#EFDECD] w-full max-w-md mx-auto p-4 md:p-6 relative">
         <!-- Close Button -->
         <button
             @click="showLogin = false"
-            class="absolute -top-0 -right-0 w-7 h-7 bg-white border border-gray-300 shadow text-3xl text-gray-600 hover:text-black hover:bg-gray-100 flex items-center justify-center z-50"
+            class="absolute -top-2 -right-2 w-7 h-7 bg-white border border-gray-300 shadow text-3xl text-gray-600 hover:text-black hover:bg-gray-100 flex items-center justify-center z-50"
         >
             &times;
         </button>
 
-
         <!-- Login Card -->
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-white rounded-lg shadow p-4 md:p-6">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
@@ -224,7 +730,7 @@
                     <input
                         id="email"
                         style="color: black"
-                        class="block mt-1 w-full bg-white text-black border border-black rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        class="block mt-1 w-full bg-white text-black border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 px-3 py-2 text-sm"
                         type="email"
                         name="email"
                         required
@@ -242,14 +748,14 @@
                     <x-input-label for="login_password" :value="__('Password')" />
                     <input
                         id="login_password"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md text-black focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        class="block mt-1 w-full bg-white border border-black rounded-md text-black focus:outline-none focus:ring-2 focus:ring-amber-800 px-3 py-2 text-sm"
                         type="password"
                         name="password"
                         required
                     />
                     <button
                         type="button"
-                        class="absolute top-7 right-2 text-gray-600"
+                        class="absolute top-9 right-2 text-gray-600"
                         onclick="togglePassword('login_password', this)"
                     >
                         <i class="fa-solid fa-eye"></i>
@@ -263,7 +769,7 @@
                         <input
                             id="remember_me"
                             type="checkbox"
-                            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                            class="rounded border-gray-300 text-black shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-800"
                             name="remember"
                         />
                         <span class="ml-2 text-sm text-gray-600"
@@ -288,22 +794,19 @@
     x-cloak
     x-show="showRegister"
     x-transition
-    class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
+    class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
 >
-    <div
-        class="bg-[#EFDECD] w-full max-w-md mx-4  p-6 relative"
-    >
+    <div class="bg-[#EFDECD] w-full max-w-md mx-auto p-4 md:p-6 relative">
         <!-- Close Button -->
         <button
             @click="showRegister = false"
-            class="absolute -top-0 -right-0 w-7 h-7  bg-white border border-gray-300 shadow text-xl text-gray-600 hover:text-black hover:bg-gray-100 flex items-center justify-center z-50"
+            class="absolute -top-2 -right-2 w-7 h-7 bg-white border border-black rounded-md shadow text-xl text-gray-600 hover:text-black hover:bg-gray-100 flex items-center justify-center z-50"
         >
             &times;
         </button>
 
-
         <!-- Register Form -->
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-white rounded-lg shadow p-4 md:p-6">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
@@ -312,7 +815,7 @@
                     <x-input-label for="name" :value="__('Name')" />
                     <input
                         id="name"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
+                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black px-3 py-2 text-sm"
                         type="name"
                         name="name"
                         :value="old('name')"
@@ -330,7 +833,7 @@
                     <x-input-label for="email" :value="__('Email')" />
                     <input
                         id="email"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
+                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black px-3 py-2 text-sm"
                         type="email"
                         name="email"
                         :value="old('email')"
@@ -349,7 +852,7 @@
                     <x-input-label for="address" :value="__('Address')" />
                     <input
                         id="address"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
+                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black px-3 py-2 text-sm"
                         type="address"
                         name="address"
                         :value="old('address')"
@@ -370,7 +873,7 @@
                     />
                     <input
                         id="phone_number"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
+                        class="block mt-1 w-full bg-white border border-black rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800 text-black px-3 py-2 text-sm"
                         type="phone_number"
                         name="phone_number"
                         :value="old('phone_number')"
@@ -388,7 +891,7 @@
                     <x-input-label for="register_password" :value="__('Password')" />
                     <input
                         id="register_password"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md text-black focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        class="block mt-1 w-full bg-white border border-black rounded-md text-black focus:outline-none focus:ring-2 focus:ring-amber-800 px-3 py-2 text-sm"
                         type="password"
                         name="password"
                         required
@@ -396,7 +899,7 @@
                     />
                     <button
                         type="button"
-                        class="absolute top-7 right-2 text-gray-600"
+                        class="absolute top-9 right-2 text-gray-600"
                         onclick="togglePassword('register_password', this)"
                     >
                         <i class="fa-solid fa-eye"></i>
@@ -409,7 +912,7 @@
                     <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                     <input
                         id="password_confirmation"
-                        class="block mt-1 w-full bg-white border border-gray-300 rounded-md text-black focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        class="block mt-1 w-full bg-white border border-black rounded-md text-black focus:outline-none focus:ring-2 focus:ring-amber-800 px-3 py-2 text-sm"
                         type="password"
                         name="password_confirmation"
                         required
@@ -417,7 +920,7 @@
                     />
                     <button
                         type="button"
-                        class="absolute top-7 right-2  text-gray-600"
+                        class="absolute top-9 right-2 text-gray-600"
                         onclick="togglePassword('password_confirmation', this)"
                     >
                         <i class="fa-solid fa-eye"></i>
@@ -508,4 +1011,3 @@
 </script>
 </body>
 </html>
-
